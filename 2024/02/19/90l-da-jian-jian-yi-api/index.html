@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>90L_搭建实时汇率简易api</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2024/02/19/90l-da-jian-jian-yi-api/">
+  
+  <meta name="description" content="准备 python的flask框架 数据爬取 数据整理，构建返回数据 Flask-limitter限流器 logging—python的日志记录工具  Flask-limitter限流器使用flask-limitter对访问频率限制,对获取到的ip进行五秒内最多三次的限制 limiter &amp;#x3D">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="90L_搭建实时汇率简易api" />
+  
+  <meta property="og:description" content="准备 python的flask框架 数据爬取 数据整理，构建返回数据 Flask-limitter限流器 logging—python的日志记录工具  Flask-limitter限流器使用flask-limitter对访问频率限制,对获取到的ip进行五秒内最多三次的限制 limiter &amp;#x3D">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2024/02/19/90l-da-jian-jian-yi-api/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="90L_搭建实时汇率简易api">
+  
+  <meta name="twitter:description" content="准备 python的flask框架 数据爬取 数据整理，构建返回数据 Flask-limitter限流器 logging—python的日志记录工具  Flask-limitter限流器使用flask-limitter对访问频率限制,对获取到的ip进行五秒内最多三次的限制 limiter &amp;#x3D">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2024/02/19/90l-da-jian-jian-yi-api/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>90L_搭建实时汇率简易api</h2>
+
+  <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/en/3.0.x/quickstart/">python的flask框架</a></li>
+<li>数据爬取</li>
+<li>数据整理，构建返回数据</li>
+<li>Flask-limitter限流器</li>
+<li><a target="_blank" rel="noopener" href="https://www.osgeo.cn/cpython/library/logging.html?highlight=logging#module-logging">logging—python的日志记录工具</a></li>
+</ul>
+<h2 id="Flask-limitter限流器"><a href="#Flask-limitter限流器" class="headerlink" title="Flask-limitter限流器"></a>Flask-limitter限流器</h2><p>使用flask-limitter对访问频率限制,对获取到的ip进行五秒内最多三次的限制</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">limiter &#x3D; Limiter(
+    app,
+    key_func&#x3D;get_remote_address,
+    default_limits&#x3D;[&quot;3 per 5 seconds&quot;, &quot;10 per hour&quot;]
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/380861110">Flask-Limiter详细使用说明</a></li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/677508786">flask框架—limiter限流器的使用方法</a></li>
+</ul>
+<h2 id="打印日志"><a href="#打印日志" class="headerlink" title="打印日志"></a>打印日志</h2><p>basicConfig()函数要在debug()、info()等运行，且只要第一次运行才生效。后续的调用都是无效的。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 创建一个日志记录器
+logger &#x3D; logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>创建一个日志记录器并设置其级别是为了为<strong>处理器（Handler）提供一个容器</strong>，以便可以将处理器添加到记录器中。</p>
+<p>这样可以使得多个处理器共享同一日志级别和日志过滤器。如果没有指定日志记录器，则处理器将无法添加到日志记录器中。</p>
+<p>比如两个处理器,<strong>一个控制端打印日志</strong>, <strong>一个输出日志到文件</strong></p>
+<h2 id="校准时间"><a href="#校准时间" class="headerlink" title="校准时间"></a>校准时间</h2><p>检查和修复系统时区配置</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">查看当前时区设置：
+cat &#x2F;etc&#x2F;timezone
+readlink &#x2F;etc&#x2F;localtime
+
+设置一致的时区：
+假设你希望使用 Asia&#x2F;Shanghai 时区：
+echo &quot;Asia&#x2F;Shanghai&quot; | sudo tee &#x2F;etc&#x2F;timezone
+sudo ln -sf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>重置时间后,记得将正在运行的服务重启</strong></p>
+<h2 id="无法启动nginx"><a href="#无法启动nginx" class="headerlink" title="无法启动nginx"></a>无法启动nginx</h2><p>查看监听端口</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">netstat -nultuln
+sudo netstat -tuln | grep 80<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>发现80端口被ipv6监听, 可能是因为v2ray的伪装域名, 我选择更改nginx的端口改为8000, 但是出现域名无法正产访问, 端口可以的问题</p>
+<p><a target="_blank" rel="noopener" href="http://23.26.232.222:8000/">http://23.26.232.222:8000/</a></p>
+<p>上面的可以,下面的不行</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">http:&#x2F;&#x2F;23.26.232.222:8000&#x2F;exchange_rate?currency&#x3D;usd
+http:&#x2F;&#x2F;exrate.apigpt.eu.org&#x2F;exchange_rate?currency&#x3D;usd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p><strong>exrate.apigpt.eu.org</strong> 目前无法处理此请求。HTTP ERROR 503</p>
+<p>测试 反代到b站</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <a target="_blank" rel="noopener" href="http://23.26.232.222:8000/">http://23.26.232.222:8000/</a></li>
+</ul>
+<ul>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener" href="http://exrate.apigpt.eu.org/">http://exrate.apigpt.eu.org/</a></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">server &#123;
+    listen 8000;
+    server_name exrate.apigpt.eu.org;
+    location &#x2F; &#123;
+        #proxy_pass http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;;
+        proxy_pass https:&#x2F;&#x2F;www.bilibili.com&#x2F;;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix &#x2F;;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>换回80端口就都行了, 域名换成80端口也行了</p>
+</li>
+</ul>
+<p><em><strong>我的疑问</strong></em>,为什么如果nginx监听比如说9999端口,其他的配置都一样,访问域名就不行,但是访问ip,加端口就可以(<a target="_blank" rel="noopener" href="http://your_server_ip:9999/">http://your_server_ip:9999</a>)</p>
+<blockquote>
+<p>答：浏览器访问，都是<strong>域名+端口</strong>，只不过<strong>默认80</strong>，所以一般不用输入</p>
+<p>例如，输入<a target="_blank" rel="noopener" href="http://example.com,浏览器会默认连接到example.com的80端口./">http://example.com，浏览器会默认连接到example.com的80端口。</a></p>
+</blockquote>
+<blockquote>
+<p>使用域名来访问服务器，例如<em><strong><a target="_blank" rel="noopener" href="http://yourdomain.com/">http://yourdomain.com</a></strong></em>，浏览器会默认尝试使用HTTP的标准端口（80端口）发送请求。</p>
+<p>因此，如果Nginx监听的端口不是80端口，浏览器无法直接连接到Nginx服务器。</p>
+</blockquote>
+<p>如果更改nginx默认监听的端口，那么访问时就要使用域名加上端口号</p>
+<h2 id="Nginx重启失败"><a href="#Nginx重启失败" class="headerlink" title="Nginx重启失败"></a>Nginx重启失败</h2><p>查看运行状态</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>因为 nginx 启动需要一点点时间，而 systemd 在 nginx 完成启动前就去读取 pid file造成读取 pid 失败</p>
+<p>解决方法: </p>
+<p>让 systemd 在执行 ExecStart 的指令后等待一点点时间即可, 如果你的 nginx 启动需要时间更长，可以把 sleep 时间改长一点</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mkdir -p &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;nginx.service.d
+printf &quot;[Service]\nExecStartPost&#x3D;&#x2F;bin&#x2F;sleep 0.1\n&quot; &gt; &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;nginx.service.d&#x2F;override.conf
+systemctl daemon-reload
+systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>出现报错,以及解决方法**[参考文章](<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/300986">nginx Failed to read PID from file &#x2F;run&#x2F;nginx.pid: Invalid argument - V2EX</a>)**</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_xuewen/article/details/103859099"> Active: failed (Result: exit-code)</a></p>
+<p>安装redis</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">apt update
+apt install nginx
+#安装redis
+apt install redis<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>报错</strong>: ImportError: cannot import name ‘url_quote’ from ‘werkzeug.urls’ (&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;dist-packages&#x2F;werkzeug&#x2F;urls.py)</p>
+<p>flask版本太低,不兼容,更新一下就好了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip install --upgrade werkzeug
+pip install --upgrade Flask<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>报错</strong>: Job for nginx.service failed because the control process exited with error code.</p>
+<p>我这里是因为忘记配置</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ln -s &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;weixin.conf &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果不创建符号链接将配置文件链接到 <code>sites-enabled</code> 目录中，Nginx 将不会加载或应用该站点的配置，该站点将不会在服务器上运行或生效。这样可以将配置文件保存在<code>sites-available</code> 目录中，暂时不启用, 不创建符号链接到 <code>sites-enabled</code> 目录中， Nginx就不会加载这些配置文件。</p>
+<hr>
+<ol>
+<li><p>检查nginx配置文件是否有错误</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nginx -t  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>已经启动nginx或者配置文件中的端口号被占用<br>检查端口是否被占用</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">netstat -tnlp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果端口已被占用, 选择换端口, 或者杀掉进程</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pkill -9 nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>查看nginx日志</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cat &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>考虑权限问题</p>
+</li>
+</ol>
+<h2 id="nginx配置ssl证书"><a href="#nginx配置ssl证书" class="headerlink" title="nginx配置ssl证书"></a>nginx配置ssl证书</h2><p><strong>客户端证书与源服务器证书的区别</strong></p>
+<h3 id="1-客户端证书"><a href="#1-客户端证书" class="headerlink" title="1. 客户端证书"></a>1. 客户端证书</h3><h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>客户端证书用于在客户端和服务器之间进行双向身份验证。也就是说，服务器不仅验证客户端的身份，客户端也验证服务器的身份。</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>客户端证书由客户端持有，用于证明客户端的身份。</li>
+<li>服务器需要配置验证客户端证书的 CA（Certificate Authority）证书。</li>
+</ul>
+<h3 id="2-源服务器证书（Origin-Certificate）"><a href="#2-源服务器证书（Origin-Certificate）" class="headerlink" title="2. 源服务器证书（Origin Certificate）"></a>2. 源服务器证书（Origin Certificate）</h3><h4 id="用途-1"><a href="#用途-1" class="headerlink" title="用途"></a>用途</h4><p>源证书用于在 Cloudflare 和源服务器之间加密流量。它确保从 Cloudflare 到源服务器的通信是安全的。</p>
+<h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>源证书由 Cloudflare 签发，用于源服务器，通常不在公共信任链中，因此只在 Cloudflare 和源服务器之间使用。</li>
+<li>只需在服务器上配置，客户端不会直接与源证书交互。</li>
+</ul>
+<h4 id="配置客户端证书"><a href="#配置客户端证书" class="headerlink" title="配置客户端证书"></a>配置客户端证书</h4><ol>
+<li><p><strong>生成客户端证书：</strong> 在 Cloudflare 仪表板中生成客户端证书，并下载证书和私钥。</p>
+</li>
+<li><p><strong>配置服务器验证客户端证书：</strong> 在 Nginx 配置中启用客户端证书验证。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">server &#123;
+    listen 443 ssl;
+    server_name exrate.apigpt.eu.org;
+
+    ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;server.crt;
+    ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;server.key;
+
+    ssl_client_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;cloudflare_ca.pem;  # CA 证书
+    ssl_verify_client on;  # 启用客户端证书验证
+
+    location &#x2F; &#123;
+        proxy_pass http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix &#x2F;;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h4 id="配置源证书"><a href="#配置源证书" class="headerlink" title="配置源证书"></a>配置源证书</h4><ol>
+<li><p><strong>生成源证书：</strong> 在 Cloudflare 仪表板中生成源证书，并下载证书和私钥。</p>
+</li>
+<li><p><strong>配置服务器使用源证书：</strong> 在 Nginx 配置中配置源证书。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">server &#123;
+    listen 443 ssl;
+    server_name exrate.apigpt.eu.org;
+
+    ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;cloudflare_origin.pem;
+    ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;cloudflare_origin.key;
+
+    location &#x2F; &#123;
+        proxy_pass http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix &#x2F;;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><strong>客户端证书</strong>主要用于客户端和服务器之间的双向身份验证，确保只有授权的客户端可以访问服务器。</li>
+<li><strong>源证书</strong>用于在 Cloudflare 和源服务器之间加密流量，保护从 Cloudflare 到源服务器的通信。</li>
+</ul>
+<p>给权限</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo chmod 600 &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;exrate_api.pem #公钥
+sudo chmod 600 &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;exrate_api.key #私钥<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>nginx配置</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">server &#123;
+    listen 80;
+    server_name exrate.apigpt.eu.org;
+
+    # 重定向 HTTP 请求到 HTTPS
+    return 301 https:&#x2F;&#x2F;$server_name$request_uri;
+&#125;
+
+server &#123;
+    listen 443 ssl;
+    server_name exrate.apigpt.eu.org;
+
+    ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;exrate_api.pem;
+    ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;exrate_api.key;   
+   
+    # ssl验证相关配置
+    ssl_session_timeout  5m;    #缓存有效期
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;    #加密算法
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;    #安全链接可选的加密协议
+    ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
+
+    location &#x2F; &#123;
+        proxy_pass http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix &#x2F;;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>出现错误</p>
+<img src="/2024/02/19/90l-da-jian-jian-yi-api/image-20240221085320742.png" class="" title="image-20240221085320742">
+
+<p><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/support/troubleshooting/cloudflare-errors/troubleshooting-cloudflare-5xx-errors/#526error">Cloudflare 5XX 错误疑难解答 ·Cloudflare 支持文档</a></p>
+<p>查看日志,未发现报错,说明nginx配置没有问题</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo cat &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>Error code 525</strong>可能能使因为nginx配置文件,关于ssl部分配置错误出现的问题</p>
+<p>例如我这里<code> listen 443 ssl;</code>忘记加ssl的</p>
+<img src="/2024/02/19/90l-da-jian-jian-yi-api/image-20240221105344522.png" class="" title="image-20240221105344522">
+
+<h2 id="07-x2F-21-x2F-24"><a href="#07-x2F-21-x2F-24" class="headerlink" title="07&#x2F;21&#x2F;24"></a>07&#x2F;21&#x2F;24</h2><p>不小心删了DNS解析记录，但是加回来了，依然访问不了，不知道哪里设置错误</p>
+<p>反应慢吧应该是</p>
+<img src="/2024/02/19/90l-da-jian-jian-yi-api/image-20240721162835575.png" class="" title="image-20240721162835575">
+
+<img src="/2024/02/19/90l-da-jian-jian-yi-api/image-20240721162942436.png" class="" title="image-20240721162942436">
+
+<h2 id="07-x2F-27-x2F-24"><a href="#07-x2F-27-x2F-24" class="headerlink" title="07&#x2F;27&#x2F;24"></a>07&#x2F;27&#x2F;24</h2><p>bytevirt的机器被dd黑洞，api无法使用，我打算将网站</p>
+<ul>
+<li>迁移到其他服务器</li>
+<li>负载均衡(但是由于这个api有ssh，要稍微麻烦一些)</li>
+<li>并且更改爬取方式和源站，对数据进行缓存，减少对源站的压力</li>
+</ul>
+
+  <p> — Feb 19, 2024</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

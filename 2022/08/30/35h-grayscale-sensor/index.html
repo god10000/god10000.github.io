@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>八路灰度传感器</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2022/08/30/35h-grayscale-sensor/">
+  
+  <meta name="description" content="灰度传感器与红外传感器1.灰度传感器是模拟传感器,有一只发光二极管和一只光敏电阻,安装在同一面上,利用不同颜色的检测面对光的反射程度不同，光敏电阻对不同检测面返回的光，其阻值也不同的原理进行颜色深浅检测。在有效的检测距离内，发光二极管发出白光，照射在检测面上，检测面反射部分光线，光敏电阻检测此光线的">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="八路灰度传感器" />
+  
+  <meta property="og:description" content="灰度传感器与红外传感器1.灰度传感器是模拟传感器,有一只发光二极管和一只光敏电阻,安装在同一面上,利用不同颜色的检测面对光的反射程度不同，光敏电阻对不同检测面返回的光，其阻值也不同的原理进行颜色深浅检测。在有效的检测距离内，发光二极管发出白光，照射在检测面上，检测面反射部分光线，光敏电阻检测此光线的">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2022/08/30/35h-grayscale-sensor/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="八路灰度传感器">
+  
+  <meta name="twitter:description" content="灰度传感器与红外传感器1.灰度传感器是模拟传感器,有一只发光二极管和一只光敏电阻,安装在同一面上,利用不同颜色的检测面对光的反射程度不同，光敏电阻对不同检测面返回的光，其阻值也不同的原理进行颜色深浅检测。在有效的检测距离内，发光二极管发出白光，照射在检测面上，检测面反射部分光线，光敏电阻检测此光线的">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2022/08/30/35h-grayscale-sensor/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>八路灰度传感器</h2>
+
+  <h2 id="灰度传感器与红外传感器"><a href="#灰度传感器与红外传感器" class="headerlink" title="灰度传感器与红外传感器"></a>灰度传感器与红外传感器</h2><p>1.灰度传感器是模拟传感器,有一只发光二极管和一只光敏电阻,安装在同一面上,利用不同颜色的检测面对光的反射程度不同，光敏电阻对不同检测面返回的光，其阻值也不同的原理进行颜色深浅检测。在有效的检测距离内，发光二极管发出白光，照射在检测面上，检测面反射部分光线，光敏电阻检测此光线的强度并将其转换为机器人可以识别的信号。</p>
+<p>灰度传感器：所谓灰度也可认为是亮度，简单的说就是色彩的深浅程度。根据反射光的强度，可以判断出物体的灰级程度</p>
+<p>灰度传感器缺点：有效检测距离比较短。</p>
+<p>2.红外传感器：红外传感器主要用来检测是否有障碍物，一般由两只红外管构成的，一只发射，一只接收</p>
+<ul>
+<li>调电阻可变电阻的技术指标<ul>
+<li>可调电阻被广泛的应用于各种电路中，常见的型号有3361W、3006P、3266W、3323P、3266P、3296P、3386P、3296W、3362P、3362M、3361P、3266X等。常见阻值的标注方法有：101表示10×10的一次方，即100Ω;202表示200×10的二次方，即2000Ω&#x3D;2kΩ;501表示50×10的一次方，即500Ω;</li>
+</ul>
+</li>
+<li>单圈电位器和多圈电位器的区别<ul>
+<li><p>单圈电位器是说，它的电阻体只有一周，既可以无限连续旋转，也可以有机械限位角度。有止挡的话，可以在0-360度范围内选择电气角度。 多圈电位器是说，它的电阻体有很多周，通常来说有10周。即：它的机械行程为3600度。内部可以做成螺旋状的机械行程导轨，在导轨两头设置止挡。<br> 无论多圈还是单圈电位器，只要在机械部分设置了止挡，则电位器的机械行程是有范围的，即：不可连续无限旋转的。 电位器很小，它的止挡是有“止挡力矩”的，过大的力将破坏电位器的止挡，从而引起电位器的损坏。<br> 没有限制角度的电位器，叫做无止挡电位器（从机械角度讲，可以连续旋转，但是电阻体上总是有一个起始点和一个终止点）</p>
+</li>
+<li><p>单圈电位器主要用在民用设备上，主要特点是在一圈的范围内就能完成大幅度的改变，多圈特点是能调节的精密，适合设备上或工控用，举个例子，假设你买个音箱，想变个音量，但音箱用多圈电位器，你受得了调个音量就得转十几圈么？但如果有个0~5V的电压源，你能要输出3.25V，但单圈电位器稍微一碰就0.5V的变动，肯定用单圈就是失败的设计。在PCB设计上如不是太计较成本都可以用的，多圈电位器也有小型的！</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>需要精确度比较高的调试,常选用多圈电位器</p>
+<h2 id="画板过程中遇到的困难"><a href="#画板过程中遇到的困难" class="headerlink" title="画板过程中遇到的困难"></a>画板过程中遇到的困难</h2><p>首先就是不知道原理,资料很少,照着一个大佬的博客画出了原理图,看到淘宝有卖那种数字信号和模拟信号只需改变电阻位置就可以改变结果的,找原因找了好久,最后发现是因为LM339DT做电压比较器,想要输出模拟信号,去掉这个芯片就可以,所以这个芯片应该是A&#x2F;D转换芯片<br>所以淘宝店铺的那个产品的电阻部分应该是这样的</p>
+<img src="/2022/08/30/35h-grayscale-sensor/05.jpg" class="">
+<img src="/2022/08/30/35h-grayscale-sensor/04.jpg" class="">
+<p>一个焊盘在A_OUT1的左面,接在这里输出数字信号</p>
+<img src="/2022/08/30/35h-grayscale-sensor/06.jpg" class="">
+<p>另一个焊盘的位置在这张图的R1这,改变的电阻就是R1,接在这里,输出的就是模拟信号,因为LM339DT已经断开</p>
+<h2 id="LM339DT芯片"><a href="#LM339DT芯片" class="headerlink" title="LM339DT芯片"></a>LM339DT芯片</h2><p>引脚图</p>
+<img src="/2022/08/30/35h-grayscale-sensor/07.jpg" class="">
+<p>LM339 比较器 IC 由 4 个内置的独立电压比较器组成<br>比较器 1、2、3 、 4 ：正输入连接到 IC 引脚 3 ， 负输入 连接到 IC 引脚 12。<br>比较器 1 ：反相输入连接到 IC 引脚 4 ，非反相输入连接到 IC 引脚 5，输出连接到 IC 引脚 2。<br>比较器 2 ：反相输入连接到 IC 引脚 6 ，非反相输入连接到 IC 引脚 7，输出连接到 IC 引脚 1。<br>比较器 3 ：反相输入连接到 IC 引脚 8 ，非反相输入连接到 IC 引脚 9，输出连接到 IC 引脚14。<br>比较器 4 ：反相输入连接到 IC 引脚 10 ，非反相输入连接到 IC 引脚 11，输出连接到 IC 引脚13。<br>典型电路图</p>
+<img src="/2022/08/30/35h-grayscale-sensor/08.jpg" class="">
+<h2 id="暂时还不知道LM339DT芯片与LM399芯片的区别是什么"><a href="#暂时还不知道LM339DT芯片与LM399芯片的区别是什么" class="headerlink" title="暂时还不知道LM339DT芯片与LM399芯片的区别是什么"></a>暂时还不知道LM339DT芯片与LM399芯片的区别是什么</h2><h2 id="LM399芯片"><a href="#LM399芯片" class="headerlink" title="LM399芯片"></a>LM399芯片</h2><p>LM399 是一款电压比较器，由 14 个引脚和 4 个独立的电压比较器组成，比较在输入端应用的两个输入，并以数字形式显示输出</p>
+<h2 id="可以进行模数转换的原理"><a href="#可以进行模数转换的原理" class="headerlink" title="可以进行模数转换的原理"></a>可以进行模数转换的原理</h2><p>  红外对管,透明的那个是红外发射管，暗黑色那个叫红外接收管。是不是红外发射管发出的亮度越高越好呢？不是的，发出的亮度应该是适中且固定的。适中容易<br>理解，固定是什么意思？就是亮度应该由始至终都相同，不然就算是检测同一个障碍物的灰度，红外发射管发射的亮度忽明忽暗，红外接收管接收到的反射光也就忽明忽暗，但是明明是同一个障碍物，这样就不对了。我们一般能够在厂商提供的数据手册中找到红外发射管正常工作时的电流（一般是十几毫安到几十毫安），根据这个电流和电源的电压，求出要加的电阻的大小。</p>
+<p>红外接收管怎么知道接收红外光有多亮<br>　　首先我们要了解一个概念：光敏元件，简单来说就是对光敏感的元件，也就是说，环境亮度大小会导致光敏元件某一个物理量发生变化。我们使用的红外接收管就是一种光敏元件，当接收红外光亮度越大时，电阻就越小。接收的原理弄懂了，实际实现要怎么做呢？测电阻。但是单片机没有办法直接测电阻,把测电阻转换成测电压。</p>
+<p>　　怎么测电阻大小,图中的RL即红外接收管的电阻，R1是我们挑选的固定阻值的电阻。根据电阻分压原理，我们可以得到UL的值，固定电源为5V，我们假设红外接收管在障碍物为黑色的时候（即在跑道上），RL电阻为30K，在障碍物为白色的时候，RL电阻为300，假设R1我们用10K的电阻，求障碍物为黑色的时候电压UL等于多少，障碍物为白色的时候电压UL等于多少。<br>　　因此小车在跑道上跑的时候，UL的值就在0.15到3.75之间变化，我们通过检测UL的大小就可以知道这个红外灰度传感器是否在跑道上了。</p>
+<p>　还记得我们前面提到说，“勉强”可以测量电压吗？为什么要说勉强？实际上一般型号的51单片机（不包括某些增强版）是不具备测电压功能的，也就是说，我们没有办法测得出UL的数值。但是51单片机能够输入高低电平，也就是0和1，输入低于0.4V就相当于输入0，输入高于2.4V就相当于输入1。因此，我们需要一种折中的办法，以达到我们的目的。<br>　　我们回顾一下我们的目的，不就是区分黑线和白色背景吗，而且黑线和白色背景对应的UL相差又比较大，我们大概取一个中间值，约为2V。现在我们设计一个元件，这个元件有一个输入和一个输出。当输入小于2V时，输出为0V；当输出大于2V时，输出为5V。如下图理解：</p>
+<p>　　这样一来我们就将UL的0.15~3.75这样的一个范围值变成了0和5这样的两个数，对应了单片机输入的0和1，分别代表着白色背景和黑色线路。</p>
+<p>　　<code>这个将数值进行比较后进行输出的元件叫电压比较器，划重点，电压比较器</code>！！！ 电压比较器的电路应该这样画：</p>
+<img src="/2022/08/30/35h-grayscale-sensor/07.jpg" class="">
+<p>　　中间那个带+ -号的三角形叫做运放，当+（正）端输入的电压大于-（负）端电压时，输出5V，否则输出0V。</p>
+<p>　　回顾一下上面说到的几个电路，电阻限流，电阻分压，比较器。综合以上三个电路，一个红外灰度传感器的电路就出现了，如下图：VCC连接电源正极，GND连接电源负极，TCRT5000是一组红外对管，左边带两个箭头的是红外发射管，右边的是红外接收管。</p>
+<img src="/2022/08/30/35h-grayscale-sensor/09.jpg" class="">
+<p>　　上面我们说的，比较器的原理是什么来着，<code>当运放+（正）输入电压大于-（负）输入电压时(也就是IN+&gt;IN-引脚的时候)</code>，运放输出(OUT引脚)就为5V，反之输出就为0V。观察此时的+-极输入是什么。+极输入是前面电阻分压电路得到的UL，-极输入是VCC和GND之间的电压经过滑动变阻器（也叫电位器）分压后得到的某一固定电压，在上文的分析中，我们把这个固定电压设置为2V，在这里我们调节滑动变阻器，获得一个2V的电压提供给运放-（负）极即可。<br><a target="_blank" rel="noopener" href="https://www.eefocus.com/e/508731">灰度传感器与红外传感器的介绍</a><br><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.151.78fe2ed1yarCIX&id=593277124077&ns=1&abbucket=14#detail">八路传感器的介绍</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ycznjust/article/details/124309824">传感器原理图参考</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lmf666/article/details/126084700">LM393灰度传感器</a><br><a target="_blank" rel="noopener" href="http://www.360doc.com/content/22/0730/21/11955020_1042010929.shtml">LM339参考文章</a><br><a target="_blank" rel="noopener" href="https://www.semiee.com/file/TI/TI-LM339.pdf">LM339-Datasheet</a><br><a target="_blank" rel="noopener" href="https://blog.51cto.com/liucw/1155420">嵌入式硬件基础</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30851409/article/details/96397517?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166159776316782388033825%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166159776316782388033825&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-96397517-null-null.142%5Ev42%5Epc_rank_34_ctr25,185%5Ev2%5Econtrol&utm_term=%E7%BA%A2%E5%A4%96%E4%BC%A0%E6%84%9F%E5%99%A8%E5%92%8C%E7%81%B0%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB&spm=1018.2226.3001.4187">对红外灰度传感器的理解</a></p>
+
+  <p><a class="classtest-link" href="/tags/%E4%BC%A0%E6%84%9F%E5%99%A8/" rel="tag">传感器</a> — Aug 30, 2022</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

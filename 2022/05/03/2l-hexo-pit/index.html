@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>hexo搭建过程中遇到的坑</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2022/05/03/2l-hexo-pit/">
+  
+  <meta name="description" content="hexo常用命令： hexo cl &amp;amp;&amp;amp; hexo g &amp;amp;&amp;amp; hexo d hexo s &amp;#x3D;&amp;#x3D; hexo server hexo g &amp;#x3D;&amp;#x3D; hexo generate hexo d &amp;#x3D;&amp;#x3D; hexo deplo">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="hexo搭建过程中遇到的坑" />
+  
+  <meta property="og:description" content="hexo常用命令： hexo cl &amp;amp;&amp;amp; hexo g &amp;amp;&amp;amp; hexo d hexo s &amp;#x3D;&amp;#x3D; hexo server hexo g &amp;#x3D;&amp;#x3D; hexo generate hexo d &amp;#x3D;&amp;#x3D; hexo deplo">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2022/05/03/2l-hexo-pit/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="hexo搭建过程中遇到的坑">
+  
+  <meta name="twitter:description" content="hexo常用命令： hexo cl &amp;amp;&amp;amp; hexo g &amp;amp;&amp;amp; hexo d hexo s &amp;#x3D;&amp;#x3D; hexo server hexo g &amp;#x3D;&amp;#x3D; hexo generate hexo d &amp;#x3D;&amp;#x3D; hexo deplo">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2022/05/03/2l-hexo-pit/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>hexo搭建过程中遇到的坑</h2>
+
+  <h2 id="hexo常用命令："><a href="#hexo常用命令：" class="headerlink" title="hexo常用命令："></a>hexo常用命令：</h2><blockquote>
+<p>hexo cl &amp;&amp; hexo g &amp;&amp; hexo d</p>
+<p>hexo s &#x3D;&#x3D; hexo server</p>
+<p>hexo g &#x3D;&#x3D; hexo generate</p>
+<p>hexo d &#x3D;&#x3D; hexo deploy</p>
+<p>hexo n &#x3D;&#x3D; hexo new</p>
+<p>hexo clean</p>
+<p>hexo g -d</p>
+<p>hexo new ‘my-first-blog’  </p>
+<p>npm install hexo-cli -g</p>
+</blockquote>
+<p>2024&#x2F;7&#x2F;13出现背景图片无法更改的问题</p>
+<img src="/2022/05/03/2l-hexo-pit/image-20240713192611561.png" class="" title="image-20240713192611561">
+
+<p>删掉后变为空白</p>
+<h2 id="Typora与hexo无法同时预览图片的问题"><a href="#Typora与hexo无法同时预览图片的问题" class="headerlink" title="Typora与hexo无法同时预览图片的问题"></a>Typora与hexo无法同时预览图片的问题</h2><p>通过安装某个插件解决，但是该插件可能导致违章封面失效，因为无法识别.png后缀的图片</p>
+<h2 id="预览与上传不可兼"><a href="#预览与上传不可兼" class="headerlink" title="预览与上传不可兼"></a>预览与上传不可兼</h2><p>关于typora预览图片hexo不能显示,hexo显示图片typora上不能预览的问题</p>
+<p>未解决…..</p>
+<img src="/2022/05/03/2l-hexo-pit/image-20230905210325207.png" class="" title="image-20230905210325207">
+
+<p>typora的图片路径.&#x2F;${filename}&#x2F;</p>
+<p>当设置为相对路径时,仍不能正常显示</p>
+<p>观察html代码路径发现</p>
+<blockquote>
+<p><img src="/01.jpg" alt="01">这个可以hexo网站显示,也就是说这个是插件可以识别拼接的格式,所以我只需要把图片放到同一个文件夹下,但是就太乱了</p>
+</blockquote>
+<p>因为hexo-assert-image插件的源码</p>
+<p>适配了这个路径将它替换为,但是不能预览</p>
+<img src="/2022/05/03/2l-hexo-pit/image-20230908214200264.png" class="" title="image-20230908214200264">
+
+<p>官方使用方法</p>
+<p><img src="/2022/05/03/2l-hexo-pit/image-20230908230632842.png" alt="image-20230908230632842"></p>
+<p>所以只要增加对两种格式代码的替换即可</p>
+<img src="/2022/05/03/2l-hexo-pit/image-20230905210813363.png" class="" title="image-20230905210813363">
+
+<p>这个是.&#x2F;${filename}&#x2F;下,相对路径时,网站的显示,差了一个日期和解码的问题</p>
+<img src="/2022/05/03/2l-hexo-pit/image-20230905210938026.png" class="" title="image-20230905210938026">
+
+<p>但是,<code>如01.jpg在同一个目录里面,那么就可以实现即可以预览又可以在网站中正确显示</code></p>
+<p>剩下的就要研究js了</p>
+<hr>
+<p>我感觉js加一个匹配就可以了,但是我不会,开发的重要性</p>
+<p>markdown用法和表情</p>
+<p>兼的的办法是md与图片放在一起</p>
+<p>或者说,关于链接的问题</p>
+<p>或者,匹配到相对路径,去掉前面部分</p>
+<p>2024&#x2F;01&#x2F;29</p>
+<blockquote>
+<p>发现了另一个hexo-assert-img插件,可以实现相对路径拼接图片链接</p>
+</blockquote>
+<p>下一阶段目标,自己写一个这样的插件</p>
+<p><a target="_blank" rel="noopener" href="https://www.freesion.com/article/78201400603/">hexo 图片显示问题及使用typora设置图片路径 - 灰信网（软件开发博客聚合） (freesion.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/645679541">解决Hexo+Github+Typora图片无法正确显示的问题 - 知乎 (zhihu.com)</a></p>
+<h2 id="err-Error-Spawn-failed"><a href="#err-Error-Spawn-failed" class="headerlink" title="err: Error: Spawn failed."></a>err: Error: Spawn failed.</h2><p>he correct access rights and the repository exists</p>
+<p> (1)首先重新设置一下git的用户名和邮箱</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">git config --global user.name &quot;xxx&quot;
+    
+git config --global user.email &quot;xxx&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>(2) 删除.ssh文件夹</p>
+<p>(3)git输入</p>
+<blockquote>
+<p>‘ssh-keygen -t rsa ‘    放到github上时要加上邮箱</p>
+</blockquote>
+<p>(4)服务端</p>
+<blockquote>
+<p>su fuchen</p>
+</blockquote>
+<blockquote>
+<p>mkdir ~&#x2F;.ssh</p>
+</blockquote>
+<blockquote>
+<p>vim ~&#x2F;.ssh&#x2F;authorized_keys</p>
+</blockquote>
+<p>(5)如果重复出现此错误,检查一下是否用root建立了.ssh文件</p>
+<p>(还有一种可能是git环境的配置问题)</p>
+<h2 id="ERROR-Deployer-not-found-git"><a href="#ERROR-Deployer-not-found-git" class="headerlink" title="ERROR Deployer not found: git"></a>ERROR Deployer not found: git</h2><p>运行hexo clean &amp;&amp; hexo g &amp;&amp; hexo d命令,出现</p>
+<blockquote>
+<p>原因：少了hexo针对git的deploy组件</p>
+</blockquote>
+<blockquote>
+<p>解决方法：npm install –save hexo-deployer-git</p>
+</blockquote>
+<blockquote>
+<p>搞定，运行成功之后提示：INFO  Deploy done: git</p>
+</blockquote>
+<h3 id="git报错—The-authenticity-of-host-can’t-be-established"><a href="#git报错—The-authenticity-of-host-can’t-be-established" class="headerlink" title="git报错—The authenticity of host can’t be established."></a>git报错—The authenticity of host can’t be established.</h3><p>打开本地的.ssh文件夹(C:\Users\Administrator.ssh)会发现有两个文件分别是公钥和私钥</p>
+<p><strong>产生原因：</strong><br>文件夹内少了一个known_hosts文件，本来<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AF%86%E9%92%A5&spm=1001.2101.3001.7020">密钥</a>文件应该是三个，现在只有两个，便报了这样的错误</p>
+<blockquote>
+<p>解决:输入yes回车，生成known_hosts文件</p>
+<p>注:不要直接按回车,要输入yes后回车</p>
+</blockquote>
+<h3 id="SSL-certificate-problem-unable-to-get-local-issuer-certificate"><a href="#SSL-certificate-problem-unable-to-get-local-issuer-certificate" class="headerlink" title="SSL certificate problem: unable to get local issuer certificate"></a>SSL certificate problem: unable to get local issuer certificate</h3><blockquote>
+<p>这是由于当你通过HTTPS访问Git远程仓库的时候，如果服务器上的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=SSL&spm=1001.2101.3001.7020">SSL</a>证书未经过第三方机构认证，git就会报错。原因是因为未知的没有签署过的证书意味着可能存在很大的风险。解决办法就是通过下面的命令将git中的sslverify关掉：</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">git config --global http.sslverify false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>　　上面这行命令的影响范围是系统当前用户，如果要设置为全局所有用户，可以改成这样：</p>
+<pre class="line-numbers language-none"><code class="language-none">git config --system http.sslverify false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>　　如果只是想针对当前仓库进行设置，可以在需要修改的仓库目录下执行：</p>
+<pre class="line-numbers language-none"><code class="language-none">git config http.sslverify false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>　　如果你的仓库中存在嵌套的git子模块（就是子模块中又引用了子模块），在进行初始化时，仍然有可能遇到self signed certificate in certificate chain的错误，此时可以通过执行下面的命令来解决：</p>
+<pre class="line-numbers language-none"><code class="language-none">npm config set strict-ssl false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="执行remote-add时：fatal-Not-a-git-repository"><a href="#执行remote-add时：fatal-Not-a-git-repository" class="headerlink" title="执行remote add时：fatal: Not a git repository"></a>执行remote add时：fatal: Not a git repository</h2><blockquote>
+<p>执行git remote add命令时报这个错误：</p>
+</blockquote>
+<h4 id="fatal-Not-a-git-repository-or-any-of-the-parent-directories-git"><a href="#fatal-Not-a-git-repository-or-any-of-the-parent-directories-git" class="headerlink" title="fatal: Not a git repository (or any of the parent directories): .git"></a>fatal: Not a git repository (or any of the parent directories): .git</h4><blockquote>
+<p>原因：<br>当前所在的目录不是一个git目录，要么切换目录到你想添加的git目录下，或者在当前目录下初始化一个git目录：git init</p>
+</blockquote>
+<h2 id="没有可用软件包nginx"><a href="#没有可用软件包nginx" class="headerlink" title="没有可用软件包nginx"></a>没有可用软件包nginx</h2><blockquote>
+<p>yum install epel-release  epel扩展</p>
+</blockquote>
+<blockquote>
+<p>yum  update</p>
+</blockquote>
+<h2 id="更改-config-yuml后出现YAMLException"><a href="#更改-config-yuml后出现YAMLException" class="headerlink" title="更改_config.yuml后出现YAMLException:"></a>更改_config.yuml后出现YAMLException:</h2><p> YAMLException: duplicated mapping key (25:1)的解决方法</p>
+<blockquote>
+<p>YAMLException:重复的映射键（25:1),观察25行是否重复,是否冲突,</p>
+</blockquote>
+<blockquote>
+<p>比如前面true 后面false<br>需要看看前后有没有多余的粘贴!!</p>
+</blockquote>
+<h2 id="hexo更换主题后：WARN-No-layout-index-html"><a href="#hexo更换主题后：WARN-No-layout-index-html" class="headerlink" title="hexo更换主题后：WARN No layout: index.html"></a>hexo更换主题后：WARN No layout: index.html</h2><p> (1).检查下载的主题是不是放在了themes文件夹下面，比如next主题的放置，</p>
+<blockquote>
+<p>点开themes就看到next的文件夹，next下面就是主题的文件，不能打开next文件夹还有themes<br> 解决方法<br>把theme下的文件夹名称改为next。</p>
+</blockquote>
+<p>(2).检查站点配置_config.yml是不是下面的形式<br>theme: 你的主题名字</p>
+<blockquote>
+<p>注意:（1）这里是theme，不是themes.</p>
+<blockquote>
+<blockquote>
+<p>（2）theme后面与主题名直接有一个空格。</p>
+<blockquote>
+<p>（3）主题名字是否与themes文件夹下 主题的名字一致。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>比如next：theme: next,冒号后面有空格。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="假如全部一致还运行有错，建议每次修改后"><a href="#假如全部一致还运行有错，建议每次修改后" class="headerlink" title="假如全部一致还运行有错，建议每次修改后"></a>假如全部一致还运行有错，建议每次修改后</h3><p>先输入命令’hexo clean’清理一下原来的配置，然后运行</p>
+<h4 id="第二个错误"><a href="#第二个错误" class="headerlink" title="第二个错误"></a>第二个错误</h4><p>本地主题样式修改完之后，本地运行访问都对，</p>
+<p>然后hexo d部署到github上面后访问没有样式。</p>
+<blockquote>
+<p>打开站点配置_config.yml,更改其中的url和root配置</p>
+</blockquote>
+<blockquote>
+<p>url: 这里是GitHub给你分配的地址,root: &#x2F;项目名</p>
+</blockquote>
+<blockquote>
+<p>然后重新 hexo g,hexo d 解决问题。</p>
+</blockquote>
+<h2 id="bash-hexo-command-not-found"><a href="#bash-hexo-command-not-found" class="headerlink" title="bash: hexo: command not found"></a>bash: hexo: command not found</h2><p>(1)git关了重新开一下</p>
+<p>(2)查<code>nodejs</code>和<code>npm</code>是否正常，依次输入命令<code>node -v 和</code>npm -v&#96;看看是否有相关版本信息</p>
+<blockquote>
+<p>(3)此电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;选择系统变量 Path</p>
+</blockquote>
+<blockquote>
+<p>将 node_modules 下的 .bin 文件路径添加到 Path 里面</p>
+</blockquote>
+<p>环境变量添加好了之后重新打开 git 即可运行 hexo 命令</p>
+<p>如果此时仍然无法执行 hexo 命令，那就只能重装试试了，</p>
+<blockquote>
+<p>运行命令 npm install hexo-cli -g 重新安装 hexo 即可</p>
+</blockquote>
+<h2 id="YAMLException-end-of-the-stream-or-a-document-separator-is-expected"><a href="#YAMLException-end-of-the-stream-or-a-document-separator-is-expected" class="headerlink" title="YAMLException: end of the stream or a document separator is expected"></a>YAMLException: end of the stream or a document separator is expected</h2><blockquote>
+<p>检查文件头缺空格</p>
+</blockquote>
+<blockquote>
+<p>为了避免配置后出现大量错误,无从下手,建议分部配置,不报错了再继续配置</p>
+</blockquote>
+<h3 id="x2F-c-x2F-Users-x2F-DELL-x2F-AppData-x2F-Roaming-x2F-npm-x2F-hexo-line-12-node-command-not-found"><a href="#x2F-c-x2F-Users-x2F-DELL-x2F-AppData-x2F-Roaming-x2F-npm-x2F-hexo-line-12-node-command-not-found" class="headerlink" title="&#x2F;c&#x2F;Users&#x2F;DELL&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;hexo: line 12: node: command not found"></a>&#x2F;c&#x2F;Users&#x2F;DELL&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;hexo: line 12: node: command not found</h3><p>重新安装git后,运行hexo出现这样的报错,重新安装一下<a target="_blank" rel="noopener" href="https://www.wangfuchao.com/?golink=aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==">node.js</a>就可以了</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40486955/article/details/105967026">4.1参考文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_55125921/article/details/125220576">4.2参考文章</a>)</p>
+
+  <p><a class="classtest-link" href="/tags/hexo/" rel="tag">hexo</a>, <a class="classtest-link" href="/tags/markdown/" rel="tag">markdown</a> — May 3, 2022</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

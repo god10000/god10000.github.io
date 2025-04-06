@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>一些元器件基础知识</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/">
+  
+  <meta name="description" content="如何改变hexo生成的新文件的标头自锁开关6脚六脚开关（六脚自锁开关）也就是我们说的双刀双掷开关，引脚共2排，每排3个引脚，中间一根是公共端，对应他左右2个脚一个常开一个常闭，另外一排和这个一样，常开对常开，公共点对公共点，常闭对常闭，但是是完全独立的2组，除非你在PCB上将他们连接起来才是通的。 ">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="一些元器件基础知识" />
+  
+  <meta property="og:description" content="如何改变hexo生成的新文件的标头自锁开关6脚六脚开关（六脚自锁开关）也就是我们说的双刀双掷开关，引脚共2排，每排3个引脚，中间一根是公共端，对应他左右2个脚一个常开一个常闭，另外一排和这个一样，常开对常开，公共点对公共点，常闭对常闭，但是是完全独立的2组，除非你在PCB上将他们连接起来才是通的。 ">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="一些元器件基础知识">
+  
+  <meta name="twitter:description" content="如何改变hexo生成的新文件的标头自锁开关6脚六脚开关（六脚自锁开关）也就是我们说的双刀双掷开关，引脚共2排，每排3个引脚，中间一根是公共端，对应他左右2个脚一个常开一个常闭，另外一排和这个一样，常开对常开，公共点对公共点，常闭对常闭，但是是完全独立的2组，除非你在PCB上将他们连接起来才是通的。 ">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>一些元器件基础知识</h2>
+
+  <h2 id="如何改变hexo生成的新文件的标头"><a href="#如何改变hexo生成的新文件的标头" class="headerlink" title="如何改变hexo生成的新文件的标头"></a>如何改变hexo生成的新文件的标头</h2><h2 id="自锁开关6脚"><a href="#自锁开关6脚" class="headerlink" title="自锁开关6脚"></a>自锁开关6脚</h2><p>六脚开关（六脚自锁开关）也就是我们说的双刀双掷开关，引脚共2排，每排3个引脚，中间一根是公共端，对应他左右2个脚一个常开一个常闭，另外一排和这个一样，常开对常开，公共点对公共点，常闭对常闭，但是是完全独立的2组，除非你在PCB上将他们连接起来才是通的。</p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230524153941245.png" class="" title="image-20230524153941245">
+
+<blockquote>
+<p>不同规格的六脚自锁开关不同</p>
+<ul>
+<li>5.8*5.8 原理底下凹槽是常开(两个两个的)</li>
+<li>7*7 靠近凹槽常开</li>
+<li>8.5*8.5靠近凹槽常开</li>
+<li>8*8左上右下常开,旋转180°也一样</li>
+</ul>
+</blockquote>
+<p><strong>费劲死了,电压表蜂鸣档直接测</strong></p>
+<p><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?ali_trackid=2:mm_50570328_39070332_145428725:1684914191_026_477441657&bxsign=tbk4CjUu0VKiy6pgKc5NXCeGntgjFGlrlH0o4q57jjAgHBLTi-VROloECI7kUICD5dEgyj2SdysJccMa53Ljd_FEZRfl6OPYUwl5u5SCicHIhzEsLQQeKI_GUEAPW08w3zHuZsQuLKWuYx1_KtW-N5l5w&id=619450836896&spm=a2e1u.27655827.d1661933647166.20&union_lens=lensId:OPT@1684913782@213e7f1b_0ac4_1884caffd34_44f6@01@eyJmbG9vcklkIjo2MTc4NH0ie;recoveryid:201_33.43.202.19_13111709_1684913724229;prepvid:201_33.50.201.183_13093957_1684913779022">自锁无锁开关视频介绍</a></p>
+<h2 id="三极管"><a href="#三极管" class="headerlink" title="三极管"></a>三极管</h2><p>半导体三极管(Bipolar Junction Transistor)，也称双极型晶体管、晶体三极管，英文缩写BJT。<br>它是由两个PN结构成，三条引线分别称为 发射极e （Emitter）、 基极b (Base)和 集电极c (Collector)<br>类型分为NPN型与PNP型，如下图,p指向n,即p流向n</p>
+<p><img src="https://img-blog.csdnimg.cn/c076d7166beb4e8baaded679a008b697.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/30464b5bc0b94f2497b98e14edd8eb3c.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="三极管有哪三极"><a href="#三极管有哪三极" class="headerlink" title="三极管有哪三极"></a>三极管有哪三极</h3><ul>
+<li><strong>基极</strong>：用于激活晶体管。（名字的来源，最早的点接触晶体管有两个点接触放置在基材上，而这种基材形成了底座连接。）</li>
+<li><strong>集电极</strong>：三极管的正极。（因为收集电荷载体）</li>
+<li><strong>发射极</strong>：三极管的负极。（因为发射电荷载流子）</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/3d3d5b5fe231451daf711043804460b9.png#pic_center" alt="在这里插入图片描述"></p>
+<p>I&#x3D;电流<br>Ie&#x3D;Ib+Ic<br>这就是说，在基极补充一个很小的Ib，就可以在集电极上得到一个较大的Ic，这就是所谓电流放大作用，Ic与Ib是维持一定的比例关系<br>β1&#x3D;Ic&#x2F;Ib<br>式中：β1–称为直流放大倍数<br>三极管有3种工作状态，分别是<strong>截止状态、放大状态、饱和状态</strong></p>
+<img src="https://img-blog.csdnimg.cn/e0d49ef9ea2f440c908a9cfee151073b.png#pic_center" alt="在这里插入图片描述" style="zoom: 50%;" />
+
+<p><strong>截止状态；</strong> 当发射极与集电极出现反向偏置时，三级管进入截止转态<br>这句话比较名专业术语来讲，我的个人理解正向偏置就是P到N，因为三极管是有2个PN节,换言之反向偏置就是N到P</p>
+<img src="https://img-blog.csdnimg.cn/71c14f62b9d14175b7f8fed298b41d3d.png#pic_center" alt="在这里插入图片描述" style="zoom: 50%;" />
+
+<p><strong>放大状态；</strong> 当三极管发射极正向偏置，集电极反向偏置，三极管就进入放大转态。<br>以NPN型为例，（可以参考文章图2），此时放大状态电流流向，就是C到E流！！！</p>
+<img src="https://img-blog.csdnimg.cn/eebc584ee75f4fa093ad57f6adbfa49e.png#pic_center" alt="在这里插入图片描述" style="zoom: 50%;" />
+
+<p><strong>饱和状态</strong><br>当三极管发射极正偏，集电极正偏时，三极管工作在饱和状态<br>说白了就是B基极电流太大了超过C极，水阀阀门已经开到最大，所以饱和了！！！</p>
+<p>I&#x3D;电流<br>套用这个公式,Ie&#x3D;Ib+Ic<br>β1&#x3D;Ic&#x2F;Ib<br>式中：β1–称为直流放大倍数<br>这就是说，在基极补充一个很小的Ib，就可以在集电极上得到一个较大的Ic，这就是所谓电流放大作用，Ic与Ib是维持一定的比例关系</p>
+<h3 id="8550三极管"><a href="#8550三极管" class="headerlink" title="8550三极管"></a>8550三极管</h3><img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/01.jpg" class="" title="image-20230524151959362">
+
+<p>（文字朝自己，引脚朝下）从左到右数如下:</p>
+<p>1脚&#x3D;E（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%91%E5%B0%84%E6%9E%81/5957463?fromModule=lemma_inlink">发射极</a>，带箭头的那个），</p>
+<p>2脚&#x3D;B（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9F%BA%E6%9E%81/763327?fromModule=lemma_inlink">基极</a>），</p>
+<p>3脚&#x3D;C（集电极）.</p>
+<p>8550<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%89%E6%9E%81%E7%AE%A1?fromModule=lemma_inlink">三极管</a>（SOT-23封装）管脚图</p>
+<p>1、B（基极)　2、E（发射极)　3、C（集电极)</p>
+<h3 id="s8050三极管"><a href="#s8050三极管" class="headerlink" title="s8050三极管"></a>s8050三极管</h3><p>SOT封装的s8050三极管</p>
+<p>基级,发射集,集电极,对应引脚1,2,3</p>
+<p><img src="https://pics6.baidu.com/feed/2e2eb9389b504fc2a2720fc828b2501a91ef6d4d.png@f_auto?token=09351f9bce6acc8467384f8ca7c7c4ff" alt="img"></p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722181609855.png" class="" title="image-20230722181609855">
+
+<h3 id="三极管的作用"><a href="#三极管的作用" class="headerlink" title="三极管的作用"></a>三极管的作用</h3><p>三极管更多的是做一个开关管来使用，且只有截止、饱和两个状态。截止状态看作是“关”，饱和状态看作是“开”</p>
+<h4 id="开关作用"><a href="#开关作用" class="headerlink" title="开关作用"></a>开关作用</h4><p>三极管作为开关时,要么是工作在饱和区,即导通,要么是工作在截至区,即截止</p>
+<p>不能工作再放大区(由于Vce电压难以确定,无法区分高低电平)</p>
+<p>导通</p>
+<p><strong>NPN</strong>:导通条件:(Vbe)大于某个阈值(通常约为0.7V),即VB&gt;VE</p>
+<p><strong>PNP</strong>:与NPN相反</p>
+<p><em>截止</em></p>
+<p><strong>NPN</strong>:(Vbe)小于阈值时,一般小于0</p>
+<p>三极管可靠截止条件是:uBE ≤ 0 饱和导通条件是:iB≥IB(sat)</p>
+<p><strong>PNP</strong>:与NPN相反</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lx123010/article/details/122967176">三极管开关作用_3极管的开关作用和工作原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/501215906">三极管的工作原理</a></p>
+<h4 id="放大作用"><a href="#放大作用" class="headerlink" title="放大作用"></a>放大作用</h4><img src="D:\blog\source\_posts\61H-一些元器件基础知识\image-20230722202225861.png" style="zoom:80%;" />
+
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722202242360.png" class="" title="image-20230722202242360">
+
+<p>我不明白为什么不能集电极接3.3v接蜂鸣器,发射极接地</p>
+<blockquote>
+<p>因为蜂鸣器是因为需要放大电流才会使用三极管,如果将三极管接在发射极,就会失去放大作用</p>
+<p>npn型三极管如8050,当be通电时,会吸引电子,有空穴,但是左边N的电子密度大于空穴</p>
+<p>所以一个空穴会有多个电子去抢,左边的电子浓度大于右边,使电子穿过中间的P区到达C,也就是说	</p>
+<p>BE每吸引一个电子到E,就会有一堆,也就是<code>β倍的电子流向c</code></p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722210429336.png" class="" title="image-20230722210429336">
+
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722210821202.png" class="" title="image-20230722210821202">
+</blockquote>
+<p>**PNP</p>
+<p>先给CE通电使E极将正电空穴推往中间,C极释放电子填补中间空穴,</p>
+<p>此时耗尽层仍然很大,无法通过,然后给BE施加电压,B极发送一个电子,顶掉P填补P的空穴,</p>
+<p>这一瞬间左侧空穴和中间空穴都显正电,吸引右侧P倍的电子通过耗尽层</p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230723071532924.png" class="" title="image-20230723071532924">
+
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230723070424558.png" class="" title="image-20230723070424558">
+
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230723070617985.png" class="" title="image-20230723070617985">
+
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>硅晶体不导电,硅原子四个电子,硅晶体周围八个电子四个共价键,稳定,电子不动</p>
+<p>掺B,      3+4形成7电子机啊一个空穴,正电,负极输入负电荷填充到空穴再被正极吸引-&gt;P型半导体</p>
+<p>掺P,,五个电子+4形成八电子加一自由电子,导电了,因为自由电子会移动-&gt;N型半导体</p>
+<p>二极管具有单向导电性,腹肌推动电子前进,&gt;0.7v即可穿过p区域</p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722211013917.png" class="" title="image-20230722211013917">
+
+<p>反向截止,因为耗尽层(pn结)增大,个人理解,两边距离变大了,为什么叫耗尽层,我理解的是+-,电子-&gt;,走不动</p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722212300595.png" class="" title="image-20230722212300595">
+
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722211130400.png" class="" title="image-20230722211130400">
+
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fB4y147Gn/?spm_id_from=333.788&vd_source=e33ad22b3d91cb180bef532ce5877b2e">终于有人讲了，凭什么三极管能放大?_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1js4y1A7GU/?buvid=XXBDF84B608D26441D57DCC92DCF748F1B01A&is_story_h5=false&mid=ige4SFfjyP88bhZMDXpf6g==&p=1&plat_id=114&share_from=ugc&share_medium=android&share_plat=android&share_session_id=ac455019-b821-4d6f-8733-31372cf7a6e9&share_source=COPY&share_tag=s_i&timestamp=1682047526&unique_k=LjVL2ks&up_id=677486623&vd_source=e33ad22b3d91cb180bef532ce5877b2e">没人讲PNP三极管是吧?我讲!_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv22690611/">3.3V 蜂鸣器电路设计 - 哔哩哔哩 (bilibili.com)</a></p>
+<p>[三极管工作原理介绍(动画图解)]<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40907156/article/details/125163969?ops_request_misc=%7B%22request_id%22:%22168576074216800222849050%22,%22scm%22:%2220140713.130102334..%22%7D&amp;request_id=168576074216800222849050&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-125163969-null-null.142%5Ev88%5Einsert_down38v5,239%5Ev2%5Einsert_chatgpt&amp;utm_term=%E4%B8%89%E7%BA%A7%E7%AE%A1&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/qq_40907156/article/details/125163969?ops_request_misc=%7B%22request%5Fid%22%3A%22168576074216800222849050%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=168576074216800222849050&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-125163969-null-null.142^v88^insert_down38v5,239^v2^insert_chatgpt&amp;utm_term=三级管&amp;spm=1018.2226.3001.4187</a>)</p>
+<h2 id="蜂鸣器"><a href="#蜂鸣器" class="headerlink" title="蜂鸣器"></a>蜂鸣器</h2><h3 id="有源蜂鸣器-震荡源"><a href="#有源蜂鸣器-震荡源" class="headerlink" title="有源蜂鸣器(震荡源)"></a>有源蜂鸣器(震荡源)</h3><p>发声原理:振荡器产生音频信号电流通过线圈,产生磁场,电磁线圈和磁场一起起作用使振动磨片周期震动</p>
+<p><code>需要大电流</code>,所以会连接一个三极管因为三极管有开关和放大作用,51单片机只有10ma的电流</p>
+<img src="/2023/05/24/61h-yi-xie-yuan-qi-jian-ji-chu-zhi-shi/image-20230722204642348.png" class="" title="image-20230722204642348">
+
+<h3 id="无源蜂鸣器"><a href="#无源蜂鸣器" class="headerlink" title="无源蜂鸣器"></a>无源蜂鸣器</h3><h2 id="贴片电容"><a href="#贴片电容" class="headerlink" title="贴片电容"></a>贴片电容</h2><p><strong>贴片电容</strong>102等于1NF，103等于10NF， 104等于100NF，105等于1UF，106等于10UF</p>
+<p>102，即10×102 pF&#x3D;1nF;</p>
+<p>103，即10×103 pF&#x3D;10nF;</p>
+<p>104，即10×104 pF&#x3D;100nF;</p>
+<p>105，即10×105 pF&#x3D;1000nF&#x3D;1uF;</p>
+<p>106，即10×106 pF&#x3D;10000nF&#x3D;10uF</p>
+<p>10u+是10u钽电容</p>
+<p>电阻同理,102就是10*10平方&#x3D;1000Ω&#x3D;1k</p>
+<h2 id="四层PCB"><a href="#四层PCB" class="headerlink" title="四层PCB"></a>四层PCB</h2><h2 id="LM295S"><a href="#LM295S" class="headerlink" title="LM295S"></a>LM295S</h2><h3 id="SAM8108"><a href="#SAM8108" class="headerlink" title="SAM8108"></a>SAM8108</h3><p>SAM8108是按键触发开关 IC，一路 NMOS 开漏输出。 有两种触发模式开关功能</p>
+<p><a target="_blank" rel="noopener" href="https://www.semiee.com/file/Sun&Moon/Sun&Moon-SAM8108.pdf">Deltas Integrated Circuit Technology Co (semiee.com)</a></p>
+<h3 id="MOS管"><a href="#MOS管" class="headerlink" title="MOS管"></a>MOS管</h3><p><a target="_blank" rel="noopener" href="https://www.semiee.com/file/TWGMC/TWGMC-SI2301.pdf">TWGMC-SI2301.pdf (semiee.com)</a></p>
+
+  <p> — May 24, 2023</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

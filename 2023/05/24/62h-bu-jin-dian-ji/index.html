@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>62H_步进电机</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2023/05/24/62h-bu-jin-dian-ji/">
+  
+  <meta name="description" content="42步进电机1.步进电机的基本知识（1）拍数——每一次循环所包含的通电状态数（电机转过一个齿距角所需脉冲数）（2）单拍制分配方式——状态数&amp;#x3D;相数（3）双拍制分配方式——状态数&amp;#x3D;相数的两倍（4）步距角 ——步进机通过一个电脉冲转子转过的角度,电机上一般会给出   N:一个周期的运行">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="62H_步进电机" />
+  
+  <meta property="og:description" content="42步进电机1.步进电机的基本知识（1）拍数——每一次循环所包含的通电状态数（电机转过一个齿距角所需脉冲数）（2）单拍制分配方式——状态数&amp;#x3D;相数（3）双拍制分配方式——状态数&amp;#x3D;相数的两倍（4）步距角 ——步进机通过一个电脉冲转子转过的角度,电机上一般会给出   N:一个周期的运行">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2023/05/24/62h-bu-jin-dian-ji/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="62H_步进电机">
+  
+  <meta name="twitter:description" content="42步进电机1.步进电机的基本知识（1）拍数——每一次循环所包含的通电状态数（电机转过一个齿距角所需脉冲数）（2）单拍制分配方式——状态数&amp;#x3D;相数（3）双拍制分配方式——状态数&amp;#x3D;相数的两倍（4）步距角 ——步进机通过一个电脉冲转子转过的角度,电机上一般会给出   N:一个周期的运行">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2023/05/24/62h-bu-jin-dian-ji/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>62H_步进电机</h2>
+
+  <h2 id="42步进电机"><a href="#42步进电机" class="headerlink" title="42步进电机"></a>42步进电机</h2><h3 id="1-步进电机的基本知识"><a href="#1-步进电机的基本知识" class="headerlink" title="1.步进电机的基本知识"></a>1.步进电机的基本知识</h3><p>（1）拍数——每一次循环所包含的通电状态数（电机转过一个齿距角所需脉冲数）<br>（2）单拍制分配方式——状态数&#x3D;相数<br>（3）双拍制分配方式——状态数&#x3D;相数的两倍<br><strong>（4）步距角 ——步进机通过一个电脉冲转子转过的角度</strong>,电机上一般会给出</p>
+<p><img src="https://img-blog.csdnimg.cn/20190504174146766.png#pic_center" alt="计算公式"></p>
+<ul>
+<li>N:一个周期的运行拍数<br>Zr：转子齿数<br>拍数：N&#x3D;km<br>m:相数<br>k&#x3D;1单拍制<br>k&#x3D;2双拍制</li>
+</ul>
+<p>（5）转速<br><img src="https://img-blog.csdnimg.cn/20190504184912141.png#pic_center" alt="转速"></p>
+<p>（6）角度细分的原理</p>
+<ul>
+<li>电磁力的大小与绕组通电电流的大小有关。</li>
+<li>当通电相的电流并不马上升到位，而断电相的电流也非立即降为0时，它们所产生的磁场合力，会使转子有一个新的平衡位置，这个新的平衡位置是在原来的步距角范围内。</li>
+</ul>
+<h3 id="3-42步进电机速度与角度控制"><a href="#3-42步进电机速度与角度控制" class="headerlink" title="3. 42步进电机速度与角度控制"></a>3. 42步进电机速度与角度控制</h3><p>电机的转速与脉冲频率成正比，电机转过的角度与脉冲数成正比。所以控制脉冲数和脉冲频率就可以精确调速。<br>理论上步进电机转速 &#x3D; 频率 * 60 &#x2F;((360&#x2F;T)<em>x)<br>w &#x3D; f ∗ 60 ( 360 ° T × x ) w&#x3D; \frac{f</em>60}{(\frac {360°}{T}\times x)}w&#x3D;(T360°​×x)f∗60​</p>
+<ul>
+<li>转速单位： 转&#x2F; 分</li>
+<li>频率单位：赫兹</li>
+<li>x 细分倍数</li>
+<li>T 步距角<br>例如，在本实验中，32细分；频率72000 赫兹；步距角1.8°；套用公式72000 ∗ 60 ( ( 360 &#x2F; 1.8 ) ∗ 32 ) &#x3D; 112.5 \frac{72000*60}{((360&#x2F;1.8)*32)}&#x3D;112.5((360&#x2F;1.8)∗32)72000∗60​&#x3D;112.5rad&#x2F; min，即1.875 rad&#x2F;s.</li>
+</ul>
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230525191834700.png" class="" title="image-20230525191834700">
+
+
+
+
+
+
+
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230525191852684.png" class="" title="image-20230525191852684">
+
+
+
+<p><strong>接口</strong><br>步进驱动器可分为两部分：环形分配器、功率放大器。<br><strong>环形分配器</strong>：接收3种信号分别为：脉冲信号（PUL&#x2F;CLK），方向信号（DIR&#x2F;CW），脱机信号（ENA）。<br><strong>脉冲信号</strong>：环形分配器对脉冲信号进行分配，去控制功率放大器相应的晶体管，使步进电机的线圈得电。所以，步进电机要运转就必须有脉冲输入，所以需要一个驱动器来给步进电机的各项绕组依次通电。<br><strong>方向信号</strong>：控制AB通电的相序，A-B顺时针，B-A逆时针<br><strong>脱机信号</strong>：步进电机停止时，AB线圈有一相得电，得电的功能使转子锁住，使转子不能动，需要收去拨动转子的时候，需要给脱机信号，使AB相绕组完全断电，转子处于自由转动状态。（也就是说控制电机停止除了不给脉冲之外，还可以控制脱机信号来锁死电机，此处用不着脱机信号）</p>
+<h2 id="不转-尖叫-啸叫"><a href="#不转-尖叫-啸叫" class="headerlink" title="不转,尖叫,啸叫"></a>不转,尖叫,啸叫</h2><p>之前同样的代码可以正常使用,现在更换驱动器和步进电机之后仍然不好使</p>
+<p>下一步准备更换主控</p>
+<p>我先换线,后面所有的线都换了,依然不行</p>
+<p>也有可能是电池没电了(自己的笔记还是要及时看的,不然思路会忘掉)</p>
+<blockquote>
+<p><code>确实是电池没电了,电压变成9v多,不够了</code>,而驱动器的电源范围为9-40V</p>
+</blockquote>
+<h2 id="步进电机不转并出现尖叫啸叫的原因"><a href="#步进电机不转并出现尖叫啸叫的原因" class="headerlink" title="步进电机不转并出现尖叫啸叫的原因"></a>步进电机不转并出现尖叫啸叫的原因</h2><p>1.供电问题</p>
+<p>电源电压过低或不稳定-&gt;更换电源</p>
+<p>2.驱动器故障</p>
+<p>上电后,绿灯常亮,蓝灯不亮(这个蓝灯状态我不确定)</p>
+<p>我认为驱动时蓝绿两个灯都亮着,驱动器就是正常的</p>
+<p>另一种方法是,pul+接电源24v,pul-与电源地线一下一下触动,电机轻微转动,则驱动器没有问题</p>
+<p><a target="_blank" rel="noopener" href="https://www.jiangtexs.net/hynews/2067.html">步进电机尖叫而不转的原因是什么（详解步进电机故障排查）-江西电机 (jiangtexs.net)</a></p>
+<p>3.步进电机故障</p>
+<p>此时可以将一相的两根线拧在一起然后,转动电机有阻力,再将另外两根线接在一起,阻力加大-&gt;电机未故障</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35858902/article/details/124069845?ops_request_misc=%7B%22request_id%22:%22168887086916800182114140%22,%22scm%22:%2220140713.130102334.pc_blog.%22%7D&request_id=168887086916800182114140&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~hot_rank-6-124069845-null-null.268%5Ev1%5Ekoosearch&utm_term=stm32%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA&spm=1018.2226.3001.4450">stm32控制步进电机_司徒法克的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44041987/article/details/88254493?ops_request_misc=%7B%22request_id%22:%22168885611916800180640001%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=168885611916800180640001&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-88254493-null-null.142%5Ev88%5Einsert_down38v5,239%5Ev2%5Einsert_chatgpt&utm_term=stm32f407%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA&spm=1018.2226.3001.4187">基于STM32F407ZGT6对步进电机的控制（单脉冲+重复计数）有代码_stm32f407igt6 步进电机模块代码编程_weixin_44041987的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wxc971231/article/details/82086392?ops_request_misc=%7B%22request_id%22:%22168885691916800185829953%22,%22scm%22:%2220140713.130102334.pc_blog.%22%7D&request_id=168885691916800185829953&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~hot_rank-7-82086392-null-null.268%5Ev1%5Ekoosearch&utm_term=stm32f407%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA&spm=1018.2226.3001.4450">利用stm32控制步进电机 速度&amp;&amp;加速度控制_步进电机2相驱动控制方向与速度程序代码_云端FFF的博客-CSDN博客</a></p>
+<h3 id="步进电机的驱动"><a href="#步进电机的驱动" class="headerlink" title="步进电机的驱动"></a>步进电机的驱动</h3><h3 id="驱动原理"><a href="#驱动原理" class="headerlink" title="驱动原理"></a>驱动原理</h3><h3 id="驱动方法"><a href="#驱动方法" class="headerlink" title="驱动方法"></a>驱动方法</h3><ul>
+<li>GPIO翻转+delay</li>
+<li>GPIO翻转+外部中断</li>
+<li>PWM+定时器中断</li>
+<li>PWM+主从定时器</li>
+<li>定时器输出比较</li>
+<li>定时器输出比较_IO口翻转模式</li>
+</ul>
+<h3 id="脉冲宽度-即ccr-对步进电机的影响"><a href="#脉冲宽度-即ccr-对步进电机的影响" class="headerlink" title="脉冲宽度(即ccr)对步进电机的影响"></a>脉冲宽度(即ccr)对步进电机的影响</h3><p>如果你是用驱动器来驱动步进电机的话，那脉冲的占空比跟步进电机的步进数是没关系的，只要脉冲宽度大于驱动器的要求就好了，因为决定步进电机的步进数是脉冲个数，跟脉冲宽度无关。另外要注意的是脉冲频率，不能超过驱动器可接受的脉冲频率和电机响应频率。另外楼上说的电机扭矩的话跟脉冲宽度也没多大关系，决定扭矩的是驱动电流</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ng4y1w7oT/?spm_id_from=333.788&vd_source=e33ad22b3d91cb180bef532ce5877b2e">梯形加减速_哔哩哔哩_bilibili</a></p>
+<h2 id="定时器时钟"><a href="#定时器时钟" class="headerlink" title="定时器时钟"></a>定时器时钟</h2><img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710151905256.png" class="" title="image-20230710151905256">
+
+<p>CNT-&gt;ARR 影像周期,进而影响频率,频率计算公式:f&#x3D;1&#x2F;T</p>
+<p>CNT自增到ARR的时间&#x3D;PWM周期时间</p>
+<p>CCR-&gt;影响占空比</p>
+<p>晶振(CK-PSC)-&gt;分频器分频后-&gt;作为PWM波的频率</p>
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710152415736.png" class="" title="image-20230710152415736">
+
+<p>因为arr和psc都是从0开始所以计算式要+1</p>
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710152520300.png" class="" title="image-20230710152520300">
+
+
+
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710152635959.png" class="" title="image-20230710152635959">
+
+
+
+<p>配置成复用推挽输出的原因</p>
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710152810574.png" class="" title="image-20230710152810574">
+
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710152946501.png" class="" title="image-20230710152946501">
+
+<img src="/2023/05/24/62h-bu-jin-dian-ji/image-20230710153130548.png" class="" title="image-20230710153130548">
+
+
+
+
+
+<p>定时器中断,先写一个串口发送控制速度,角度,按键控制,然后oled显示,然后画板子,确定电源接口</p>
+<h3 id="梯形加减速"><a href="#梯形加减速" class="headerlink" title="梯形加减速"></a>梯形加减速</h3><p>原理:定时器输出比较_io口翻转</p>
+<p>弧长&#x3D;半径对应的角度,360&#x2F;2π&#x3D;180&#x2F;π</p>
+<ul>
+<li>rad 为弧度单位 (1rad &#x3D; (180&#x2F;π)° ≈ 57.3°)</li>
+</ul>
+<p>摆放顺序由比赛现场抽签确定</p>
+<h2 id="通电发热-且有电流声"><a href="#通电发热-且有电流声" class="headerlink" title="通电发热,且有电流声"></a>通电发热,且有电流声</h2><p><del>步进电机电流过大,驱动器没有对电流进行细分</del>,</p>
+<p>细分之后没有电流声,但是通电时间长了之后依然会发热,,我觉得的是EN的问题</p>
+<p>sscanf</p>
+<p>使用 <code>sscanf()</code> 函数从字符串中提取两个整数。但是，由于字符串中只有一个整数，因此会导致提取错误的结果。</p>
+<p>修正该代码的方法是，使用 <code>%c%d</code> 的格式字符串，将第一个字符作为符号位，第二个字符作为整数部分，然后使用 <code>sscanf()</code> 函数从字符串中提取这两个值。以下是修正后的代码：</p>
+<p><code>steps = atoi((char const *)Rebuf)</code>;</p>
+<p> 将 <code>Rebuf</code> 缓冲区中的字符串转换为整型数据，并将其赋值给 <code>steps</code> 变量</p>
+<p>我有很多的事情想不明白</p>
+<h2 id="关于串口通信出现的问题"><a href="#关于串口通信出现的问题" class="headerlink" title="关于串口通信出现的问题"></a>关于串口通信出现的问题</h2><h3 id="电机只能转一次"><a href="#电机只能转一次" class="headerlink" title="电机只能转一次"></a>电机只能转一次</h3><p>我遇到的问题有发送+5,电机不转,加了判断之后,电机只能转一次,后面再发送就没反应了,但是我写了</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">memset(Rebuf, 0, sizeof(Rebuf));
+steps&#x3D;0;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>清空步数和缓存区</p>
+<p>下面这个代码可以完成10以内的圈数,但是他清的是buf_len,但我认为不是清空的事,而是转换成整数的事<code>steps = steps * 10 + (Rebuf[i] - &#39;0&#39;);</code></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">int16_t BUFFER_SIZE &#x3D;200;
+void USART3_IRQHandler(void)
+&#123;
+char res;&#x2F;&#x2F;无符号,所以会导致没有+-
+static int i&#x3D;0;
+char Rebuf[BUFFER_SIZE];
+uint8_t buf_len &#x3D; 0;  &#x2F;&#x2F; 接收缓冲区当前长度
+uint8_t digit_count &#x3D; 0;
+int32_t steps&#x3D;0 ; &#x2F;&#x2F; 存储步数变量
+if(USART_GetITStatus(USART3,USART_IT_RXNE)!&#x3D; RESET)
+	&#123;
+   	 	Rebuf[buf_len++]&#x3D;USART_ReceiveData(USART3); &#x2F;&#x2F;既然是一个字符一个中断,那为什么我看到的是&quot;哈哈哈&quot;是连着的,是因为串口助手规范的吗
+    &#x2F;*在你的代码中，如果接收到的数据是负数，则转换后会出现错误。
+    这是因为负数的ASCII码值大于127，而你使用的uint8_t类型的变量无法表示大于127的数值。*&#x2F;
+    &#x2F;&#x2F; 遍历接收缓冲区中的每个字符
+    	for( i &#x3D; 0; i &lt; buf_len; i++)
+    		&#123;
+      		  	if (Rebuf[i] &gt;&#x3D; &#39;0&#39; &amp;&amp; Rebuf[i] &lt;&#x3D; &#39;9&#39;)
+       		 		&#123;
+            &#x2F;&#x2F; 如果当前字符是数字，则将其转换为整数并累加到步数中
+            			steps &#x3D; steps * 10 + (Rebuf[i] - &#39;0&#39;);
+            			digit_count++;
+        				&#125;
+    		&#125;
+         	 MOTOR_Move(1600 * steps, step_accel, step_decel, set_speed);  &#x2F;&#x2F; 需要时调
+          		buf_len &#x3D; 0;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>因为这样的代码同样可以用,但是只能是个位数,甚至还有正负,所以应该是<code>steps = atoi((const char *)Rebuf);</code>这个转换的问题</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">int16_t BUFFER_SIZE &#x3D;200;
+void USART3_IRQHandler(void)
+&#123;
+	char res;&#x2F;&#x2F;无符号,所以会导致没有+-
+ 	&#x2F;&#x2F;char res;  &#x2F;&#x2F; 将数据类型修改为有符号的int8_t
+ 	static int i&#x3D;0;
+	char Rebuf[BUFFER_SIZE];
+  	 uint8_t buf_len &#x3D; 0;  &#x2F;&#x2F; 接收缓冲区当前长度
+     uint8_t digit_count &#x3D; 0;
+ 	int32_t steps&#x3D;0 ; &#x2F;&#x2F; 存储步数变量
+	if(USART_GetITStatus(USART3,USART_IT_RXNE)!&#x3D; RESET)
+	&#123;
+    	Rebuf[buf_len++]&#x3D;USART_ReceiveData(USART3); 
+      	&#x2F;&#x2F;int steps &#x3D; res - &#39;000&#39;; &#x2F;&#x2F; 将字符转换为数字,   这样会以最大速度一直转  
+     	 int steps &#x3D; Rebuf[0] - &#39;0&#39;;&#x2F;&#x2F;这个有符号,但是只能识别一位
+      		MOTOR_Move((1600 * steps), step_accel, step_decel, set_speed);  &#x2F;&#x2F; 需要时调
+       &#125;
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<blockquote>
+<p>他们说串口发送数据是一个字节一个字节发送的,又说是一个字符一个字符发送的,所以我最开始写的代码是这样的,当输入+5的时候,这个判断可以进来,</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">if(rebuf[0]&#x3D;&#x3D;&#39;+&#39;)
+&#123;
+&#x2F;&#x2F;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但是这个输入+5也可以正常执行,<del>c所以有没有可能一个字节是八位,而一个字符只是一位</del></p>
+<p>串口发送数据的方式可以是一个字节一个字节发送，也可以是一次发送多个字节,因为一个字符的 ASCII 码值可以用一个字节表示，所以一个字符只占用一个字节的空间。而一个整数通常需要多个字节来表示，所以将字符转换为整数时只能转换为一位数字</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">int steps &#x3D; Rebuf[0] - &#39;0&#39;;&#x2F;&#x2F;这个有符号,但是只能识别一位<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+</blockquote>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Rebuf[buf_len++]&#x3D;USART_ReceiveData(USART3); &#x2F;&#x2F;既然是一个字符一个中断,那为什么我看到的是&quot;哈哈哈&quot;是连着的,是因为串口助手规范的吗
+    &#x2F;*在你的代码中，如果接收到的数据是负数，则转换后会出现错误。
+    这是因为负数的ASCII码值大于127，而你使用的uint8_t类型的变量无法表示大于127的数值。*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="switch判断方法-不能自由控制"><a href="#switch判断方法-不能自由控制" class="headerlink" title="switch判断方法,不能自由控制"></a>switch判断方法,不能自由控制</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">switch(res)
+&#123;
+  case &#39;1&#39;:
+       MOTOR_Move(1600 * 1, step_accel, step_decel, set_speed);  &#x2F;&#x2F; 需要时调
+       break;    
+  case &#39;2&#39;:
+       MOTOR_Move(-1600 * 5, step_accel, step_decel, set_speed);  &#x2F;&#x2F; 需要时调
+       break;
+ &#125;       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="error-42-operand-types-are-incompatible-“char”-and-“char-”"><a href="#error-42-operand-types-are-incompatible-“char”-and-“char-”" class="headerlink" title="error: #42: operand types are incompatible (“char” and “char *”)"></a>error: #42: operand types are incompatible (“char” and “char *”)</h2><p>if (Rebuf[0]&#x3D;&#x3D;”+”||Rebuf[0]&#x3D;&#x3D;” “)sign&#x3D;1;</p>
+<p>这个错误是因为你在代码中将一个字符（<code>char</code> 类型）与一个字符串（<code>char*</code> 类型）进行了比较。具体而言，在第 75 行代码中，你将 <code>Rebuf[0]</code> 的值与字符串 <code>&quot;+&quot;</code> 和 <code>&quot; &quot;</code> 进行了比较，这是不允许的。因为 <code>Rebuf[0]</code> 是一个字符，而 <code>&quot;+&quot;</code> 和 <code>&quot; &quot;</code> 都是字符串常量，是由多个字符组成的字符数组。</p>
+<blockquote>
+<p>将””换成’’,将字符串常量改为字符常量\</p>
+</blockquote>
+<h2 id="我不明白这个代码为什么我发送r12-不应该是rrbuf-0-x3D-rebuf-1-x3D-1-rebuf-2-x3D-2而不是rebuf-0-x3D-r12"><a href="#我不明白这个代码为什么我发送r12-不应该是rrbuf-0-x3D-rebuf-1-x3D-1-rebuf-2-x3D-2而不是rebuf-0-x3D-r12" class="headerlink" title="我不明白这个代码为什么我发送r12,不应该是rrbuf[0]&#x3D;,rebuf[1]&#x3D;1,rebuf[2]&#x3D;2而不是rebuf[0]&#x3D;r12"></a>我不明白这个代码为什么我发送r12,不应该是rrbuf[0]&#x3D;,rebuf[1]&#x3D;1,rebuf[2]&#x3D;2而不是rebuf[0]&#x3D;r12</h2><p>​           <code> if (res == &#39;\n&#39;)</code></p>
+<p>如果接收到回车符,这个判断很重要,有这个可以正常按数组接收数据,没有的话,可能就与变量接收没有区别</p>
+<p>原因:</p>
+<h3 id="关于steps无法算两位数以上"><a href="#关于steps无法算两位数以上" class="headerlink" title="关于steps无法算两位数以上"></a>关于steps无法算两位数以上</h3><h3 id="并且代码的公式没问题-for循环的括号-要把for循环结束后step才是我想要的值"><a href="#并且代码的公式没问题-for循环的括号-要把for循环结束后step才是我想要的值" class="headerlink" title="并且代码的公式没问题,for循环的括号,要把for循环结束后step才是我想要的值"></a>并且代码的公式没问题,for循环的括号,要把for循环结束后step才是我想要的值</h3><h3 id="steps无法计算小数"><a href="#steps无法计算小数" class="headerlink" title="steps无法计算小数"></a>steps无法计算小数</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"> for ( i &#x3D; 0; i &lt; buf_len; i++)
+                  &#123;   
+                   
+                    if (Rebuf[i] &gt;&#x3D; &#39;0&#39; &amp;&amp; Rebuf[i] &lt;&#x3D; &#39;9&#39;)&#x2F;&#x2F;1.5
+                       &#123; 
+   &#x2F;&#x2F; 如果当前字符是数字，则将其转换为整数并累加到步数中
+                          steps &#x3D; steps * 10 + (Rebuf[i] - &#39;0&#39;);
+
+                      &#125;
+                       else if(Rebuf[i]&#x3D;&#x3D;&#39;.&#39;)&#x2F;&#x2F;12.5,1.25
+                      &#123; 
+&#x2F;&#x2F;                      float steps &#x3D; atof(Rebuf + 1); &#x2F;&#x2F; 将字符串转换为浮点数
+                        steps &#x3D; steps * 10 + (Rebuf[i+1] - &#39;0&#39;);                     
+                        float ff &#x3D; steps*0.1;
+                         steps&#x3D;ff;
+                        break;
+                       &#125;
+                     &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>问题:小数点无效,比如r0.5会正转5圈</p>
+<p>原因:</p>
+<p><code>作用域问题</code></p>
+<p>因为在 <code>else if(Rebuf[i]==&#39;.&#39;)</code> 分支中重新定义了 <code>steps</code> 变量，而且这个新定义的 <code>steps</code> 变量的作用域仅限于该分支中，不会影响到外部的 <code>steps</code> 变量。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#define BUFFER_SIZE 200
+char Rebuf[BUFFER_SIZE];
+uint8_t buf_len &#x3D; 0;  &#x2F;&#x2F; 接收缓冲区当前长度
+uint8_t digit_count &#x3D; 0;
+int32_t steps &#x3D; 0; &#x2F;&#x2F; 存储步数变量
+int sign;
+
+void USART3_IRQHandler(void)
+&#123;
+    if (USART_GetITStatus(USART3, USART_IT_RXNE) !&#x3D; RESET)
+    &#123;
+        char res &#x3D; USART_ReceiveData(USART3);
+        if (buf_len &lt; BUFFER_SIZE - 1) &#x2F;&#x2F; 如果接收缓冲区未满
+        &#123;
+            Rebuf[buf_len++] &#x3D; res; &#x2F;&#x2F; 存储接收到的字符
+            if (res &#x3D;&#x3D; &#39;\n&#39;) &#x2F;&#x2F; 如果接收到回车符,这个判断很重要,有这个可以正常按数组接收数据,没有的话,可能就与变量接收没有区别
+            &#123;
+                &#x2F;&#x2F;Rebuf[buf_len] &#x3D; &#39;\0&#39;; &#x2F;&#x2F; 在最后一个字符后添加字符串结束符
+                if (Rebuf[0] &#x3D;&#x3D; &#39;r&#39;)
+                &#123;
+                    steps &#x3D; atoi((char const *)(Rebuf + 1));
+                    MOTOR_Move(1600 * steps, step_accel, step_decel, set_speed); &#x2F;&#x2F; 需要时调
+                &#125;
+                buf_len &#x3D; 0; &#x2F;&#x2F; 清空接收缓冲区
+                steps &#x3D; 0; &#x2F;&#x2F; 清空步数变量
+            &#125;
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>明天的任务</p>
+<p>0.5.找到电机发热问题 </p>
+<p>1.封装xx,y,z电机</p>
+<p>2.电赛准备</p>
+<p>3.数学原理很重要,可以系统学习一下,步进电机梯形加减速的原理</p>
+<p>4.不知道为什么f4的例程里面没有出现这个\n的问题,不知道是不是因为hal库封装好了</p>
+<p>5.树莓派使用串口要先打开,奶奶滴,那个人没给我ip,没给我热点,我连个JQK</p>
+<h2 id="串口控制xxyz四个电机"><a href="#串口控制xxyz四个电机" class="headerlink" title="串口控制xxyz四个电机"></a>串口控制xxyz四个电机</h2><h3 id="问题四分之一"><a href="#问题四分之一" class="headerlink" title="问题四分之一"></a>问题四分之一</h3><p>现在就是我之前使用tim3的通道一,控制一个电机,现在我爸四个通道都打开了,不知道为什么会变成原来的四分之一,因为计算公式都没变</p>
+<h2 id="换四个定时器-参考四轴步进电机"><a href="#换四个定时器-参考四轴步进电机" class="headerlink" title="换四个定时器,参考四轴步进电机"></a>换四个定时器,参考四轴步进电机</h2><p>在定时器中断处理函数中，每次中断发生时会检测定时器的中断标志位，并根据标志位来执行相应的代码。如果您在中断处理函数中多次检测定时器中断标志位，并且每次都处理一个脉冲信号，那么每次中断发生时就会处理多个脉冲信号，导致总的脉冲信号数量增加。</p>
+<blockquote>
+<p>例如，如果您多写了一个处理脉冲信号的代码，那么每次中断发生时会处理两个脉冲信号，导致总的脉冲信号数量增加一倍，因此电机的转速也会增加一倍。同样地，如果您多写了三个处理脉冲信号的代码，那么每次中断发生时会处理四个脉冲信号，导致总的脉冲信号数量减少四分之三，因此电机的转速也会减少四分之三。</p>
+</blockquote>
+<h3 id="单开oc1可-oc2-03-oc4都不行"><a href="#单开oc1可-oc2-03-oc4都不行" class="headerlink" title="单开oc1可,oc2,03,oc4都不行"></a>单开oc1可,oc2,03,oc4都不行</h3>
+  <p> — May 24, 2023</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

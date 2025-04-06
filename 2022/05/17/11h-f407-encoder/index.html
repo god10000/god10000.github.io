@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>stm32f407串口打印编码器测速</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2022/05/17/11h-f407-encoder/">
+  
+  <meta name="description" content="对于电机测速用到的正交编码器，测速时需要捕获2路脉冲，输入捕获，编程较为复杂。单片机的通用定时器具有专门的正交编码器接口，只需配置相应的寄存器，就可实现编码器输入的上下沿自动捕获与计数，便于编码器的测速。 编码器模式,原理相当于输入捕获,为什么叫正交编码,因为编码器的A相和B相相差90度(如果两个信">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="stm32f407串口打印编码器测速" />
+  
+  <meta property="og:description" content="对于电机测速用到的正交编码器，测速时需要捕获2路脉冲，输入捕获，编程较为复杂。单片机的通用定时器具有专门的正交编码器接口，只需配置相应的寄存器，就可实现编码器输入的上下沿自动捕获与计数，便于编码器的测速。 编码器模式,原理相当于输入捕获,为什么叫正交编码,因为编码器的A相和B相相差90度(如果两个信">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2022/05/17/11h-f407-encoder/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="stm32f407串口打印编码器测速">
+  
+  <meta name="twitter:description" content="对于电机测速用到的正交编码器，测速时需要捕获2路脉冲，输入捕获，编程较为复杂。单片机的通用定时器具有专门的正交编码器接口，只需配置相应的寄存器，就可实现编码器输入的上下沿自动捕获与计数，便于编码器的测速。 编码器模式,原理相当于输入捕获,为什么叫正交编码,因为编码器的A相和B相相差90度(如果两个信">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2022/05/17/11h-f407-encoder/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>stm32f407串口打印编码器测速</h2>
+
+  <p>对于电机测速用到的正交编码器，测速时需要捕获2路脉冲，输入捕获，编程较为复杂。单片机的通用定时器具有专门的正交编码器接口，只需配置相应的寄存器，就可实现编码器输入的上下沿自动捕获与计数，便于编码器的测速。</p>
+<p>编码器模式,原理相当于输入捕获,为什么叫正交编码,因为编码器的A相和B相相差90度(如果两个信号相位相差90度，则这两个信号称为正交)因此可以根据两个信号哪个先哪个后来判断方向、根据每个信号脉冲数量的多少及整个编码轮的周长就可以算出当前行走的距离、如果再加上定时器的话还可以计算出速度。</p>
+<p>要明白的一点就是为什么要用编码器模式，而不是直接用输入捕获。<br>最主要的原因就是编码器采集的是两个信号，根据两个信号的高低电平来判断是正转还是反转，比输入捕获用一个信号的抗干扰能力强。如果一个信号有干扰，而另一个信号没有干扰，则计数器不会计数，</p>
+<h2 id="编码器分类："><a href="#编码器分类：" class="headerlink" title="编码器分类："></a>编码器分类：</h2><h3 id="增量式编码器"><a href="#增量式编码器" class="headerlink" title="增量式编码器"></a>增量式编码器</h3><blockquote>
+<p>只有当设备运动时才会输出信号。</p>
+</blockquote>
+<blockquote>
+<p>一般会输出通道A和通道B 两组信号，并且有90° 的相位差（1&#x2F;4个周期），同时采集这两组信号就可以计算设备的运动速度和方向。</p>
+</blockquote>
+<blockquote>
+<p>正转的时候信号线A先输出信号,信号线B后输出  A相超前B相90度  证明是正转,反转则相反</p>
+</blockquote>
+<blockquote>
+<p>除通道A、通道B 以外，还会设置一个额外的通道Z 信号，表示编码器特定的参考位置</p>
+</blockquote>
+<blockquote>
+<p>如下图，传感器转一圈后Z 轴信号才会输出一个脉冲，在Z轴输出时，可以通过将AB通道的计数清零，实现对码盘绝对位置的计算。</p>
+</blockquote>
+<blockquote>
+<p>增量式编码器只输出设备的位置变化和运动方向，不会输出设备的绝对位置。<br><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fc95ea0.jpg" alt="04.jpg"></p>
+</blockquote>
+<h3 id="绝对值型："><a href="#绝对值型：" class="headerlink" title="绝对值型："></a>绝对值型：</h3><blockquote>
+<p>对应一圈，每个基准的角度发出一个唯一与该角度对应二进制的数值，通过外部记圈器件可以进行多个位置的记录和测量。<br><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fd98477.jpg" alt="06.jpg"></p>
+</blockquote>
+<h2 id="编码器采集原理"><a href="#编码器采集原理" class="headerlink" title="编码器采集原理"></a>编码器采集原理</h2><p><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fa4d7f4.jpg" alt="01.jpg"></p>
+<p>上图是定时器的框图，首先我们会从电机屁股后面的编码器引出两根信号线<code>就是编码器的AB相</code>接到单片机的编码器引脚，如上图第一个框内，接到某定时器的TIMx_CH1和TIMx_CH2两个通道的引脚上。进来之后进行滤波和边沿检测之后输出TI1FP1和TI1FP2，之后就直接到2号框了。2号框是将TI1FP1和TI1FP2接入编码器接口，在这里判断是该向上还是向下计数，之后来到3号框，进行分频，最后来到CNT计数器进行计数。我们可以定时采集CNT里面的值，这样就能算出电机的转速和其他一些参数了。</p>
+<h2 id="计数原理及计数方式"><a href="#计数原理及计数方式" class="headerlink" title="计数原理及计数方式"></a>计数原理及计数方式</h2><h3 id="正反转计数原理"><a href="#正反转计数原理" class="headerlink" title="正反转计数原理"></a>正反转计数原理</h3><p>编码器模式下，计数器的计数方向代表的电机的正转与反转，计数的大小代表了转速的大小。<br>如下图，电机正转时，编码器的通道A（TI1）的信号超前通道B，计数器向上计数，反转时，通道A的信号滞后，向下计数。<br><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39ff5375b.jpg" alt="09.jpg"></p>
+<p>设置信号的极性反相，可以使向下计数代表电机正转。<br><img src="http://45.92.193.42:7788/i/2022/07/12/62cd3a0005b63.jpg" alt="10.jpg"><br>以STM32 芯片为例，其内部有专门用来采集增量式编码器方波信号的接口，这些接口实际上是STM32 定时器的其中一种功能。不过编码器接口功能只有高级定时器TIM1、TIM8 和通用定时器的TIM2~TIM5 才有。<br><img src="http://45.92.193.42:7788/i/2022/07/12/62cd3a0081cc6.jpg" alt="11.jpg"></p>
+<h3 id="计数方式"><a href="#计数方式" class="headerlink" title="计数方式"></a>计数方式</h3><p><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fa87c2c.jpg" alt="02.jpg"><br><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39facf3b3.jpg" alt="03.jpg"></p>
+<p>首先假定此时是电机正转，还有一点要知道，编码器两个信号相差90°的相位角。一个周期的信号可以分为0 π&#x2F;2 π 3&#x2F;2*π 2π，如上图，刚好差了π&#x2F;2。上图是两个通道上下边沿都检测（SMS&#x3D;’011’） 。<br>当TI1为上升沿时时，此时TI2为低电平，对应下面的图，先看<code>有效边沿</code>，因为是看的TI1上升沿，所以第一项选择<code>仅在TI1计数</code>，之后找对应的<code>TI1FP1 信号项</code>，选择上升。因为图中TI1是上升沿，对应TI2是低电平，因此在<code>相对信号的电平</code>那一项应该选择低，对应起来就是向上计数。<br>理解了TI1上升沿计数之后，其他的都一样了。</p>
+<h2 id="编码器倍频的原理"><a href="#编码器倍频的原理" class="headerlink" title="编码器倍频的原理"></a>编码器倍频的原理</h2><blockquote>
+<p>编码器倍频是什么意思，比如某光栅编码器一圈有N个栅格，理论上电机带动编码器转一圈，只能输出N个信号，通过倍频技术，可以实现转一圈，却能输出N*n个信号，这里的n为倍频数。</p>
+</blockquote>
+<p><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fd0d2af.jpg" alt="05.jpg">增量式编码器输出的脉冲波形一般为占空比50% 的方波，通道A 和B 相位差为90°。</p>
+<blockquote>
+<p>如果只使用通道A计数，并且只捕获通道A的上升沿，则一圈的计数值&#x3D;码盘的栅格数，即为1倍频（没有倍频）<br>如果只使用通道A计数，并且捕获了通道A的上升沿和下降沿，则编码器转一圈的计数值翻倍，实现2倍频<br>如果既使用通道A计数，又使用通道B计数，且都捕获了上升沿和下降沿，则实现了4倍频</p>
+</blockquote>
+<p><img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fe7aad2.jpg" alt="07.jpg"></p>
+<p>假设某个增量式编码器它的分辨率是600PPR，能分辨的最小角度是0.6°，对它进行4 倍频之后就相当于把分辨率提高到了600*4&#x3D;2400PPR，此时编码器能够分辨的最小角度为0.15°。</p>
+<blockquote>
+<p><code>个人理解</code>:在A先达到上升沿,B处于低电平时,则向上计数,电机正转,一个周期只有一个上升沿,每个周期计数一次,AB通道相差四分之一个周期,四倍频相当于在这一个向上计数的周期里捕获了四次,A上升A下降B上升B下降达到四倍频效果</p>
+</blockquote>
+<h2 id="编码器测速原理及测速方法"><a href="#编码器测速原理及测速方法" class="headerlink" title="编码器测速原理及测速方法"></a>编码器测速原理及测速方法</h2><h3 id="测速原理"><a href="#测速原理" class="headerlink" title="测速原理"></a>测速原理</h3><blockquote>
+<p>STM32的编码器模式共有三种</p>
+</blockquote>
+<blockquote>
+<p>仅在TL1计数(A相)</p>
+</blockquote>
+<blockquote>
+<p>仅在TL2计数(B相)</p>
+</blockquote>
+<blockquote>
+<p>在TL1和TL2都计数(A相和B相都计数)</p>
+</blockquote>
+<blockquote>
+<p>编码器相当于内外两个环,一个A一个B,相位差为90度<br>A上升沿,B处于低电平,则为正转<br>A下降沿,B处于高电平,则为反转<br>定时器在编码器模式下记得数则为总的脉冲数,由于是TL12模式,四倍频,所以总的脉冲数&#x3D;线数<em>减速比</em>4</p>
+</blockquote>
+<blockquote>
+<p>把TIM3理解为一个计数器而不是一个定时器，则没有了时序信号。<br>这里TIM3的时钟信号（或者说是计数信号）将由电机编码器输出的脉冲代替，也就是说电机脉冲信号成为TIM3的信号，电机每产生一个脉冲被TIM3检测到，则计数器CNT加一（类比于时序信号时每隔一个时间段计数值加一）</p>
+</blockquote>
+<blockquote>
+<p>这样的话，输入捕获的自动重装载值period则影响着脉冲值计数到多少之后就溢出，比如65535的话，则接收到65535个脉冲信号之后计数值置零溢出</p>
+</blockquote>
+<blockquote>
+<p>这样的话，输入捕获的预分频系数prescaler的作用是，当我不分频时，来一个电机脉冲信号我计数值就加一，当我二分频时，只有接收到两个脉冲信号我才认为是一个有效脉冲，计数值才加一，简单来说就是计数值总体除以二了</p>
+</blockquote>
+<blockquote>
+<p>这样我们就把输入捕获初始化完成了，接下来是编码器模式的初始化<br>设为<code>TIM_EncoderMode_TI12</code>模式，即计数器在TI1和TI2上升沿处均计数，再根据设置的极性是<code>TIM_ICPolarity_Rising</code>，也就是在TI1和TI2的上升沿计数器累加（或累减）–&gt;那么到时候要除以二<br>这样，编码器的初始化就完成了，接下来我们只要通过函数得出它的计数值，就可以知道电机产生的脉冲数，再根据电机的参数（每转产生多少个脉冲）就可以得到电机转了几圈</p>
+</blockquote>
+<h3 id="测速方法"><a href="#测速方法" class="headerlink" title="测速方法"></a>测速方法</h3><h4 id="M法测速"><a href="#M法测速" class="headerlink" title="M法测速"></a>M法测速</h4><p>又叫做频率测量法。该方法是在一个固定的时间内（以秒为单位），统计这段时间的编码器脉冲数，计算速度值。M法适合测量高速。</p>
+<p>假设：</p>
+<p>编码器单圈总脉冲数为C（常数）</p>
+<p>统计时间为T0</p>
+<p>该时间内统计到的编码器脉冲数为M0</p>
+<p>则：转速n（圈&#x2F;秒）的计算公式为：![]!<img src="http://45.92.193.42:7788/i/2022/07/12/62cd39fea709a.jpg" alt="08.jpg"></p>
+<p>如何理解这个公式：<br> M0&#x2F;C 即统计时间内有多少个编码器脉冲，再除以统计时间T0，即1s（单位时间）内转了多少圈</p>
+<h4 id="T法测速"><a href="#T法测速" class="headerlink" title="T法测速"></a>T法测速</h4><blockquote>
+<p>待更新……..</p>
+</blockquote>
+<h4 id="MT法测速"><a href="#MT法测速" class="headerlink" title="MT法测速"></a>MT法测速</h4><blockquote>
+<p>待更新……..</p>
+</blockquote>
+<h2 id="使用编码器模式时需要注意以下几点："><a href="#使用编码器模式时需要注意以下几点：" class="headerlink" title="使用编码器模式时需要注意以下几点："></a>使用编码器模式时需要注意以下几点：</h2><blockquote>
+<p>1.编码器有个转速上限,超过这个上限是不能正常工作的,这个是硬件的限制,原则上线数越多转速就越低,这点在选型时要注意。</p>
+</blockquote>
+<blockquote>
+<p>定时器初始化好以后,任何时候CNT寄存器的值就是编码器的位置信息,正转他会加反转他会减这部分是不需要软件干预的,初始化时给的TIM_Period 值应该是码盘整圈的刻度值,在减溢出会自动修正为这个数.加超过此数值就回0.</p>
+</blockquote>
+<blockquote>
+<p>计数值偶尔也会有出错误的情况,一圈多计一个或少计一个数都是很正常的特别是转速比较高的时候尤其明显,有个绝对位置信号做修正是很有必要的.绝对位置信号不需要一定在零位置点,收到这个信号就将CNT修正为一个固定的数值即可.</p>
+</blockquote>
+<h2 id="编码器模式基础配置"><a href="#编码器模式基础配置" class="headerlink" title="编码器模式基础配置"></a>编码器模式基础配置</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c">void encoder_init(void)
+&#123;
+	  GPIO_InitTypeDef GPIO_InitStructure;
+	  TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	  TIM_ICInitTypeDef TIM_ICInitStructure;
+	
+   	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+	  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+	
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_6 | GPIO_Pin_7;
+	  GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AF;
+    GPIO_InitStructure.GPIO_PuPd &#x3D; GPIO_PuPd_NOPULL;
+	  GPIO_Init(GPIOA, &amp;GPIO_InitStructure);
+
+	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource6, GPIO_AF_TIM3);    
+	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_TIM3);
+	
+	&#x2F;&#x2F;Specifies the prescaler value used to divide the TIM clock.
+	&#x2F;&#x2F;也就是说，这里的TIM3的时钟信号其实是由A&#x2F;B相的频率来决定的，类似于外部时钟，然后分频就是对这个脉冲频率分频，比如二分频就是把两个脉冲记为一个脉冲。
+	TIM_TimeBaseStructure.TIM_Prescaler &#x3D; 1-1;					
+  &#x2F;&#x2F;这里我们把它设为1，即不分频
+	TIM_TimeBaseStructure.TIM_Period &#x3D; 65535;					
+  &#x2F;&#x2F;每来一个脉冲信号的上升沿（下面有设置）计数值就累加（或累减），65535则为最大计数值，就溢出了
+	TIM_TimeBaseStructure.TIM_ClockDivision &#x3D; TIM_CKD_DIV1;
+	TIM_EncoderInterfaceConfig(TIM3, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising ,TIM_ICPolarity_Rising); 
+  &#x2F;&#x2F;配置为编码器模式，计数器在TI1和TI2上升沿处均计数
+	TIM_SetCounter(TIM3, 0);		&#x2F;&#x2F;将脉冲计数值设为零
+	TIM_Cmd(TIM3, ENABLE);			&#x2F;&#x2F;使能TIM3
+&#125;
+&#x2F;&#x2F; 读取定时器计数值
+uint32_t read_cnt(void)
+&#123;
+	uint32_t encoder_cnt;
+	encoder_cnt &#x3D; TIM3-&gt;CNT;		&#x2F;&#x2F;读取计数器CNT的值，CNT系uint32_t型的变量
+	TIM_SetCounter(TIM3, 0);		&#x2F;&#x2F;每一次读取完计数值后将计数值清零，重新开始累加脉冲，方便下一次计数
+	return encoder_cnt;				&#x2F;&#x2F;返回的值就是本次读到的计数值
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="有个问题"><a href="#有个问题" class="headerlink" title="有个问题"></a>有个问题</h2><p>编码器配置的时候,TI1,TI2捕获的都是上升沿,应该是二倍频为什么&#x2F;4,为什么不配置成上下都捕获的</p>
+<blockquote>
+<p>小白,还在努力学习,如有错误,请多指教</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbsyaaa/article/details/113784920">参考文章1</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbsyaaa/article/details/114715319?ops_request_misc=&request_id=&biz_id=102&utm_term=%E7%BC%96%E7%A0%81%E5%99%A8%E8%BD%AC%E4%B8%80%E5%9C%88%E7%9A%84%E8%84%89%E5%86%B2%E6%95%B0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-6-114715319.142%5Ev10%5Econtrol,157%5Ev4%5Econtrol&spm=1018.2226.3001.4187">参考文章2</a></p>
+
+  <p><a class="classtest-link" href="/tags/stm32f407/" rel="tag">stm32f407</a> — May 17, 2022</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

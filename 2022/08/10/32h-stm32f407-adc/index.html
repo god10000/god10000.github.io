@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>stm32f407串口与tft输出adc</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2022/08/10/32h-stm32f407-adc/">
+  
+  <meta name="description" content="stm32f407ADC简介STM32F4xx 系列一般都有 3 个 ADC，这些 ADC 可以独立使用，也可以使用双重&amp;#x2F;三重模式（提高采样率）。简单来说ADC就是将模拟量电压转换为数字量的工具，F4的12 位 ADC 是逐次趋近型模数转换器。有19 个复用通道，可测量来自16 个外部源、">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="stm32f407串口与tft输出adc" />
+  
+  <meta property="og:description" content="stm32f407ADC简介STM32F4xx 系列一般都有 3 个 ADC，这些 ADC 可以独立使用，也可以使用双重&amp;#x2F;三重模式（提高采样率）。简单来说ADC就是将模拟量电压转换为数字量的工具，F4的12 位 ADC 是逐次趋近型模数转换器。有19 个复用通道，可测量来自16 个外部源、">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2022/08/10/32h-stm32f407-adc/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="stm32f407串口与tft输出adc">
+  
+  <meta name="twitter:description" content="stm32f407ADC简介STM32F4xx 系列一般都有 3 个 ADC，这些 ADC 可以独立使用，也可以使用双重&amp;#x2F;三重模式（提高采样率）。简单来说ADC就是将模拟量电压转换为数字量的工具，F4的12 位 ADC 是逐次趋近型模数转换器。有19 个复用通道，可测量来自16 个外部源、">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2022/08/10/32h-stm32f407-adc/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>stm32f407串口与tft输出adc</h2>
+
+  <h2 id="stm32f407ADC简介"><a href="#stm32f407ADC简介" class="headerlink" title="stm32f407ADC简介"></a>stm32f407ADC简介</h2><p>STM32F4xx 系列一般都有 3 个 ADC，这些 ADC 可以独立使用，也可以使用双重&#x2F;三重模式（提高采样率）。简单来说ADC就是将模拟量电压转换为数字量的工具，F4的12 位 ADC 是逐次趋近型模数转换器。有19 个复用通道，可测量来自16 个外部源、两个内部源和 VBAT 通道的信号。这些通道的 A&#x2F;D 转换可在单次、连续、扫描或不连续采样模式下进行。ADC采样的结果存储在一个左对齐或右对齐的 16 位数据寄存器中。ADC 具有模拟看门狗特性——允许应用检测输入电压是否超过了用户自定义的阈值上限或下限。</p>
+<blockquote>
+<p>STM32F407ZGT6 包含有 3 个 ADC。STM32F4 的 ADC 最大的转换速率为 2.4Mhz，也就是转换时间为 1us（在 ADCCLK&#x3D;36M,采样周期为 3 个 ADC 时钟下得到），不要让 ADC 的时钟超过 36M，否则将导致结果准确度下降。</p>
+</blockquote>
+<blockquote>
+<p>STM32F4 将 ADC 的转换分为 2 个通道组：规则通道组和注入通道组。规则通道相当于你<br>正常运行的程序，而注入通道呢，就相当于中断。在你程序正常执行的时候，中断是可以打断<br>你的执行的。同这个类似，注入通道的转换可以打断规则通道的转换， 在注入通道被转换完成<br>之后，规则通道才得以继续转换。</p>
+</blockquote>
+<blockquote>
+<p>STM32F4 的 ADC 在单次转换模式下，只执行一次转换，该模式可以通过 ADC_CR2 寄存<br>器的 ADON 位（只适用于规则通道）启动，也可以通过外部触发启动（适用于规则通道和注入<br>通道），这时 CONT 位为 0</p>
+</blockquote>
+
+
+<p>STM32F407内部有两个ADC模块，彼此独立可进行同步采样；<br>外部16个通道（GPIO0~15）采样精度默认为12位；<br>转换时间&#x3D;采样时间+转换周期&#x3D;1.5+12.5&#x3D;14周期；</p>
+<h3 id="工作过程分析"><a href="#工作过程分析" class="headerlink" title="工作过程分析"></a>工作过程分析</h3><p>ADC转换是把外面输入到引脚的电压值转换成数字信号，(而DAC则是把设定的数字信号转化成电压值输出到引脚)单片机里面有一个模拟至数字的转换模块，我们可以控制它采集引脚的电压，stm32F407可以利用void ADC_SoftwareStartConv（ADC_TypeDef* ADCx）这个函数来控制转换。</p>
+<h3 id="三种实现方法："><a href="#三种实现方法：" class="headerlink" title="三种实现方法："></a>三种实现方法：</h3><blockquote>
+<p>1.使用定时器中断每隔一定时间进行ADC转换，这样每次都必须读ADC的数据寄存器，非常浪费时间；<br>2.把ADC设置成连续转换模式，同事对应的DMA通道开启循环模式，这样ADC就一直在进行数据采集然后通过DMA把数据搬运至内存。再加一个定时中断，用来定时读取内存中的数据。<br>3.使用ADC的定时器触发ADC转换的功能，然后使用DMA进行数据的搬运，这样只要设置好定时器的触发间隔，就能实现ADC定时采样转换的功能，然后可以在程序的死循环中一直检测DMA转换完成标志，然后进行数据的读取，或者使能DMA转换完成中断，这样每次转换完成就会产生中断。</p>
+</blockquote>
+<p>ADC上电开启到稳定需要一段时间。ADC外设上电，使能ADC功能，启动ADC转换，实质AD转换是不一样的动作和不同的时间点。<br>先校准再开启ADC的DMA功能。<br>在多通道ADC DMA传输时，经常出现因为缓冲区数据类型，源数据类型不一致导致的异常状况。</p>
+<h3 id="ADC的供电及采样电压"><a href="#ADC的供电及采样电压" class="headerlink" title="ADC的供电及采样电压"></a>ADC的供电及采样电压</h3><p>ADC 电源要求：全速运行时为 2.4 V 到 3.6 V，慢速运行时为 1.8 V。<br>ADC 输入范围：VREF-   \leq  VIN  \leq  VREF+ , 并且VREF- 如果可用（取决于封装），则必须将其连接到 VSSA。而通常我们将VREF+与VDDA连接，F407的芯片引脚当中VSS、VDD引脚并不容忍5V供电，而ADC的采集引脚很多可以容忍5V，所以通常情况下，ADC采集的范围在0-3.3V。</p>
+<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><blockquote>
+<p>通过设置ADC1的三个通道采样顺序并且开启DMA相对应的通道，对数据寄存器当中每一次的采样值（对应每个通道的外部电压转换值）进行收集，并传递到CPU的内部寄存器当中，再对电压值进行串口输出</p>
+</blockquote>
+<h2 id="F407在ADC实验中使用的函数理解"><a href="#F407在ADC实验中使用的函数理解" class="headerlink" title="F407在ADC实验中使用的函数理解"></a>F407在ADC实验中使用的函数理解</h2><h3 id="非DMA的相关函数"><a href="#非DMA的相关函数" class="headerlink" title="非DMA的相关函数"></a>非DMA的相关函数</h3><h3 id="有关DMA的相关函数"><a href="#有关DMA的相关函数" class="headerlink" title="有关DMA的相关函数"></a>有关DMA的相关函数</h3><p>待更新….</p>
+<h2 id="STM32F407的ADC的基础知识"><a href="#STM32F407的ADC的基础知识" class="headerlink" title="STM32F407的ADC的基础知识"></a>STM32F407的ADC的基础知识</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c">　　1，ADC是12位逐次逼近型模拟数字转换器。
+　　2，ADC的时钟不超过36MHz。
+　　3，STM32F407的ADC的最小转换时间为0.41us。
+　　4，STM32F407将ADC的转换分为2个通道组：规则通道组和注入通道组
+　　　　因为规则组和注入组，我们不需要在切换AD循环扫描的通道时，重新配置AD循环扫描的通道。（某MCU就只有单次ADC扫描，切换通道时，需要重新配置ADC寄存器）
+　　5，有规则通道组和注入通道组的ADC外设，使MCU能在某些需要快速检测和监视的领域（如工控应用），有了优势。
+　　6，当使用ADC的连续模式时，建议采样DMA模式。
+　　7，当使用ADC的单次模式时，只进行一次转换。
+　　8，ADC相邻两个采样阶段之间的时间间隔是延时5个时钟-20个时钟（例如，在1ms单位时间内，延时时间越少，在采样次数越多。）
+　　9，对于每个要转换的通道，采样时间影响了转换结果的准确度和ADC的转换速率。采样时间越长，转换结果准确度越高，ADC的转换速率越低。
+
+　　　　ADC转换时间 &#x3D; 采样时间（3~480个ADCCLK周期） + 12个ADCCLK周期
+
+　　10，STM32F407的ADC触发极性分为四种：（1）禁止触发检测、（2）在上升沿时检测、（3）在下降时检测、（4）在上升和下降时均检测。
+　　　　当使用第（1）时，表示使用软件转换，我在开发中最常用这个；当使用第（2）（3）（4）时，表示使用事件来启动转换。
+　　11，STM32F407的ADC的分辨率有四档：6、8、10、12位。ADC的分辨率影响ADC的转换时间。
+　　12，如果已经使能了一个PORT的时钟，那么该PORT的时钟，不能再被使能。
+二，ADC实验：
+　　1，使用ADC1的通道PA5时，需要使能：GPIOA时钟、ADC1时钟。
+　　2，设置PA5为：不带上下拉电阻；模拟输入（将GPIO用于ADC采样的通道，需要设置为模拟输入，输入电压不超过3.3V）。
+　　3，STM32F407开发板的ADC的正模拟参考电压接的是3.3V，负模拟参考电压接的是GND。
+　　4，当硬件ADC开始进行转换之后，我们可以根据判断转换结束标志位是否被置一来判断是否跳出死循环。
+　　　　（1）当在等待ADC转换结束期间，死循环可被中断给打断，以便系统可运行其他更高需要实时处理的事件。
+　　　　（2）硬件ADC的转换过程，是不会被应用软件给打断的。,
+　　5，测试ADC1的PA5的连续转换模式，使用DMA？
+　　　　应用：对一阵列的传感器进行信号采集
+　　6，利用ADC1来测试温度传感器、内部参考电压、BAT电压？<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30443075/article/details/99765337?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_utm_term~default-0-99765337-blog-119870392.t0_eslanding_v1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">参考文章</a></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="ADC-c"><a href="#ADC-c" class="headerlink" title="ADC.c"></a>ADC.c</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;&#x2F;初始化ADC															   
+void  Adc_Init(void)
+&#123;    
+  GPIO_InitTypeDef  GPIO_InitStructure;
+	ADC_CommonInitTypeDef ADC_CommonInitStructure;
+	ADC_InitTypeDef       ADC_InitStructure;
+	
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);&#x2F;&#x2F;使能GPIOA时钟
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE); &#x2F;&#x2F;使能ADC1时钟
+
+  &#x2F;&#x2F;先初始化ADC1通道5 IO口
+  GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_5;&#x2F;&#x2F;PA5 通道5
+  GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AN;&#x2F;&#x2F;模拟输入
+  GPIO_InitStructure.GPIO_PuPd &#x3D; GPIO_PuPd_NOPULL ;&#x2F;&#x2F;不带上下拉
+  GPIO_Init(GPIOA, &amp;GPIO_InitStructure);&#x2F;&#x2F;初始化  
+ 
+	RCC_APB2PeriphResetCmd(RCC_APB2Periph_ADC1,ENABLE);	  &#x2F;&#x2F;ADC1复位
+	RCC_APB2PeriphResetCmd(RCC_APB2Periph_ADC1,DISABLE);	&#x2F;&#x2F;复位结束	 
+ 
+	
+  ADC_CommonInitStructure.ADC_Mode &#x3D; ADC_Mode_Independent;&#x2F;&#x2F;独立模式
+  ADC_CommonInitStructure.ADC_TwoSamplingDelay &#x3D; ADC_TwoSamplingDelay_5Cycles;&#x2F;&#x2F;两个采样阶段之间的延迟5个时钟
+  ADC_CommonInitStructure.ADC_DMAAccessMode &#x3D; ADC_DMAAccessMode_Disabled; &#x2F;&#x2F;DMA失能
+  ADC_CommonInitStructure.ADC_Prescaler &#x3D; ADC_Prescaler_Div4;&#x2F;&#x2F;预分频4分频。ADCCLK&#x3D;PCLK2&#x2F;4&#x3D;84&#x2F;4&#x3D;21Mhz,ADC时钟最好不要超过36Mhz 
+  ADC_CommonInit(&amp;ADC_CommonInitStructure);&#x2F;&#x2F;初始化
+	
+  ADC_InitStructure.ADC_Resolution &#x3D; ADC_Resolution_12b;&#x2F;&#x2F;12位模式
+  ADC_InitStructure.ADC_ScanConvMode &#x3D; DISABLE;&#x2F;&#x2F;非扫描模式	
+  ADC_InitStructure.ADC_ContinuousConvMode &#x3D; DISABLE;&#x2F;&#x2F;关闭连续转换
+  ADC_InitStructure.ADC_ExternalTrigConvEdge &#x3D; ADC_ExternalTrigConvEdge_None;&#x2F;&#x2F;禁止触发检测，使用软件触发
+  ADC_InitStructure.ADC_DataAlign &#x3D; ADC_DataAlign_Right;&#x2F;&#x2F;右对齐	
+  ADC_InitStructure.ADC_NbrOfConversion &#x3D; 1;&#x2F;&#x2F;1个转换在规则序列中 也就是只转换规则序列1 
+  ADC_Init(ADC1, &amp;ADC_InitStructure);&#x2F;&#x2F;ADC初始化
+	
+ 
+	ADC_Cmd(ADC1, ENABLE);&#x2F;&#x2F;开启AD转换器	
+
+&#125;				  
+&#x2F;&#x2F;获得ADC值
+&#x2F;&#x2F;ch: @ref ADC_channels 
+&#x2F;&#x2F;通道值 0~16取值范围为：ADC_Channel_0~ADC_Channel_16
+&#x2F;&#x2F;返回值:转换结果
+u16 Get_Adc(u8 ch)   
+&#123;
+	  	&#x2F;&#x2F;设置指定ADC的规则组通道，一个序列，采样时间
+	ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_480Cycles );	&#x2F;&#x2F;ADC1,ADC通道,480个周期,提高采样时间可以提高精确度			    
+  
+	ADC_SoftwareStartConv(ADC1);		&#x2F;&#x2F;使能指定的ADC1的软件转换启动功能	
+	 
+	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC ));&#x2F;&#x2F;等待转换结束
+
+	return ADC_GetConversionValue(ADC1);	&#x2F;&#x2F;返回最近一次ADC1规则组的转换结果
+&#125;
+&#x2F;&#x2F;获取通道ch的转换值，取times次,然后平均 
+&#x2F;&#x2F;ch:通道编号
+&#x2F;&#x2F;times:获取次数
+&#x2F;&#x2F;返回值:通道ch的times次转换结果平均值
+u16 Get_Adc_Average(u8 ch,u8 times)
+&#123;
+	u32 temp_val&#x3D;0;
+	u8 t;
+	for(t&#x3D;0;t&lt;times;t++)
+	&#123;
+		temp_val+&#x3D;Get_Adc(ch);
+		delay_ms(5);
+	&#125;
+	return temp_val&#x2F;times;
+&#125; 
+	 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>3 个函数，Adc_Init 函数用于初始化 ADC1。这里我们仅开通了 1 个通道，即通道 5。第二<br>个函数 Get_Adc，用于读取某个通道的 ADC 值，例如我们读取通道 5 上的 ADC 值，就可以通<br>过 Get_Adc（ADC_Channel_5）得到。最后一个函数 Get_Adc_Average，用于多次获取 ADC 值，<br>取平均，用来提高准确度。</p>
+</blockquote>
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &quot;sys.h&quot;
+#include &quot;delay.h&quot;
+#include &quot;usart.h&quot;
+#include &quot;led.h&quot;
+#include &quot;adc.h&quot;
+#include &quot;lcd_init.h&quot;
+#include &quot;lcd.h&quot;
+#include &quot;pic.h&quot;
+#include &quot;timer.h&quot;
+&#x2F;&#x2F;              ----------------------------------------------------------------
+&#x2F;&#x2F;              GND    电源地
+&#x2F;&#x2F;              VCC  接5V或3.3v电源
+&#x2F;&#x2F;              SCL   PG12（SCLK）
+&#x2F;&#x2F;              SDA   PD5（MOSI）
+&#x2F;&#x2F;              RES   PD4
+&#x2F;&#x2F;              DC    PD15
+&#x2F;&#x2F;              CS    PD1
+&#x2F;&#x2F;              BLK   PE8
+&#x2F;&#x2F;              ----------------------------------------------------------------
+&#x2F;&#x2F;更新日期 2022 08 17
+&#x2F;*问题
+1.无法读出小数部分
+解决:
+lcd函数的问题,更换了lcd的库所以函数功能改变,原来的显示小数功能的函数不适用了
+原函数无法直接显示小数,所以通过将小数转换成整数显示,改后的函数可直接显示小数
+2.printf使用报错,usart senddata发送,串口助手不显示
+main.c(72): error:  #167: argument of type &quot;int&quot; is incompatible with parameter of type &quot;const char *restrict&quot;
+解决:
+因为print(&#39;adc:&#39;)用了单引号
+3.只显示adc不显示数据
+解决:
+没加f%
+是时候补一补c语言了
+*&#x2F;
+int main(void)
+&#123; 
+ 	u16 adcx;
+	float temp;
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);&#x2F;&#x2F;设置系统中断优先级分组2
+	delay_init(168);    &#x2F;&#x2F;初始化延时函数
+	uart_init(115200);	&#x2F;&#x2F;初始化串口波特率为115200
+	LED_Init();					&#x2F;&#x2F;初始化LED 
+ 	LCD_Init();         &#x2F;&#x2F;初始化LCD接口
+	Adc_Init();         &#x2F;&#x2F;初始化ADC
+	&#x2F;&#x2F;POINT_COLOR&#x3D;RED; 
+  
+&#x2F;&#x2F;	float t&#x3D;0;
+	delay_init(168);
+	LED_Init();&#x2F;&#x2F;LED初始化
+	LCD_Init();&#x2F;&#x2F;LCD初始化
+	LCD_Fill(0,0,LCD_W,LCD_H,WHITE);
+	LED0&#x3D;0;
+  
+  	LCD_ShowChinese(0,10,&quot;Increaseing Nun:&quot;,RED,WHITE,16,0);
+		LCD_ShowString(0,20,&quot;Explorer STM32F4&quot;,RED,WHITE,16,0);
+		LCD_ShowString(0,40,&quot;ADC TEST&quot;,RED,WHITE,16,0);
+		LCD_ShowString(0,60,&quot;ATOM@ALIENTEK&quot;,RED,WHITE,16,0);
+    LCD_ShowString(0,100, &quot;ADC1_CH5_VAL:&quot;,RED,WHITE,16,0);
+    LCD_ShowString(0,120,&quot;ADC1_CH5_VOL:0.000V&quot;,RED,WHITE,16,0);
+
+		LCD_ShowString(0,80,&quot;2014&#x2F;5&#x2F;6&quot;,RED,WHITE,16,0);
+
+	while(1)
+	&#123; 
+		adcx&#x3D;Get_Adc_Average(ADC_Channel_5,20);  &#x2F;&#x2F;获取通道5的转换值，20次取平均
+                                             &#x2F;&#x2F;显示ADCC采样后的原始值
+    LCD_ShowIntNum(110,100,adcx,3,RED,WHITE,16);
+		temp&#x3D;(float)adcx*(3.3&#x2F;4096);            &#x2F;&#x2F;获取计算后的带小数的实际电压值，比如3.1111
+&#x2F;&#x2F;	adcx&#x3D;temp;                            &#x2F;&#x2F;赋值整数部分给adcx变量，因为adcx为u16整形
+                                            &#x2F;&#x2F;显示电压值的整数部分，3.1111的话，这里就是显示3
+&#x2F;&#x2F;  LCD_ShowIntNum(104,120,adcx,1,RED,WHITE,16);
+&#x2F;&#x2F;	temp-&#x3D;adcx;                           &#x2F;&#x2F;把已经显示的整数部分去掉，留下小数部分，比如3.1111-3&#x3D;0.1111
+&#x2F;&#x2F;	temp*&#x3D;1000;                           &#x2F;&#x2F;小数部分乘以1000，例如：0.1111就转换为111.1，相当于保留三位小数。
+&#x2F;&#x2F;  LCD_ShowxNum(150,150,temp,3,16,0X80);   &#x2F;&#x2F;显示小数部分（前面转换为了整形显示），这里显示的就是111.
+    LCD_ShowFloatNum1(104,120,temp,3,RED,WHITE,16);  &#x2F;&#x2F;120  120
+		LED0&#x3D;!LED0;
+		delay_ms(250);	 
+    printf(&quot;ADC:%f \r\n&quot;,temp);
+   
+&#x2F;&#x2F;  
+	&#125;
+&#125;
+
+1.54tft屏和串口都可以输出adc的值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>这个程序将每隔 250ms 读取一次 ADC通道 5 的值，并显示读到的 ADC 值（数字量），以及其转换成模拟量后的电压值。同时控制 LED0闪烁，以提示程序正在运行。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_59194050/article/details/119870392?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166013535816782391895979%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166013535816782391895979&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-119870392-null-null.142%5Ev40%5Epc_rank_v36,185%5Ev2%5Econtrol&utm_term=stm32f407%20adc&spm=1018.2226.3001.4187">参考文章</a></p>
+
+  <p><a class="classtest-link" href="/tags/STM32F407/" rel="tag">STM32F407</a> — Aug 10, 2022</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>117_个人主页</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2025/02/13/117-ge-ren-zhu-ye/">
+  
+  <meta name="description" content="想做一个导航页，抄参考这个大佬的Zyyo，缝缝补补 CSS 常用属性1. 布局   属性 功能 示例    display 设置元素的显示方式 display: flex;   flex 定义 flex 容器内的项目如何分配空间 flex: 1;   flex-direction 设置 flex 容">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="117_个人主页" />
+  
+  <meta property="og:description" content="想做一个导航页，抄参考这个大佬的Zyyo，缝缝补补 CSS 常用属性1. 布局   属性 功能 示例    display 设置元素的显示方式 display: flex;   flex 定义 flex 容器内的项目如何分配空间 flex: 1;   flex-direction 设置 flex 容">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2025/02/13/117-ge-ren-zhu-ye/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="117_个人主页">
+  
+  <meta name="twitter:description" content="想做一个导航页，抄参考这个大佬的Zyyo，缝缝补补 CSS 常用属性1. 布局   属性 功能 示例    display 设置元素的显示方式 display: flex;   flex 定义 flex 容器内的项目如何分配空间 flex: 1;   flex-direction 设置 flex 容">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/02/13/117-ge-ren-zhu-ye/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>117_个人主页</h2>
+
+  <p>想做一个导航页，<del>抄</del>参考这个大佬的<a target="_blank" rel="noopener" href="https://zyyo.cc/">Zyyo</a>，缝缝补补</p>
+<h1 id="CSS-常用属性"><a href="#CSS-常用属性" class="headerlink" title="CSS 常用属性"></a>CSS 常用属性</h1><h2 id="1-布局"><a href="#1-布局" class="headerlink" title="1. 布局"></a>1. <strong>布局</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>display</code></td>
+<td>设置元素的显示方式</td>
+<td><code>display: flex;</code></td>
+</tr>
+<tr>
+<td><code>flex</code></td>
+<td>定义 flex 容器内的项目如何分配空间</td>
+<td><code>flex: 1;</code></td>
+</tr>
+<tr>
+<td><code>flex-direction</code></td>
+<td>设置 flex 容器内子元素的排列方向</td>
+<td><code>flex-direction: column;</code></td>
+</tr>
+<tr>
+<td><code>justify-content</code></td>
+<td>控制 flex 项目在主轴上的对齐方式</td>
+<td><code>justify-content: center;</code></td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td>控制 flex 项目在交叉轴上的对齐方式</td>
+<td><code>align-items: flex-start;</code></td>
+</tr>
+<tr>
+<td><code>align-self</code></td>
+<td>控制单个 flex 项目在交叉轴上的对齐方式</td>
+<td><code>align-self: center;</code></td>
+</tr>
+<tr>
+<td><code>grid-template-columns</code></td>
+<td>定义 grid 容器的列宽</td>
+<td><code>grid-template-columns: 1fr 2fr;</code></td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>设置元素的定位方式</td>
+<td><code>position: absolute;</code></td>
+</tr>
+<tr>
+<td><code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code></td>
+<td>定位元素的位置</td>
+<td><code>top: 10px; left: 20px;</code></td>
+</tr>
+<tr>
+<td><code>z-index</code></td>
+<td>设置元素的堆叠顺序</td>
+<td><code>z-index: 10;</code></td>
+</tr>
+</tbody></table>
+<h2 id="2-尺寸与边距"><a href="#2-尺寸与边距" class="headerlink" title="2. 尺寸与边距"></a>2. <strong>尺寸与边距</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width</code></td>
+<td>设置元素的宽度</td>
+<td><code>width: 100px;</code></td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>设置元素的高度</td>
+<td><code>height: 200px;</code></td>
+</tr>
+<tr>
+<td><code>min-width</code></td>
+<td>设置元素的最小宽度</td>
+<td><code>min-width: 200px;</code></td>
+</tr>
+<tr>
+<td><code>min-height</code></td>
+<td>设置元素的最小高度</td>
+<td><code>min-height: 100px;</code></td>
+</tr>
+<tr>
+<td><code>max-width</code></td>
+<td>设置元素的最大宽度</td>
+<td><code>max-width: 500px;</code></td>
+</tr>
+<tr>
+<td><code>max-height</code></td>
+<td>设置元素的最大高度</td>
+<td><code>max-height: 500px;</code></td>
+</tr>
+<tr>
+<td><code>margin</code></td>
+<td>设置元素的外边距（上、右、下、左）</td>
+<td><code>margin: 10px 20px 30px 40px;</code></td>
+</tr>
+<tr>
+<td><code>padding</code></td>
+<td>设置元素的内边距（上、右、下、左）</td>
+<td><code>padding: 10px 20px;</code></td>
+</tr>
+<tr>
+<td><code>box-sizing</code></td>
+<td>控制元素的盒子模型（<code>content-box</code>、<code>border-box</code>）</td>
+<td><code>box-sizing: border-box;</code></td>
+</tr>
+</tbody></table>
+<h2 id="3-背景与颜色"><a href="#3-背景与颜色" class="headerlink" title="3. 背景与颜色"></a>3. <strong>背景与颜色</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>background-color</code></td>
+<td>设置元素的背景颜色</td>
+<td><code>background-color: #f0f0f0;</code></td>
+</tr>
+<tr>
+<td><code>background-image</code></td>
+<td>设置元素的背景图片</td>
+<td><code>background-image: url(&#39;image.jpg&#39;);</code></td>
+</tr>
+<tr>
+<td><code>background-position</code></td>
+<td>设置背景图片的位置</td>
+<td><code>background-position: center;</code></td>
+</tr>
+<tr>
+<td><code>background-size</code></td>
+<td>设置背景图片的尺寸（<code>cover</code>、<code>contain</code>）</td>
+<td><code>background-size: cover;</code></td>
+</tr>
+<tr>
+<td><code>background-repeat</code></td>
+<td>设置背景图片是否平铺</td>
+<td><code>background-repeat: no-repeat;</code></td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>设置文本的颜色</td>
+<td><code>color: red;</code></td>
+</tr>
+<tr>
+<td><code>opacity</code></td>
+<td>设置元素的透明度</td>
+<td><code>opacity: 0.5;</code></td>
+</tr>
+</tbody></table>
+<h2 id="4-文本"><a href="#4-文本" class="headerlink" title="4. 文本"></a>4. <strong>文本</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>font-size</code></td>
+<td>设置字体大小</td>
+<td><code>font-size: 16px;</code></td>
+</tr>
+<tr>
+<td><code>font-family</code></td>
+<td>设置字体系列</td>
+<td><code>font-family: Arial, sans-serif;</code></td>
+</tr>
+<tr>
+<td><code>font-weight</code></td>
+<td>设置字体的粗细</td>
+<td><code>font-weight: bold;</code></td>
+</tr>
+<tr>
+<td><code>line-height</code></td>
+<td>设置文本的行高</td>
+<td><code>line-height: 1.5;</code></td>
+</tr>
+<tr>
+<td><code>text-align</code></td>
+<td>设置文本的水平对齐方式</td>
+<td><code>text-align: center;</code></td>
+</tr>
+<tr>
+<td><code>text-transform</code></td>
+<td>控制文本的大小写</td>
+<td><code>text-transform: uppercase;</code></td>
+</tr>
+<tr>
+<td><code>letter-spacing</code></td>
+<td>设置字符间距</td>
+<td><code>letter-spacing: 1px;</code></td>
+</tr>
+<tr>
+<td><code>word-spacing</code></td>
+<td>设置单词间距</td>
+<td><code>word-spacing: 2px;</code></td>
+</tr>
+<tr>
+<td><code>text-decoration</code></td>
+<td>设置文本的修饰</td>
+<td><code>text-decoration: underline;</code></td>
+</tr>
+<tr>
+<td><code>white-space</code></td>
+<td>设置如何处理空白符</td>
+<td><code>white-space: nowrap;</code></td>
+</tr>
+<tr>
+<td><code>text-shadow</code></td>
+<td>给文本添加阴影效果</td>
+<td><code>text-shadow: 2px 2px 5px gray;</code></td>
+</tr>
+</tbody></table>
+<h2 id="5-边框"><a href="#5-边框" class="headerlink" title="5. 边框"></a>5. <strong>边框</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>border</code></td>
+<td>设置边框样式（<code>border-width</code>, <code>border-style</code>, <code>border-color</code>）</td>
+<td><code>border: 2px solid red;</code></td>
+</tr>
+<tr>
+<td><code>border-radius</code></td>
+<td>设置元素的圆角</td>
+<td><code>border-radius: 10px;</code></td>
+</tr>
+<tr>
+<td><code>border-top</code></td>
+<td>设置上边框</td>
+<td><code>border-top: 3px solid blue;</code></td>
+</tr>
+<tr>
+<td><code>border-right</code></td>
+<td>设置右边框</td>
+<td><code>border-right: 2px dashed green;</code></td>
+</tr>
+<tr>
+<td><code>border-bottom</code></td>
+<td>设置下边框</td>
+<td><code>border-bottom: 1px dotted black;</code></td>
+</tr>
+<tr>
+<td><code>border-left</code></td>
+<td>设置左边框</td>
+<td><code>border-left: 5px solid purple;</code></td>
+</tr>
+</tbody></table>
+<h2 id="6-盒子模型"><a href="#6-盒子模型" class="headerlink" title="6. 盒子模型"></a>6. <strong>盒子模型</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>box-shadow</code></td>
+<td>给元素添加阴影</td>
+<td><code>box-shadow: 10px 10px 5px gray;</code></td>
+</tr>
+<tr>
+<td><code>outline</code></td>
+<td>设置元素的轮廓线（不影响布局）</td>
+<td><code>outline: 2px solid red;</code></td>
+</tr>
+<tr>
+<td><code>outline-offset</code></td>
+<td>设置轮廓的偏移量</td>
+<td><code>outline-offset: 5px;</code></td>
+</tr>
+<tr>
+<td><code>resize</code></td>
+<td>控制元素是否可调整大小</td>
+<td><code>resize: both;</code></td>
+</tr>
+</tbody></table>
+<h2 id="7-过渡与动画"><a href="#7-过渡与动画" class="headerlink" title="7. 过渡与动画"></a>7. <strong>过渡与动画</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>transition</code></td>
+<td>设置元素的过渡效果</td>
+<td><code>transition: all 0.3s ease;</code></td>
+</tr>
+<tr>
+<td><code>transition-duration</code></td>
+<td>设置过渡的持续时间</td>
+<td><code>transition-duration: 0.5s;</code></td>
+</tr>
+<tr>
+<td><code>transition-timing-function</code></td>
+<td>设置过渡的时间函数（<code>ease</code>, <code>linear</code> 等）</td>
+<td><code>transition-timing-function: ease-in;</code></td>
+</tr>
+<tr>
+<td><code>animation</code></td>
+<td>设置元素的动画效果</td>
+<td><code>animation: spin 2s infinite;</code></td>
+</tr>
+<tr>
+<td><code>keyframes</code></td>
+<td>定义动画的关键帧</td>
+<td><code>@keyframes spin &#123; 0% &#123; transform: rotate(0); &#125; 100% &#123; transform: rotate(360deg); &#125; &#125;</code></td>
+</tr>
+</tbody></table>
+<h2 id="8-其他"><a href="#8-其他" class="headerlink" title="8. 其他"></a>8. <strong>其他</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>visibility</code></td>
+<td>控制元素的可见性</td>
+<td><code>visibility: hidden;</code></td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td>设置鼠标光标的样式</td>
+<td><code>cursor: pointer;</code></td>
+</tr>
+<tr>
+<td><code>filter</code></td>
+<td>应用视觉效果（如模糊、亮度等）</td>
+<td><code>filter: blur(5px);</code></td>
+</tr>
+<tr>
+<td><code>clip-path</code></td>
+<td>定义元素的剪裁路径</td>
+<td><code>clip-path: circle(50%);</code></td>
+</tr>
+<tr>
+<td><code>object-fit</code></td>
+<td>设置嵌入元素的适应方式</td>
+<td><code>object-fit: cover;</code></td>
+</tr>
+</tbody></table>
+<h2 id="9-响应式设计"><a href="#9-响应式设计" class="headerlink" title="9. 响应式设计"></a>9. <strong>响应式设计</strong></h2><table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@media</code></td>
+<td>使用媒体查询进行响应式设计</td>
+<td><code>@media (max-width: 768px) &#123; /* CSS */ &#125;</code></td>
+</tr>
+<tr>
+<td><code>min-width</code></td>
+<td>在媒体查询中设置最小宽度</td>
+<td><code>@media (min-width: 600px) &#123; /* CSS */ &#125;</code></td>
+</tr>
+<tr>
+<td><code>max-width</code></td>
+<td>在媒体查询中设置最大宽度</td>
+<td><code>@media (max-width: 1200px) &#123; /* CSS */ &#125;</code></td>
+</tr>
+</tbody></table>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>这个表格涵盖了常用的 CSS 属性，包括布局、尺寸、文本、背景、边框、动画等方面。你可以根据需要查找和使用这些属性来设计和调整网页的样式。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li><p>本应该出右侧的，出现在了下侧</p>
+<blockquote>
+<p>容器使用flex，父容器中设置flex的垂直排列，改为横向排列<code>flex-direction: row;</code></p>
+</blockquote>
+</li>
+<li><p>让头像居中</p>
+<blockquote>
+<p>text-align: center;</p>
+</blockquote>
+</li>
+<li><p>调整左右侧宽度的时候，出现滚动条，且右侧无法调节</p>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li><p>在 <code>position: relative</code> 的情况下，<code>left</code> 仅仅是 <strong>相对于它原本的位置移动</strong>，并不会真正改变布局。</p>
+</li>
+<li><p><code>right</code> 在 <code>relative</code> 下不会影响 <code>left</code>，只有当 <code>position: absolute</code> 或 <code>fixed</code> 时，<code>right</code> 才会真正起作用。</p>
+</li>
+<li><p><strong><code>left: 200px;</code> 导致 <code>.main</code> 向右偏移，但宽度不变</strong>，所以它可能溢出了视口（浏览器可视区域）。</p>
+</li>
+<li><p><strong><code>flex</code> 默认让子元素按原始宽度排列</strong>，如果 <code>.main</code> 里的子元素宽度超出了 <code>.main</code> 的 <code>width</code>，就会导致溢出，触发水平滚动条。</p>
+</li>
+<li><p>**没有使用 <code>overflow: hidden;</code>**：默认情况下，超出容器的内容不会自动隐藏，而是会触发滚动条。</p>
+</li>
+</ul>
+</blockquote>
+<p>1. </p>
+<blockquote>
+</blockquote>
+
+  <p> — Feb 13, 2025</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>docker的安装、卸载、迁移</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2022/07/26/29l-docker/">
+  
+  <meta name="description" content="安装Docker、Docker-compose更新,安装vim apt-get update &amp;amp;&amp;amp; apt-get install -y wget vim 非大陆Docker安装: wget -qO- get.docker.com | bash 查看Docker版本 docker -">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="docker的安装、卸载、迁移" />
+  
+  <meta property="og:description" content="安装Docker、Docker-compose更新,安装vim apt-get update &amp;amp;&amp;amp; apt-get install -y wget vim 非大陆Docker安装: wget -qO- get.docker.com | bash 查看Docker版本 docker -">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2022/07/26/29l-docker/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="docker的安装、卸载、迁移">
+  
+  <meta name="twitter:description" content="安装Docker、Docker-compose更新,安装vim apt-get update &amp;amp;&amp;amp; apt-get install -y wget vim 非大陆Docker安装: wget -qO- get.docker.com | bash 查看Docker版本 docker -">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2022/07/26/29l-docker/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>docker的安装、卸载、迁移</h2>
+
+  <h2 id="安装Docker、Docker-compose"><a href="#安装Docker、Docker-compose" class="headerlink" title="安装Docker、Docker-compose"></a>安装Docker、Docker-compose</h2><p>更新,安装vim</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">apt-get update &amp;&amp; apt-get install -y wget vim<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>非大陆Docker安装:</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">wget -qO- get.docker.com | bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>查看Docker版本</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">docker -v<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>开机自动启动</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">systemctl enable docker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="error-安装Docker后启动失败-Failed-to-start-docker-service-Unit-not-found"><a href="#error-安装Docker后启动失败-Failed-to-start-docker-service-Unit-not-found" class="headerlink" title="error:安装Docker后启动失败,Failed to start docker.service: Unit not found."></a>error:安装Docker后启动失败,Failed to start docker.service: Unit not found.</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">运行docker-compose up -d
+
+报错,docker无法启动
+运行systemctl restart docker后,提示：Failed to start docker.service: Unit not found.
+
+在 &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system 下创建 docker.socket 文件
+cd &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system 
+
+vim docker.socket <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>并写入：</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">[Unit]
+Description&#x3D;Docker Socket for the API
+PartOf&#x3D;docker.service
+
+[Socket]
+ListenStream&#x3D;&#x2F;var&#x2F;run&#x2F;docker.sock
+SocketMode&#x3D;0660
+SocketUser&#x3D;root
+SocketGroup&#x3D;docker
+
+[Install]
+WantedBy&#x3D;sockets.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但创建后仍然无法启动，提示：<code>Failed to start docker.service: Unit not found</code>，换另一种方式：</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">卸载现有版本Docker：
+yum remove docker
+yumdocker-client
+yum docker-client-latest
+yum docker-common
+yum docker-latest
+yum docker-latest-logrotate
+yum docker-logrotate
+yum docker-engine<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>之后重装Docker，启动完成，注意到原来的&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system目录下没有docker.socket与docker.service文件，重装后docker.service文件出现(大佬注意到的,我没注意观察)</p>
+<p>有大佬说是因为版本问题</p>
+<p><a target="_blank" rel="noopener" href="https://ask.csdn.net/questions/7695921?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165876565016780357234520%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=165876565016780357234520&biz_id=4&utm_medium=distribute.pc_search_result.none-task-ask_topic-2~all~first_rank_ecpm_v1~hot_rank-5-7695921-null-null.142%5Ev34%5Epc_rank_34,185%5Ev2%5Econtrol&utm_term=Failed%20to%20start%20docker.service:%20Unit%20not%20found.&spm=1018.2226.3001.4187">参考文章</a></p>
+<h2 id="非大陆Docker-compose安装"><a href="#非大陆Docker-compose安装" class="headerlink" title="非大陆Docker-compose安装"></a>非大陆Docker-compose安装</h2><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">sudo curl -L &quot;https:&#x2F;&#x2F;github.com&#x2F;docker&#x2F;compose&#x2F;releases&#x2F;download&#x2F;1.29.2&#x2F;docker-compose-$(uname -s)-$(uname -m)&quot; -o &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
+sudo chmod +x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
+docker-compose --version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>以下配置会增加一段自定义内网 IPv6 地址，开启容器的 IPv6 功能，以及限制日志文件大小，防止 Docker 日志塞满硬盘（泪的教训）：</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF
+&#123;
+    &quot;log-driver&quot;: &quot;json-file&quot;,
+    &quot;log-opts&quot;: &#123;
+        &quot;max-size&quot;: &quot;20m&quot;,
+        &quot;max-file&quot;: &quot;3&quot;
+    &#125;,
+    &quot;ipv6&quot;: true,
+    &quot;fixed-cidr-v6&quot;: &quot;fd00:dead:beef:c0::&#x2F;80&quot;,
+    &quot;experimental&quot;:true,
+    &quot;ip6tables&quot;:true
+&#125;
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后重启 Docker 服务：</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">systemctl restart docker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>给Docker的数据、配置文件新建一个文件夹，</p>
+<blockquote>
+<p>mkdir -p data&#x2F;docker_data</p>
+</blockquote>
+<h2 id="docker项目更新"><a href="#docker项目更新" class="headerlink" title="docker项目更新"></a>docker项目更新</h2><p>以halo博客项目为例</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">docker stop halo           # 先停止容器,注意容器的名字
+
+docker rm -f halo          # 删除容器,容器的名字
+
+cp -r ~&#x2F;.halo ~&#x2F;.halo.archive   #&#96;!!!备份数据&#96;（非常非常非常重要），注意你挂载出来的路径地址
+
+rm -rf ~&#x2F;.halo&#x2F;.leveldb    # 这一步是halo特有的,其他项目不用
+
+docker pull halohub&#x2F;halo:1.5.3   # 拉取最新的镜像，一般的话你知道特定的版本号就直接写即可，比如这边的1.5.3，如果不知道版本号，可以直接写latest，即 docker pull halohub&#x2F;halo:latest
+
+docker run -it -d --name halo -p 8090:8090 -v ~&#x2F;.halo:&#x2F;root&#x2F;.halo --restart&#x3D;unless-stopped halohub&#x2F;halo:1.5.3    # 重新运行容器 注意和搭建时候唯一不同的就是最后面的版本号不同，
+                                              #如果你是latest 那就把1.5.3改成latest
+docker image prune # 删除掉旧的镜像（可选）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="docker-compose搭建的更新方法"><a href="#docker-compose搭建的更新方法" class="headerlink" title="docker-compose搭建的更新方法"></a>docker-compose搭建的更新方法</h2><p>以qbittorrent为例：</p>
+<p>搭建命令：</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">cd ~
+mkdir -p &#x2F;root&#x2F;data&#x2F;docker_data&#x2F;qBittorrent #创建qbitorrent数据文件夹
+cd &#x2F;root&#x2F;data&#x2F;docker_data&#x2F;qBittorrent
+mkdir config downloads #创建配置文件目录与下载目录
+nano docker-compose.yml #创建并编辑文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>docker-compose.yml配置文件</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">version: &quot;2&quot;
+services:
+  qbittorrent:
+    image: linuxserver&#x2F;qbittorrent:4.4.0
+    container_name: qbittorrent
+    environment:
+      - PUID&#x3D;1000
+      - PGID&#x3D;1000
+      - TZ&#x3D;Asia&#x2F;Shanghai # 你的时区
+      - UMASK_SET&#x3D;022
+      - WEBUI_PORT&#x3D;8081 # 将此处修改成你欲使用的 WEB 管理平台端口 
+    volumes:
+      - &#x2F;root&#x2F;data&#x2F;docker_data&#x2F;qBittorrent&#x2F;config:&#x2F;config # 绝对路径请修改为自己的config文件夹
+      - &#x2F;root&#x2F;data&#x2F;docker_data&#x2F;qBittorrent&#x2F;downloads:&#x2F;downloads # 绝对路径请修改为自己的downloads文件夹
+    ports:
+      # 要使用的映射下载端口与内部下载端口，可保持默认，安装完成后在管理页面仍然可以改成其他端口。
+      - 6881:6881 
+      - 6881:6881&#x2F;udp
+      # 此处WEB UI 目标端口与内部端口务必保证相同，见问题1
+      - 8081:8081
+    restart: unless-stopped
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>更新方法：</p>
+<pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">docker-compose pull     # 注意到上方docker-compose.yml里面linuxserver&#x2F;qbittorrent后面有版本号4.4.0，
+                        #（如果没有默认就是latest），所以更新需要修改版本号为新的版本号（更新到特定版本），或者直接删去现在的版本号（更新到最新版本）
+cp -r qBittorrent qBittorrent.archive    # 备份一下,也可以直接备份配置文档，因为有些时候，downloads里面文件很浪费空间 
+
+docker-compose up -d   #完成
+
+docker image prune # 删除掉旧的镜像（可选）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="docker迁移"><a href="#docker迁移" class="headerlink" title="docker迁移"></a>docker迁移</h2><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">tar -czvf .halo.tar.gz .halo.archive   #文件的备份压缩
+
+scp -P 22 -r .halo.tar.gz root@192.248.190.156:&#x2F;root  # scp -P 端口 -r &#x2F;root&#x2F;backup&#x2F;backup.tar 用户名@IP:目标目录
+tar -zxvf .halo.tar.gz                #解压
+
+mv .halo.archive .halo                #把.halo.archive重命名成.halo
+
+确保迁移到的服务器有docker和docker compose环境
+执行容器&#96;docker-compose up -d &#96;
+如果无法完全启动,将&#96;docker-compose.yml&#96;删除,重建后
+再运行&#96;docker-compose up -d&#96;
+(docker-compose搭建的lsky-pro迁移成功)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Docker项目卸载（包括卸载Docker、docker-compose）"><a href="#Docker项目卸载（包括卸载Docker、docker-compose）" class="headerlink" title="Docker项目卸载（包括卸载Docker、docker-compose）"></a>Docker项目卸载（包括卸载Docker、docker-compose）</h2><h3 id="docker命令搭建的常用卸载方法"><a href="#docker命令搭建的常用卸载方法" class="headerlink" title="docker命令搭建的常用卸载方法"></a>docker命令搭建的常用卸载方法</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">docker ps 
+
+docker stop 容器名字
+
+cd ~
+
+docker rm -f 容器名字
+
+rm -rf 映射出来的路径<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="docker-compose搭建的卸载方法"><a href="#docker-compose搭建的卸载方法" class="headerlink" title="docker-compose搭建的卸载方法"></a>docker-compose搭建的卸载方法</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">cd &#x2F;root&#x2F;data&#x2F;docker_data&#x2F;qBittorrent
+
+docker-compose down 
+
+cd ~
+
+rm -rf &#x2F;root&#x2F;data&#x2F;docker_data&#x2F;qBittorrent # rm -rf 映射出来的路径<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="卸载docker本身"><a href="#卸载docker本身" class="headerlink" title="卸载docker本身"></a>卸载docker本身</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+sudo rm -rf &#x2F;var&#x2F;lib&#x2F;docker
+
+sudo rm -rf &#x2F;var&#x2F;lib&#x2F;containerd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参考：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/debian/">https://docs.docker.com/engine/install/debian/</a></p>
+<h3 id="卸载docker-compose"><a href="#卸载docker-compose" class="headerlink" title="卸载docker-compose"></a>卸载docker-compose</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">cd &#x2F;usr&#x2F;local&#x2F;bin&#x2F;
+
+rm -rf docker-compose<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/debian/">https://docs.docker.com/engine/install/debian/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-scp.html">https://www.runoob.com/linux/linux-comm-scp.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-tar.html">https://www.runoob.com/linux/linux-comm-tar.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.halo.run/getting-started/upgrade">https://docs.halo.run/getting-started/upgrade</a><br><a target="_blank" rel="noopener" href="https://blog.laoda.de/archives/docker-issues#3.2-docker-compose%E6%90%AD%E5%BB%BA%E7%9A%84%E6%9B%B4%E6%96%B0%E6%96%B9%E6%B3%95">参考文章</a></p>
+
+  <p><a class="classtest-link" href="/tags/docker/" rel="tag">docker</a> — Jul 26, 2022</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>
