@@ -243,7 +243,7 @@ print(s.cookies.get_dict())<span aria-hidden="true" class="line-numbers-rows"><s
 </blockquote>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">[&quot;Awaitable&quot;, &quot;Coroutine&quot;, &quot;AsyncIterable&quot;, &quot;AsyncIterator&quot;, &quot;AsyncGenerator&quot;, &quot;Hashable&quot;,<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><a href="">为什么改成.abc就好用了</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47251596/article/details/124198903">参考文章</a></p>
-<h2 id="使用代理"><a href="#使用代理" class="headerlink" title="使用代理"></a>使用代理</h2><p>import os<br>os.environ[“http_proxy”] &#x3D; “<a href="http://127.0.0.1:1231&quot;">http://127.0.0.1:1231&quot;</a><br>os.environ[“https_proxy”] &#x3D; “<a href="http://127.0.0.1:1231&quot;">http://127.0.0.1:1231&quot;</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/whatday/article/details/112169945">参考文章</a><br>如果电脑开着代理,且没有加上面代码,会报错</p>
+<h2 id="使用代理"><a href="#使用代理" class="headerlink" title="使用代理"></a>使用代理</h2><p>import os<br>os.environ[“http_proxy”] &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1:1231/">http://127.0.0.1:1231</a>“<br>os.environ[“https_proxy”] &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1:1231/">http://127.0.0.1:1231</a>“<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/whatday/article/details/112169945">参考文章</a><br>如果电脑开着代理,且没有加上面代码,会报错</p>
 <h2 id="设置定时任务"><a href="#设置定时任务" class="headerlink" title="设置定时任务"></a>设置定时任务</h2><p>使用的是apscheduler,下面这三行代码就可以了</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">sched &#x3D; BlockingScheduler()
 sched.add_job(main, &#39;cron&#39;, hour&#x3D;10, minute&#x3D;55)
@@ -255,7 +255,7 @@ sched.start()<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 </blockquote>
 <p>如果你要发送中文，记得要把参数编码，比如通过 urlencode 函数。这样发送只有标题，如果需要内容，可以这样：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://sctapi.ftqq.com/SCT90898T5nukNVW9mMKCGjtQxCN6Xs3K.send?title=messagetitle&amp;desp=messagecontent">https://sctapi.ftqq.com/SCT90898T5nukNVW9mMKCGjtQxCN6Xs3K.send?title=messagetitle&amp;desp=messagecontent</a></p>
+<p><a target="_blank" rel="noopener" href="https://sctapi.ftqq.com/SCT90898T5nukNVW9mMKCGjtQxCN6Xs3K.send?title=messagetitle&desp=messagecontent">https://sctapi.ftqq.com/SCT90898T5nukNVW9mMKCGjtQxCN6Xs3K.send?title=messagetitle&amp;desp=messagecontent</a></p>
 </blockquote>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">def send_wechat(msg):
     &quot;&quot;&quot;server酱推送&quot;&quot;&quot;

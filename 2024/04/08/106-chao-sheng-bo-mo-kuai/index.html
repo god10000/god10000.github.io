@@ -294,7 +294,7 @@ void Distance_Get(void)
 <ul>
 <li>使用<code>while</code>循环等待回声信号的结束（<code>GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==1</code>）是不理想的。这种阻塞式等待会使整个中断服务例程停留在等待状态，直到回声信号结束。这会阻塞其他中断的处理，影响系统的响应能力和实时性。</li>
 </ul>
-<p>**在ISR中使用<code>printf</code>**：</p>
+<p><strong>在ISR中使用<code>printf</code></strong>：</p>
 <ul>
 <li>在中断服务例程中调用<code>printf</code>或任何可能耗时较长的函数都是不推荐的。这会大幅增加中断服务例程的执行时间，降低系统的实时性能。尤其是<code>printf</code>可能会涉及到串口通信，其速度远不如CPU执行速度，从而导致在中断中产生不必要的延迟。</li>
 </ul>
@@ -306,7 +306,8 @@ void Distance_Get(void)
 <p>为什么同样的程序到我这不好使了</p>
 <p>一样的传感器,有的能显示,有的不能显示</p>
 <h3 id="Stm32-RCT6-C8T6-移植过程的问题"><a href="#Stm32-RCT6-C8T6-移植过程的问题" class="headerlink" title="Stm32 RCT6 C8T6 移植过程的问题"></a>Stm32 RCT6 C8T6 移植过程的问题</h3><p>移植要改启动文件,否则时钟快十倍</p>
-<p>unsigned char stateInit &#x3D; 0;<br>    volatile unsigned char adjusted &#x3D; 1;<br>    unsigned int paraIndex &#x3D; 1;<br>    unsigned char paraTest &#x3D; 1;<br>    unsigned char TestTemp &#x3D; 0;<br>    signed char plscnt &#x3D; 1;</p>
+<p>unsigned char stateInit &#x3D; 0;<br>	volatile unsigned char adjusted &#x3D; 1;<br>	unsigned int paraIndex &#x3D; 1;<br>	unsigned char paraTest &#x3D; 1;<br>	unsigned char TestTemp &#x3D; 0;<br>	signed char plscnt &#x3D; 1;
+	</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">SystemInit();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>未解决</p>

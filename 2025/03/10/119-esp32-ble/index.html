@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>ESP32_S3_BLE学习记录</title>
+  
+  <link rel="canonical" href="http://blog.isgeek.top/2025/03/10/119-esp32-ble/">
+  
+  <meta name="description" content="BLE 是什么？BLE（Bluetooth Low Energy）是一种低功耗、短距离的通信协议，用于设备间小数据传输，非常适合传感器、穿戴设备、手机通信等场景。 BLE 基础架构ESP32 做 BLE Server（外设）时，通常有以下几个重要概念：    名称 说明    Server（服务端）">
+  
+  
+  <meta name="author" content="南北的猫">
+  
+  
+  
+  <meta property="og:site_name" content="南北的猫" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ESP32_S3_BLE学习记录" />
+  
+  <meta property="og:description" content="BLE 是什么？BLE（Bluetooth Low Energy）是一种低功耗、短距离的通信协议，用于设备间小数据传输，非常适合传感器、穿戴设备、手机通信等场景。 BLE 基础架构ESP32 做 BLE Server（外设）时，通常有以下几个重要概念：    名称 说明    Server（服务端）">
+  
+  <meta property="og:url" content="http://blog.isgeek.top/2025/03/10/119-esp32-ble/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ESP32_S3_BLE学习记录">
+  
+  <meta name="twitter:description" content="BLE 是什么？BLE（Bluetooth Low Energy）是一种低功耗、短距离的通信协议，用于设备间小数据传输，非常适合传感器、穿戴设备、手机通信等场景。 BLE 基础架构ESP32 做 BLE Server（外设）时，通常有以下几个重要概念：    名称 说明    Server（服务端）">
+  
+  
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/03/10/119-esp32-ble/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  
+  <script src="/js/pic.min.js" defer></script>
+  
+
+  
+  <script src="/js/search.min.js" defer></script>
+  
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Hi Folks.
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/Works" class="ml">Works</a>
+          
+        
+          
+          <a href="/About" class="ml">About</a>
+          
+        
+        
+          
+            <a href="mailto:test@test.test" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>ESP32_S3_BLE学习记录</h2>
+
+  <h3 id="BLE-是什么？"><a href="#BLE-是什么？" class="headerlink" title="BLE 是什么？"></a>BLE 是什么？</h3><p>BLE（Bluetooth Low Energy）是一种低功耗、短距离的通信协议，用于设备间小数据传输，非常适合传感器、穿戴设备、手机通信等场景。</p>
+<h3 id="BLE-基础架构"><a href="#BLE-基础架构" class="headerlink" title="BLE 基础架构"></a>BLE 基础架构</h3><p>ESP32 做 BLE Server（外设）时，通常有以下几个重要概念：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Server（服务端）</strong></td>
+<td>ESP32 作为 BLE 外设</td>
+</tr>
+<tr>
+<td><strong>Service（服务）</strong></td>
+<td>类似一个功能模块（例如心率服务）</td>
+</tr>
+<tr>
+<td><strong>Characteristic（特征值）</strong></td>
+<td>一个数据单元，支持读&#x2F;写&#x2F;通知</td>
+</tr>
+<tr>
+<td><strong>UUID</strong></td>
+<td>用于标识 Service 和 Characteristic</td>
+</tr>
+</tbody></table>
+<h3 id="环境安装配置"><a href="#环境安装配置" class="headerlink" title="环境安装配置"></a>环境安装配置</h3><ul>
+<li>VScode+Platform</li>
+</ul>
+<p> ✅ 1. <code>BLEServer *pServer = BLEDevice::createServer();</code></p>
+<ul>
+<li><code>BLEServer *</code>：意思是 <code>pServer</code> 是一个 <strong>指针</strong>，它指向一个 BLE 服务器对象。</li>
+<li><code>BLEDevice::createServer()</code>：这是 <strong>类 BLEDevice</strong> 中的一个 <strong>静态函数</strong>，它会新建一个服务器并返回。</li>
+</ul>
+<blockquote>
+<p>📦 类似于：你打电话叫了个外卖服务员回来，给他起了个名字 <code>pServer</code>。</p>
+</blockquote>
+<hr>
+<p> ✅ 2. <code>pService-&gt;start();</code></p>
+<ul>
+<li><code>pService</code> 是之前你通过 <code>pServer-&gt;createService(...)</code> 得到的服务对象。</li>
+<li><code>.start()</code> 就是告诉这个服务：<strong>开始广播、准备接收连接！</strong></li>
+</ul>
+<blockquote>
+<p>📦 类似于：你已经设置好了服务员该做什么，现在告诉他 “开始工作”。</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">BLEServer* pServer &#x3D; BLEDevice::createServer();     &#x2F;&#x2F; 创建 BLE 服务器
+BLEService* pService &#x3D; pServer-&gt;createService(&quot;xxxx&quot;); &#x2F;&#x2F; 创建一个服务
+pService-&gt;start();                                  &#x2F;&#x2F; 启动这个服务<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>C++ 符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>*</code></td>
+<td>指针（代表一个对象地址）</td>
+</tr>
+<tr>
+<td><code>-&gt;</code></td>
+<td>通过指针访问对象的成员</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>普通对象访问成员</td>
+</tr>
+</tbody></table>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.好的，不支持nano，<code>nano</code>只有<code>arduino ide</code>和<code>micropython</code>支持哦，喜提重刷固件</p>
+<blockquote>
+<p>支持，搜索nano esp32</p>
+</blockquote>
+<ol start="2">
+<li></li>
+</ol>
+<p>第一个可以连接<code>serial bluetooth</code>，第二个不可以</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">BLEDevice::init(&quot;ESP32-S3-BLE&quot;);
+pServer &#x3D; BLEDevice::createServer();
+BLEService* pService &#x3D; pServer-&gt;createService(BLEUUID((uint16_t)0xFFE0));
+pCharacteristic &#x3D; pService-&gt;createCharacteristic(
+                    BLEUUID((uint16_t)0xFFE1),
+                    BLECharacteristic::PROPERTY_READ | 
+                    BLECharacteristic::PROPERTY_WRITE | 
+                    BLECharacteristic::PROPERTY_NOTIFY);
+pCharacteristic-&gt;addDescriptor(new BLE2902());
+pService-&gt;start();
+BLEAdvertising* pAdvertising &#x3D; BLEDevice::getAdvertising();
+pAdvertising-&gt;addServiceUUID(BLEUUID((uint16_t)0xFFE0));
+pAdvertising-&gt;start();
+Serial.println(&quot;✅ BLE 初始化完成，等待连接...&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">BLEDevice::init(&quot;ESP32-BLE-Demo&quot;);
+
+BLEServer *pServer &#x3D; BLEDevice::createServer();
+BLEService *pService &#x3D; pServer-&gt;createService(&quot;12345678-1234-5678-1234-56789abcdef0&quot;);
+
+pCharacteristic &#x3D; pService-&gt;createCharacteristic(
+  &quot;abcdefab-1234-5678-1234-56789abcdef0&quot;,
+  BLECharacteristic::PROPERTY_READ |
+  BLECharacteristic::PROPERTY_WRITE |
+  BLECharacteristic::PROPERTY_NOTIFY
+);
+
+pCharacteristic-&gt;setValue(&quot;Hello BLE!&quot;);
+pCharacteristic-&gt;addDescriptor(new BLE2902());  &#x2F;&#x2F; 启用 notify
+
+pService-&gt;start();
+BLEAdvertising *pAdvertising &#x3D; BLEDevice::getAdvertising();
+pAdvertising-&gt;addServiceUUID(&quot;12345678-1234-5678-1234-56789abcdef0&quot;);
+pAdvertising-&gt;start();
+
+Serial.println(&quot;📡 等待 BLE 连接...&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>原因：</strong></p>
+<p>很多手机 App 默认只扫描常见 BLE 串口服务 UUID（如 0xFFE0）</p>
+<p> 🔍 小结对比</p>
+<table>
+<thead>
+<tr>
+<th>比较项</th>
+<th>第一段（能连）</th>
+<th>第二段（不能连）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UUID 类型</td>
+<td>16位（标准串口服务）</td>
+<td>128位（自定义）</td>
+</tr>
+<tr>
+<td>兼容性</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>App 支持</td>
+<td>nRF &#x2F; Serial Terminal 可用</td>
+<td>nRF 支持，自定义 App 才能用</td>
+</tr>
+<tr>
+<td>推荐用法</td>
+<td>开发阶段串口调试</td>
+<td>特定项目中自定义服务</td>
+</tr>
+</tbody></table>
+<p>🔷 <code>BLEUUID</code> 是什么？</p>
+<p><code>BLEUUID</code> 是 <strong>一个类</strong>，用来表示 <strong>UUID（通用唯一识别码）</strong>，用于标识 BLE 的：</p>
+<ul>
+<li>服务（Service）</li>
+<li>特征值（Characteristic）</li>
+<li>描述符（Descriptor）</li>
+</ul>
+<p>BLE 中一切都是基于 UUID 来识别的。S</p>
+<hr>
+<p>🔶 <code>0xFFE0</code> 是什么？</p>
+<ul>
+<li><code>0xFFE0</code> 是一个 <strong>16 位的 UUID</strong></li>
+<li>它常被用于类似串口服务（BLE UART）的自定义协议（如 Nordic 的 UART 或 HM-10 模块）</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><code>FFE0</code>：服务 UUID（Service UUID）</li>
+<li><code>FFE1</code>：特征值 UUID（Characteristic UUID）</li>
+</ul>
+<p>这是一种 <strong>简化写法</strong>，完整 UUID 是 128 位，系统内部会自动扩展它：</p>
+<pre class="line-numbers language-none"><code class="language-none">复制编辑
+0x0000FFE0-0000-1000-8000-00805F9B34FB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>⚠️注意</p>
+<p>轻易不要东GPIO0，另外出现ESP32频繁自启的情况，可以使用固件烧录工具擦除后重新烧录固件</p>
+<h2 id="ESP32-BLE广播收发-advertise"><a href="#ESP32-BLE广播收发-advertise" class="headerlink" title="ESP32_BLE广播收发(advertise)"></a>ESP32_BLE广播收发(advertise)</h2><h3 id="✅-常见的-BLE-广播-Type-类型"><a href="#✅-常见的-BLE-广播-Type-类型" class="headerlink" title="✅ 常见的 BLE 广播 Type 类型"></a><strong>✅ 常见的 BLE 广播 Type 类型</strong></h3><table>
+<thead>
+<tr>
+<th><strong>Type (Hex)</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+<th><strong>解析</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0x01</code></td>
+<td>设备 Flags（标志位）</td>
+<td><code>0x06</code></td>
+<td><strong>BLE 设备类型</strong></td>
+</tr>
+<tr>
+<td><code>0x02</code></td>
+<td>16-bit Service UUID（部分）</td>
+<td><code>0x0A 18</code></td>
+<td><strong>GATT 服务 UUID</strong></td>
+</tr>
+<tr>
+<td><code>0x03</code></td>
+<td>16-bit Service UUID（完整）</td>
+<td><code>0x0A 18</code></td>
+<td><strong>完整 UUID</strong></td>
+</tr>
+<tr>
+<td><code>0x07</code></td>
+<td>128-bit Service UUID</td>
+<td><code>0xFB 34 9B 5F 80 00 00 80 00 10 00 00 00 00 00 00 00</code></td>
+<td><strong>自定义服务 UUID</strong></td>
+</tr>
+<tr>
+<td><code>0x08</code></td>
+<td>短设备名称（Short Local Name）</td>
+<td><code>0x45 53 50 33</code></td>
+<td><strong>“ESP3”</strong></td>
+</tr>
+<tr>
+<td><code>0x09</code></td>
+<td>完整设备名称（Complete Local Name）</td>
+<td><code>0x45 53 50 33 32 5F 57 49 46 49</code></td>
+<td><strong>“ESP32_WIFI”</strong></td>
+</tr>
+<tr>
+<td><code>0x0A</code></td>
+<td>发射功率（Tx Power Level）</td>
+<td><code>0x09</code></td>
+<td><strong>+9 dBm</strong></td>
+</tr>
+<tr>
+<td><code>0x12</code></td>
+<td>设备厂商数据（Manufacturer Data）</td>
+<td><code>0xDE AD BE EF 12 34 56 78</code></td>
+<td><strong>HEX 数据</strong></td>
+</tr>
+<tr>
+<td><code>0xFF</code></td>
+<td>厂商数据（Manufacturer Data）</td>
+<td>✅ <strong>可自定义</strong></td>
+<td>设备私有数据</td>
+</tr>
+</tbody></table>
+<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p> <strong>📌 BLEAdvertising（广播） vs. GATT（连接）</strong></p>
+<p><strong>BLE（蓝牙低功耗）有两种主要通信方式：</strong></p>
+<ol>
+<li><strong>BLEAdvertising（广播）</strong> → <strong>ESP32 发送广播数据，无需连接</strong></li>
+<li><strong>GATT（通用属性协议）</strong> → <strong>ESP32 作为服务器，支持客户端连接并交互数据</strong></li>
+<li>BLEAdvertising（广播）**</li>
+</ol>
+<p>🔹 <strong>示例代码</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">BLEDevice::init(&quot;ESP32_Broadcaster&quot;);
+BLEAdvertising *pAdvertising &#x3D; BLEDevice::getAdvertising();
+pAdvertising-&gt;setAdvertisementData(advertisementData);
+pAdvertising-&gt;start();**<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>🔹超长数据的广播</p>
+<p>** 方案 1：使用 Scan Response 发送额外数据**</p>
+<p><strong>原理</strong>：</p>
+<ul>
+<li><strong>广播包（Advertising Data）</strong> 发送前 <strong>部分数据（如 SSID）</strong></li>
+<li><strong>扫描响应包（Scan Response）</strong> 发送 <strong>剩余数据（如密码）</strong></li>
+<li><strong>nRF Connect 或 ESP32 扫描端可同时获取这两个数据包</strong></li>
+</ul>
+<p> <strong>📌 Scannable 模式（可扫描模式）</strong></p>
+<p>**Scannable（可扫描）**模式是一种 <strong>BLE 广播模式</strong>，允许接收端设备请求额外的信息。通常用于 <strong>发送超出广播包长度的数据</strong>。</p>
+<p><strong>NRF配置</strong></p>
+<p>✅scannable</p>
+<ol start="2">
+<li>GATT（连接模式)**</li>
+</ol>
+<p>🔹 <strong>示例代码</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">BLEServer *pServer &#x3D; BLEDevice::createServer();
+BLEService *pService &#x3D; pServer-&gt;createService(SERVICE_UUID);
+BLECharacteristic *pCharacteristic &#x3D; pService-&gt;createCharacteristic(
+    CHARACTERISTIC_UUID,
+    BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE
+);
+pService-&gt;start();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>🔹 <strong>📲 手机用 nRF Connect 连接 ESP32 并读写数据</strong></p>
+<hr>
+<p> 🚀 3. 主要区别</p>
+<table>
+<thead>
+<tr>
+<th><strong>对比项</strong></th>
+<th><strong>BLEAdvertising（广播）</strong></th>
+<th><strong>GATT（连接模式）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>连接需求</strong></td>
+<td>❌ 无需连接（所有设备可接收）</td>
+<td>✅ 需要设备连接</td>
+</tr>
+<tr>
+<td><strong>数据大小</strong></td>
+<td>⚠️ 限制 31 字节（BLE 4.2）<mark>超过会不广播</mark>，255 字节（BLE 5.0）</td>
+<td>✅ 可发送大数据（分包方式）</td>
+</tr>
+<tr>
+<td><strong>数据传输</strong></td>
+<td>📡 只能发送，不能接收</td>
+<td>🔄 双向通信（读&#x2F;写&#x2F;通知）</td>
+</tr>
+<tr>
+<td><strong>私密性</strong></td>
+<td>❌ 公开广播，所有设备都能接收</td>
+<td>✅ 仅连接设备可读写</td>
+</tr>
+<tr>
+<td><strong>使用场景</strong></td>
+<td>广告、iBeacon、简单数据广播</td>
+<td>设备控制、传感器数据、BLE 串口</td>
+</tr>
+</tbody></table>
+<h3 id="接收"><a href="#接收" class="headerlink" title="接收"></a>接收</h3><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>1.常错</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">std::string manData &#x3D; advertisedDevice.getManufacturerData();
+Compilation error: conversion from &#39;String&#39; to non-scalar type &#39;std::string&#39; &#123;aka &#39;std::__cxx11::basic_string&lt;char&gt;&#39;&#125; requested<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><code>advertisedDevice.getManufacturerData()</code> 返回 <strong>Arduino String 类型</strong></p>
+<p>你尝试 <strong>直接赋值给 std::string，但不兼容</strong></p>
+<p><strong>解决方法</strong>：改用 <strong>Arduino String</strong>，或者 <strong>手动转换为 std::string</strong></p>
+</blockquote>
+
+  <p> — Mar 10, 2025</p>
+  
+
+
+        </div>
+        <div class="row mt-2">
+  <h3>Search</h3>
+  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
+  <div style="margin-top: 1.5rem;">
+    <ul id="result"></ul>
+  </div>
+</div>
+        <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://linkedin.com/in/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://instagram.com/adisaktijrs" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
+        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/story/tobiasreithmeier" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

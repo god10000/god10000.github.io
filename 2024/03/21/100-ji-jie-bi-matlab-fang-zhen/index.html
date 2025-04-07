@@ -15,7 +15,7 @@
   
   <link rel="canonical" href="http://blog.isgeek.top/2024/03/21/100-ji-jie-bi-matlab-fang-zhen/">
   
-  <meta name="description" content="需求1.实物 2.建模 3.matlab仿真 基于STM32单片机定位抓取和分拣的机械臂控制系统设计,选择STM32单片机作为主控制器，按钮、传感器、指示灯，用于机械臂的控制和状态监测。将机械臂安装到工作环境中，(旋转,有物体就放置),。*一键校准,写死的,一键定位,一键执行动作对机械臂进行综合测试">
+  <meta name="description" content="需求1.实物 2.建模 3.matlab仿真 基于STM32单片机定位抓取和分拣的机械臂控制系统设计,选择STM32单片机作为主控制器，按钮、传感器、指示灯，用于机械臂的控制和状态监测。将机械臂安装到工作环境中，(旋转,有物体就放置),*。一键校准,写死的,一键定位,一键执行动作对机械臂进行综合测试">
   
   
   <meta name="author" content="南北的猫">
@@ -26,14 +26,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="100_机械臂matlab仿真" />
   
-  <meta property="og:description" content="需求1.实物 2.建模 3.matlab仿真 基于STM32单片机定位抓取和分拣的机械臂控制系统设计,选择STM32单片机作为主控制器，按钮、传感器、指示灯，用于机械臂的控制和状态监测。将机械臂安装到工作环境中，(旋转,有物体就放置),。*一键校准,写死的,一键定位,一键执行动作对机械臂进行综合测试">
+  <meta property="og:description" content="需求1.实物 2.建模 3.matlab仿真 基于STM32单片机定位抓取和分拣的机械臂控制系统设计,选择STM32单片机作为主控制器，按钮、传感器、指示灯，用于机械臂的控制和状态监测。将机械臂安装到工作环境中，(旋转,有物体就放置),*。一键校准,写死的,一键定位,一键执行动作对机械臂进行综合测试">
   
   <meta property="og:url" content="http://blog.isgeek.top/2024/03/21/100-ji-jie-bi-matlab-fang-zhen/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="100_机械臂matlab仿真">
   
-  <meta name="twitter:description" content="需求1.实物 2.建模 3.matlab仿真 基于STM32单片机定位抓取和分拣的机械臂控制系统设计,选择STM32单片机作为主控制器，按钮、传感器、指示灯，用于机械臂的控制和状态监测。将机械臂安装到工作环境中，(旋转,有物体就放置),。*一键校准,写死的,一键定位,一键执行动作对机械臂进行综合测试">
+  <meta name="twitter:description" content="需求1.实物 2.建模 3.matlab仿真 基于STM32单片机定位抓取和分拣的机械臂控制系统设计,选择STM32单片机作为主控制器，按钮、传感器、指示灯，用于机械臂的控制和状态监测。将机械臂安装到工作环境中，(旋转,有物体就放置),*。一键校准,写死的,一键定位,一键执行动作对机械臂进行综合测试">
   
   
   
@@ -202,7 +202,7 @@
   <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1.实物</p>
 <p>2.建模</p>
 <p>3.matlab仿真</p>
-<p><strong>基于STM32单片机定位抓取和分拣的机械臂控制系统设计</strong>,选择<strong>STM32单片机</strong>作为主控制器，<strong>按钮</strong>、<strong>传感器</strong>、<strong>指示灯</strong>，用于机械臂的控制和<strong>状态监测</strong>。将机械臂安装到工作环境中，(<strong>旋转,有物体就放置</strong>),<em>。*<em>一键校准</em></em>,写死的,一键定位,一键执行动作对机械臂进行综合测试，包括定位精度测试、抓取力度测试、<strong>分拣速度测试</strong>等，验证机械臂的性能和可靠性,<strong>拿起两个物体然后放下</strong></p>
+<p><strong>基于STM32单片机定位抓取和分拣的机械臂控制系统设计</strong>,选择<strong>STM32单片机</strong>作为主控制器，<strong>按钮</strong>、<strong>传感器</strong>、<strong>指示灯</strong>，用于机械臂的控制和<strong>状态监测</strong>。将机械臂安装到工作环境中，(<strong>旋转,有物体就放置</strong>),*。<strong>一键校准</strong>,写死的,一键定位,一键执行动作对机械臂进行综合测试，包括定位精度测试、抓取力度测试、<strong>分拣速度测试</strong>等，验证机械臂的性能和可靠性,<strong>拿起两个物体然后放下</strong></p>
 <h2 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h2><p>首先需要六路PWM,两个定时器就够了</p>
 <table>
 <thead>

@@ -378,53 +378,53 @@ rdb 和aof 是redis服务中持久化功能的两种形式RDB AOF <span aria-hid
 4、获取key所存储的内容：get key
 5、obtain all the keys in a database: keys *<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><a target="_blank" rel="noopener" href="https://copyfuture.com/blogs-details/202207130551151366#1%E3%80%81Redis%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7">redis命令工具</a></p>
-<h2 id="Redeemer"><a href="#Redeemer" class="headerlink" title="Redeemer"></a>Redeemer</h2><pre class=" language-c"><code class="language-c"><span class="token number">1.</span>Q <span class="token operator">:</span> Which TCP port is open on the machine<span class="token operator">?</span> 
+<h2 id="Redeemer"><a href="#Redeemer" class="headerlink" title="Redeemer"></a>Redeemer</h2><pre class=" language-language-c"><code class="language-language-c">1.Q : Which TCP port is open on the machine? 
 
-A <span class="token operator">:</span> nmap IP <span class="token operator">-></span> <span class="token number">6379</span>
+A : nmap IP -> 6379
 
-<span class="token number">2.</span>Q <span class="token operator">:</span> Which service is running on the port that is open on the machine<span class="token operator">?</span> 
+2.Q : Which service is running on the port that is open on the machine? 
 
-A <span class="token operator">:</span> nmap IP <span class="token operator">-></span> redis
+A : nmap IP -> redis
 
-<span class="token number">2.</span>Q <span class="token operator">:</span> What type of database is Redis<span class="token operator">?</span> Choose from the following options<span class="token operator">:</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span> In<span class="token operator">-</span>memory Database<span class="token punctuation">,</span> <span class="token punctuation">(</span>ii<span class="token punctuation">)</span> Traditional Database 
+2.Q : What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database 
 
-A <span class="token operator">:</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span> In<span class="token operator">-</span>memory Database
+A : (i) In-memory Database
 
-<span class="token number">4.</span>Q <span class="token operator">:</span> Which command<span class="token operator">-</span>line utility is used to interact with the Redis server<span class="token operator">?</span> Enter the program name you would enter into the terminal without any arguments<span class="token punctuation">.</span> 
+4.Q : Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments. 
 
-A <span class="token operator">:</span> redis<span class="token operator">-</span>cli
+A : redis-cli
 
-<span class="token number">5.</span>Q <span class="token operator">:</span> Which flag is used with the Redis command<span class="token operator">-</span>line utility to specify the hostname<span class="token operator">?</span> 
+5.Q : Which flag is used with the Redis command-line utility to specify the hostname? 
 
-A <span class="token operator">:</span> <span class="token operator">-</span>h
+A : -h
 
-<span class="token number">6.</span>Q <span class="token operator">:</span> Once connected to a Redis server<span class="token punctuation">,</span> which command is used to obtain the information and statistics about the Redis server<span class="token operator">?</span> 
+6.Q : Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server? 
 
-A <span class="token operator">:</span> info
+A : info
 
-<span class="token number">7.</span>Q <span class="token operator">:</span> What is the version of the Redis server being used on the target machine<span class="token operator">?</span> 
+7.Q : What is the version of the Redis server being used on the target machine? 
 
-A <span class="token operator">:</span> nmap <span class="token operator">-</span>sV IP <span class="token operator">-></span> <span class="token number">5.0</span><span class="token number">.7</span>
+A : nmap -sV IP -> 5.0.7
 
-<span class="token number">8.</span>Q <span class="token operator">:</span> Which command is used to select the desired database in Redis<span class="token operator">?</span> 
+8.Q : Which command is used to select the desired database in Redis? 
 
-A <span class="token operator">:</span> select
+A : select
 
-<span class="token number">9.</span>Q <span class="token operator">:</span> How many keys are present inside the database with index <span class="token number">0</span><span class="token operator">?</span> 
+9.Q : How many keys are present inside the database with index 0? 
 
-A <span class="token operator">:</span> info <span class="token operator">-></span> <span class="token number">4</span>
+A : info -> 4
 
-<span class="token number">10.</span>Q <span class="token operator">:</span> Which command is used to obtain all the keys in a database<span class="token operator">?</span> 
+10.Q : Which command is used to obtain all the keys in a database? 
 
-A <span class="token operator">:</span> keys <span class="token operator">*</span>
+A : keys *
 
-<span class="token number">11.</span>Q <span class="token operator">:</span> Submit root flag 
+11.Q : Submit root flag 
 
-A <span class="token operator">:</span> redis<span class="token operator">-</span>cli <span class="token operator">-</span>h IP <span class="token operator">-</span>p <span class="token number">6379</span>
+A : redis-cli -h IP -p 6379
 
-    keys <span class="token operator">*</span>
+    keys *
 
-    get flag 
+    get flag 
 </code></pre>
 
   <p><a class="classtest-link" href="/tags/HACKTHEBOX/" rel="tag">HACKTHEBOX</a> — Oct 5, 2022</p>

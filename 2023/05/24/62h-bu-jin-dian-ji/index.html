@@ -370,7 +370,6 @@ void USART3_IRQHandler(void)
 <p>串口发送数据的方式可以是一个字节一个字节发送，也可以是一次发送多个字节,因为一个字符的 ASCII 码值可以用一个字节表示，所以一个字符只占用一个字节的空间。而一个整数通常需要多个字节来表示，所以将字符转换为整数时只能转换为一位数字</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">int steps &#x3D; Rebuf[0] - &#39;0&#39;;&#x2F;&#x2F;这个有符号,但是只能识别一位<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-
 </blockquote>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">Rebuf[buf_len++]&#x3D;USART_ReceiveData(USART3); &#x2F;&#x2F;既然是一个字符一个中断,那为什么我看到的是&quot;哈哈哈&quot;是连着的,是因为串口助手规范的吗
     &#x2F;*在你的代码中，如果接收到的数据是负数，则转换后会出现错误。
@@ -393,7 +392,7 @@ void USART3_IRQHandler(void)
 <blockquote>
 <p>将””换成’’,将字符串常量改为字符常量\</p>
 </blockquote>
-<h2 id="我不明白这个代码为什么我发送r12-不应该是rrbuf-0-x3D-rebuf-1-x3D-1-rebuf-2-x3D-2而不是rebuf-0-x3D-r12"><a href="#我不明白这个代码为什么我发送r12-不应该是rrbuf-0-x3D-rebuf-1-x3D-1-rebuf-2-x3D-2而不是rebuf-0-x3D-r12" class="headerlink" title="我不明白这个代码为什么我发送r12,不应该是rrbuf[0]&#x3D;,rebuf[1]&#x3D;1,rebuf[2]&#x3D;2而不是rebuf[0]&#x3D;r12"></a>我不明白这个代码为什么我发送r12,不应该是rrbuf[0]&#x3D;,rebuf[1]&#x3D;1,rebuf[2]&#x3D;2而不是rebuf[0]&#x3D;r12</h2><p>​           <code> if (res == &#39;\n&#39;)</code></p>
+<h2 id="我不明白这个代码为什么我发送r12-不应该是rrbuf-0-rebuf-1-1-rebuf-2-2而不是rebuf-0-r12"><a href="#我不明白这个代码为什么我发送r12-不应该是rrbuf-0-rebuf-1-1-rebuf-2-2而不是rebuf-0-r12" class="headerlink" title="我不明白这个代码为什么我发送r12,不应该是rrbuf[0]&#x3D;,rebuf[1]&#x3D;1,rebuf[2]&#x3D;2而不是rebuf[0]&#x3D;r12"></a>我不明白这个代码为什么我发送r12,不应该是rrbuf[0]&#x3D;,rebuf[1]&#x3D;1,rebuf[2]&#x3D;2而不是rebuf[0]&#x3D;r12</h2><p>​           <code> if (res == &#39;\n&#39;)</code></p>
 <p>如果接收到回车符,这个判断很重要,有这个可以正常按数组接收数据,没有的话,可能就与变量接收没有区别</p>
 <p>原因:</p>
 <h3 id="关于steps无法算两位数以上"><a href="#关于steps无法算两位数以上" class="headerlink" title="关于steps无法算两位数以上"></a>关于steps无法算两位数以上</h3><h3 id="并且代码的公式没问题-for循环的括号-要把for循环结束后step才是我想要的值"><a href="#并且代码的公式没问题-for循环的括号-要把for循环结束后step才是我想要的值" class="headerlink" title="并且代码的公式没问题,for循环的括号,要把for循环结束后step才是我想要的值"></a>并且代码的公式没问题,for循环的括号,要把for循环结束后step才是我想要的值</h3><h3 id="steps无法计算小数"><a href="#steps无法计算小数" class="headerlink" title="steps无法计算小数"></a>steps无法计算小数</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"> for ( i &#x3D; 0; i &lt; buf_len; i++)

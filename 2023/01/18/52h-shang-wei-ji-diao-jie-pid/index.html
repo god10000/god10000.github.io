@@ -228,13 +228,13 @@ printf(&quot;[a] p4:%x, %d\r\n&quot;, p4, *p4); &#x2F;&#x2F;打印p4的地址与
 [a] p4:5216f807, 0这个就取出的是首地址的值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对于这段代码,<code>他将变量a的地址强制转换成了unsigned char类型的指针</code>,并用p1,p2,p3,p4分别指向了a的首地址和后1,2,3个字节的地址,通过p1,*p2,*p3,*p4获取到了这些地址所存储的值,这些值就是a在内存中的二进制表示,根据不同的机器字节序,会得到不同的结果。</p>
 <blockquote>
-<p>所以在上面代码中打印p1会获得a的首地址,打印<em>p1会获得a的首地址的值<br>是的，在上面的代码中，p1是a的首地址，而p1是存储在a的首地址的值。这段代码中，首先将int类型的a转换为unsigned char类型的指针p1，然后利用p1来访问a的每一个字节，p2、p3、p4分别是a的首地址后一个字节、后两个字节、后三个字节的地址。在打印p1、p2、p3、p4时，会输出这些地址的十六进制值，在打印p1、</em>p2、<em>p3、</em>p4时，会输出这些地址所存储的值。</p>
+<p>所以在上面代码中打印p1会获得a的首地址,打印*p1会获得a的首地址的值<br>是的，在上面的代码中，p1是a的首地址，而p1是存储在a的首地址的值。这段代码中，首先将int类型的a转换为unsigned char类型的指针p1，然后利用p1来访问a的每一个字节，p2、p3、p4分别是a的首地址后一个字节、后两个字节、后三个字节的地址。在打印p1、p2、p3、p4时，会输出这些地址的十六进制值，在打印p1、*p2、*p3、*p4时，会输出这些地址所存储的值。</p>
 </blockquote>
 <blockquote>
 <p>就像是*p&#x3D;<em>a,即p&#x3D;a的值<br>对，这是对的。在这个代码中，p1是一个指向unsigned char类型的指针，它获取了变量a的首地址。在打印p1时，你会得到变量a的首地址。而当你打印</em>p1时，你会得到变量a在首地址上存储的值。</p>
 </blockquote>
 <blockquote>
-<p>不对我说错了是<em>p&#x3D;</em>(&amp;a),即p&#x3D;a的首地址,<em>p&#x3D;a的值<br>对的，p&#x3D;(&amp;a)，即p&#x3D;&amp;a，即p是a的首地址，</em>p&#x3D;a的值。</p>
+<p>不对我说错了是<em>p&#x3D;</em>(&amp;a),即p&#x3D;a的首地址,*p&#x3D;a的值<br>对的，p&#x3D;(&amp;a)，即p&#x3D;&amp;a，即p是a的首地址，*p&#x3D;a的值。</p>
 </blockquote>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">void printf_bin(int num)
 &#123;

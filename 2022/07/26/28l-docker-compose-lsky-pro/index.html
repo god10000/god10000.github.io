@@ -274,7 +274,7 @@ chmod +x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
 可以从 GitHub 获取到最新的版本号。
 最后，测试安装是否成功
 docker-compose version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="ERROR-In-file-‘-x2F-docker-compose-yml’-the-service-name-True-must-be-a-quoted-string-i-e-‘True’"><a href="#ERROR-In-file-‘-x2F-docker-compose-yml’-the-service-name-True-must-be-a-quoted-string-i-e-‘True’" class="headerlink" title="ERROR: In file ‘.&#x2F;docker-compose.yml’, the service name True must be a quoted string, i.e. ‘True’"></a>ERROR: In file ‘.&#x2F;docker-compose.yml’, the service name True must be a quoted string, i.e. ‘True’</h4><p>一般是.yml文件里面格式不对,重新复制一下</p>
+<h4 id="ERROR-In-file-‘-docker-compose-yml’-the-service-name-True-must-be-a-quoted-string-i-e-‘True’"><a href="#ERROR-In-file-‘-docker-compose-yml’-the-service-name-True-must-be-a-quoted-string-i-e-‘True’" class="headerlink" title="ERROR: In file ‘.&#x2F;docker-compose.yml’, the service name True must be a quoted string, i.e. ‘True’"></a>ERROR: In file ‘.&#x2F;docker-compose.yml’, the service name True must be a quoted string, i.e. ‘True’</h4><p>一般是.yml文件里面格式不对,重新复制一下</p>
 <h4 id="RROR-for-635e40a642c2-mine-app-1-Cannot-start-service-app-driver-failed-programming-external-connectivity-on-endpoint"><a href="#RROR-for-635e40a642c2-mine-app-1-Cannot-start-service-app-driver-failed-programming-external-connectivity-on-endpoint" class="headerlink" title="RROR: for 635e40a642c2_mine-app-1  Cannot start service app: driver failed programming external connectivity on endpoint"></a>RROR: for 635e40a642c2_mine-app-1  Cannot start service app: driver failed programming external connectivity on endpoint</h4><p>可能是服务器重启过程中，docker 程序运行异常，我们可以通过重启 docker 服务解决这个问题。</p>
 <blockquote>
 <p>service docker restart<br>重启后，再次运行 <code>docker-compose</code> 命令，容器服务正常启动</p>
@@ -327,7 +327,7 @@ services:
 <p>docker-compose up -d 即可部署。</p>
 </blockquote>
 <p>docker container ls 查看容器的运行情况。<br>登陆Nginx Proxy Manager<br>浏览器输入<code>主机ip:81</code></p>
-<p>默认登陆名和密码：<br>Email:    <a href="mailto:&#97;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#97;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;</a><br>Password: changeme</p>
+<p>默认登陆名和密码：<br>Email:    <a href="mailto:&#x61;&#x64;&#x6d;&#105;&#110;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">admin@example.com</a><br>Password: changeme</p>
 <p>如果以前登陆过,可能账号为邮箱</p>
 <p>查看Docker容器内部IP：<br>ip addr show docker0</p>
 <img src="/2022/07/26/28l-docker-compose-lsky-pro/01.png" class="" title="This is an test image">

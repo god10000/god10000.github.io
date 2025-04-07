@@ -266,7 +266,7 @@
 
 <p>(1) VDD_FT 对5伏容忍I&#x2F;O脚是特殊的，它与VDD不同</p>
 <h2 id="C语言相关知识"><a href="#C语言相关知识" class="headerlink" title="C语言相关知识"></a>C语言相关知识</h2><ul>
-<li><p>关键字：**#define**</p>
+<li><p>关键字：<strong>#define</strong></p>
 </li>
 <li><p>用途：用一个字符串代替一个数字，便于理解，防止出错；提取程序中经常出现的参数，便于快速修改定义宏</p>
 </li>
@@ -289,18 +289,18 @@
 <li><p>定义结构体变量：	struct{char x; int y; float z;} StructName;	因为结构体变量类型较长，所以通常用typedef更改变量类型名</p>
 </li>
 <li><p>引用结构体成员：	StructName.x &#x3D; ‘A’;	</p>
-<p>​								 StructName.y &#x3D; 66;	</p>
-<p>​								 StructName.z &#x3D; 1.23;</p>
-<p>​								<code>pStructName-&gt;x = &#39;A&#39;;</code>	&#x2F;&#x2F;pStructName为结构体的地址，pStructName-&gt;y &#x3D; 66;pStructName-&gt;z &#x3D; 1.23;</p>
+<p>​                                 StructName.y &#x3D; 66;    </p>
+<p>​                                 StructName.z &#x3D; 1.23;</p>
+<p>​                                <code>pStructName-&gt;x = &#39;A&#39;;</code>    &#x2F;&#x2F;pStructName为结构体的地址，pStructName-&gt;y &#x3D; 66;pStructName-&gt;z &#x3D; 1.23;</p>
 </li>
 <li><p>关键字：<strong>enum</strong></p>
 </li>
 <li><p>用途：定义一个取值受限制的整型变量，用于限制变量取值范围；宏定义的集合(<strong>即变量只能为enum中定义的</strong>)</p>
 </li>
 <li><p>定义枚举变量：	enum{</p>
-<p>​											FALSE &#x3D; 0, </p>
-<p>​											TRUE &#x3D; 1</p>
-<p>​										} EnumName;	</p>
+<p>​                                            FALSE &#x3D; 0, </p>
+<p>​                                            TRUE &#x3D; 1</p>
+<p>​                                        } EnumName;    </p>
 <p>因为枚举变量类型较长，所以通常用typedef更改变量类型名</p>
 </li>
 <li><p>引用枚举成员：	EnumName &#x3D; FALSE;	EnumName &#x3D; TRUE;</p>

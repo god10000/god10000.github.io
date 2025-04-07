@@ -203,17 +203,22 @@
 <p>按数据传送的方式，通讯可分为串行通讯与并行通讯。</p>
 </blockquote>
 <ul>
-<li><p>串行通讯：是指设备之间通过一根数据信号线，地线以及控制信号线，按数据位形式一位一位地传输数据的通讯方式，同一时刻只能传输一位(bit)数据。<br>并行通讯：是指使用 8、16、32 及 64 根或更多的数据线(有多少信号为就需要多少信号位)进行传输的通讯方式，可以同一时刻传输多个数据位的数据</p>
+<li>串行通讯：是指设备之间通过一根数据信号线，地线以及控制信号线，按数据位形式一位一位地传输数据的通讯方式，同一时刻只能传输一位(bit)数据。<br>并行通讯：是指使用 8、16、32 及 64 根或更多的数据线(有多少信号为就需要多少信号位)进行传输的通讯方式，可以同一时刻传输多个数据位的数据</li>
+</ul>
 <img src="/2022/09/28/41h-f407-usart/01.jpg" class="">
-</li>
+
+<ul>
 <li><p>全双工、半双工及单工通讯<br>单工通信：信息只能单方向传输的工作方式，一个固定为发送设备，另一个固定为接收设备，发送端只能发送信息不能接收信息，接收端只能接收信息不能发送信息，只需一根信号线</p>
 </li>
 <li><p>半双工通信：可以实现双向的通信，但不能在两个方向上同时进行，必须轮流交替进行，其实也可以理解成一种可以切换方向的单工通信，同一时刻必须只能一个方向传输，只需一根数据线</p>
 </li>
 <li><p>全双工通信：在同一时刻，两个设备之间可以同时收发数据，全双工方式无需进行方向的切换，这种方式要求通讯双方均有发送器和接收器，同时，需要2根数据线。</p>
+</li>
+</ul>
 <img src="/2022/09/28/41h-f407-usart/02.jpg" class="">
-<h3 id="同步通讯与异步通讯"><a href="#同步通讯与异步通讯" class="headerlink" title="同步通讯与异步通讯"></a>同步通讯与异步通讯</h3></li>
-<li><p>同步通讯：收发设备双方会使用一根信号线表示时钟信号，在时钟信号的驱动下双方进行协调，同步数据，通讯中通常双方会统一规定在时钟信号的上升沿或下降沿对数据线进行采样，对应时钟极性与时钟相位。<br>I2C 的同步通信：</p>
+<h3 id="同步通讯与异步通讯"><a href="#同步通讯与异步通讯" class="headerlink" title="同步通讯与异步通讯"></a>同步通讯与异步通讯</h3><ul>
+<li>同步通讯：收发设备双方会使用一根信号线表示时钟信号，在时钟信号的驱动下双方进行协调，同步数据，通讯中通常双方会统一规定在时钟信号的上升沿或下降沿对数据线进行采样，对应时钟极性与时钟相位。<br>I2C 的同步通信：</li>
+</ul>
 <img src="/2022/09/28/41h-f407-usart/03.jpg" class="">
 <p>异步通讯：不需要时钟信号进行数据同步，它们直接在数据信号中穿插一些同步用的信号位，或者把主体数据进行打包，以数据帧（串口：起始位 数据 校验位(可以没有) 停止位）的格式传输数据，某些通讯中还需要双方约定数据的传输速率（波特率），以便更好地同步。</p>
 <img src="/2022/09/28/41h-f407-usart/04.jpg" class="">
@@ -230,8 +235,6 @@
 <p>原生的串口通信主要是控制器跟串口的设备或者传感器通信他们但是TLL电平，不需要经过电平转换芯片来转换电平，直接就用TTL电平通信，GPS模块、GSM模块、串口转WIFI模块、HC04蓝牙模块</p>
 <h3 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h3><img src="/2022/09/28/41h-f407-usart/04.jpg" class="">
 <h3 id="1）通讯的起始和停止信号"><a href="#1）通讯的起始和停止信号" class="headerlink" title="1）通讯的起始和停止信号"></a>1）通讯的起始和停止信号</h3><p>串口通讯的一个数据包从起始信号开始，直到停止信号结束。数据包的起始信号由一个逻辑 0 的数据位表示，而数据包的停止信号可由 0.5、1、1.5 或 2 个逻辑 1 的数据位表示</p>
-</li>
-</ul>
 <p>1个停止位：停止位位数的默认值。<br>2个停止位：可用于常规USART模式、单线模式以及调制解调器模式。<br>0.5个停止位：在智能卡模式下接收数据时使用。<br>1.5个停止位：在智能卡模式下发送和接收数据时使用。</p>
 <h3 id="2-有效数据"><a href="#2-有效数据" class="headerlink" title="2)有效数据"></a>2)有效数据</h3><p>在数据包的起始位之后紧接着的就是要传输的主体数据内容，也称为有效数据，有效数据的长度常被约定为 5、6、7 或 8 位长</p>
 <h3 id="3-数据校验"><a href="#3-数据校验" class="headerlink" title="3)数据校验"></a>3)数据校验</h3><p>偶校验：校验位使得一帧中的7或8个LSB数据以及校验位中’1’的个数为偶数。<br>例如：数据&#x3D;00110101，有4个’1’，如果选择偶校验(在USART_CR1中的PS＝0)，校验位将是’0’，最后数据检验如果数据有偶数个1则数据传输没有出错(但不是绝对的，如果同时两个数据为发送错误(0变成1)则还是偶数个1)</p>
@@ -262,7 +265,7 @@
 <p><code>实际上就是把十进制的小数转化成十六进制</code></p>
 <img src="/2022/09/28/41h-f407-usart/32.jpg" class="">
 <blockquote>
-<p>波特率计算方法<br>首先时钟来源，fPCLK1或fPCLK2<br>然后除以USARTDIV<br>再除以8<em>（2-OVER8）<br>OVER8是可以改变的，可以为1或0（在CR1寄存器15位设置）<br>故波特率 &#x3D; F&#x2F;（（8</em>（2-OVER8））*USARTDIV）<br>如果你要快，就设置OVER8为1，8倍过样率，但是容错差<br>如果你要精准，就OVER8设置为0，16倍过样率，但是慢<br>我们如何控制波特率，当我们确认好我们的波特率，时钟信号也确定了，就需要控制USARTDIV大小<br>USARTDIV的值如何决定<br>由USART_BRR决定<br>当OVER8为0时，小数比方编码为4位，并通过USART_BRR寄存器中的DIV_fraction[3:0]位编程<br>当OVER8为1时，小数比方编码为3位，并通过USART_BRR寄存器中的DIV_fraction[2:0]位编程，这DIV_fraction[3]必须保持清0<br>USART_BRR寄存器如上图<br>32位使用了低16位，分为2部分，有高12位和低4位<br>高12位：整数<br>低4位：小数</p>
+<p>波特率计算方法<br>首先时钟来源，fPCLK1或fPCLK2<br>然后除以USARTDIV<br>再除以8*（2-OVER8）<br>OVER8是可以改变的，可以为1或0（在CR1寄存器15位设置）<br>故波特率 &#x3D; F&#x2F;（（8*（2-OVER8））*USARTDIV）<br>如果你要快，就设置OVER8为1，8倍过样率，但是容错差<br>如果你要精准，就OVER8设置为0，16倍过样率，但是慢<br>我们如何控制波特率，当我们确认好我们的波特率，时钟信号也确定了，就需要控制USARTDIV大小<br>USARTDIV的值如何决定<br>由USART_BRR决定<br>当OVER8为0时，小数比方编码为4位，并通过USART_BRR寄存器中的DIV_fraction[3:0]位编程<br>当OVER8为1时，小数比方编码为3位，并通过USART_BRR寄存器中的DIV_fraction[2:0]位编程，这DIV_fraction[3]必须保持清0<br>USART_BRR寄存器如上图<br>32位使用了低16位，分为2部分，有高12位和低4位<br>高12位：整数<br>低4位：小数</p>
 </blockquote>
 <blockquote>
 <p>OVER8&#x3D;0时候波特率计算</p>
@@ -337,13 +340,15 @@ uint16_t USART_ReceiveData(USART_TypeDef* USARTx);<span aria-hidden="true" class
 <li><p>USART_Mode：USART 模式选择，有 USART_Mode_Rx 和 USART_Mode_Tx，允许使用逻辑或运算选择两个,USART_CR1 寄存器的 RE 位和 TE 位。</p>
 </li>
 <li><p>USART_HardwareFlowControl：硬件流控制选择，只有在硬件流控制模式才有效，可选有⑴使能 RTS、⑵使能 CTS、⑶同时使能 RTS 和 CTS、⑷不使能硬件流。</p>
+</li>
+</ol>
 <h3 id="编程思路"><a href="#编程思路" class="headerlink" title="编程思路"></a>编程思路</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">1) 使能 RX 和 TX 引脚 GPIO 时钟和 USART 时钟；
 2) 初始化 GPIO，并将 GPIO 复用到 USART 上；
 3) 配置 USART 参数初始化结构体；
 4) 配置中断控制器并使能 USART 接收中断；
 5) 使能 USART；
-6) 在 USART 接收中断服务函数实现数据接收和发送<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
+6) 在 USART 接收中断服务函数实现数据接收和发送<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="串口收发代码"><a href="#串口收发代码" class="headerlink" title="串口收发代码"></a>串口收发代码</h3><p><code>usart.h</code></p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">#ifndef _USART_H
 #define _USART_H

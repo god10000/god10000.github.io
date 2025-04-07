@@ -263,7 +263,7 @@ second_m3u8_link &#x3D; os.path.join(os.path.dirname(first_m3u8_link),&quot;&#x2
 
 <p>windows系统不行,windows的输出会变成这样,可能是因为windows生成路径用的就是\</p>
 <blockquote>
-<p>“<a target="_blank" rel="noopener" href="https://s1.fsvod1.com/20220225/fmrpwm7M/1200kb/hls/LV5eaTwd.ts&quot;">https://s1.fsvod1.com/20220225/fmrpwm7M\1200kb/hls/LV5eaTwd.ts&quot;</a></p>
+<p>“<a target="_blank" rel="noopener" href="https://s1.fsvod1.com/20220225/fmrpwm7M/1200kb/hls/LV5eaTwd.ts">https://s1.fsvod1.com/20220225/fmrpwm7M\1200kb/hls/LV5eaTwd.ts</a>“</p>
 </blockquote>
 <p><code>os.path.join()</code> 方法用于将多个路径组合成一个路径字符串。在这里，它将 变量组合成一个路径字符串，并将其分隔符设置为操作系统的默认分隔符，在 Windows 上为反斜杠（\），在 Unix 上为正斜杠（&#x2F;）。</p>
 <p>并且那个反斜杠无法用replace替换,无效,这个我暂时不知道为什么</p>

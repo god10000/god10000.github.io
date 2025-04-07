@@ -199,7 +199,7 @@
         <div class="trans">
             <h2>python常见报错以及解决</h2>
 
-  <h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><h3 id="添加-x2F-删除然软连接"><a href="#添加-x2F-删除然软连接" class="headerlink" title="添加&#x2F;删除然软连接"></a>添加&#x2F;删除然软连接</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">#添加python3软链接：
+  <h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><h3 id="添加-删除然软连接"><a href="#添加-删除然软连接" class="headerlink" title="添加&#x2F;删除然软连接"></a>添加&#x2F;删除然软连接</h3><pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">#添加python3软链接：
 ln -s &#x2F;usr&#x2F;local&#x2F;python3.10.1&#x2F;bin&#x2F;python3.10.1 &#x2F;usr&#x2F;bin&#x2F;python3
 #添加pip3软链接：
 ln -s &#x2F;usr&#x2F;local&#x2F;python3.10.1&#x2F;bin&#x2F;pip3.10.1 &#x2F;usr&#x2F;bin&#x2F;pip3
@@ -207,7 +207,7 @@ ln -s &#x2F;usr&#x2F;local&#x2F;python3.10.1&#x2F;bin&#x2F;pip3.10.1 &#x2F;usr&#
 #删除软连接的方法(&#96;慎用,不然会连着文件一起删除&#96;)
 unlink &#x2F;usr&#x2F;local&#x2F;python3.10.1&#x2F;bin&#x2F;python3.10.1&#x2F;usr&#x2F;bin&#x2F;python3
 rm -rf &#x2F;usr&#x2F;local&#x2F;python3.10.1&#x2F;bin&#x2F;python3.10.1&#x2F;usr&#x2F;bin&#x2F;python3    #末尾有&#96;&#x2F;&#96;的是连文件一起删除<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="centos安装python时易出现的error"><a href="#centos安装python时易出现的error" class="headerlink" title="centos安装python时易出现的error"></a>centos安装python时易出现的error</h2><h3 id="WARNING-Retrying-Retry-total-x3D-1"><a href="#WARNING-Retrying-Retry-total-x3D-1" class="headerlink" title="WARNING: Retrying (Retry(total&#x3D;1,"></a>WARNING: Retrying (Retry(total&#x3D;1,</h3><p>connect&#x3D;None, read&#x3D;None, redirect&#x3D;None, status&#x3D;None)) after connec<br>原因:其实就是找第三方库的时候链接超时，总是获取不到。自带的pip命令去国外的服务器请求第三方包了，所以超时，因而换成国内镜像下载即可，并且要信任镜像的URL。</p>
+<h2 id="centos安装python时易出现的error"><a href="#centos安装python时易出现的error" class="headerlink" title="centos安装python时易出现的error"></a>centos安装python时易出现的error</h2><h3 id="WARNING-Retrying-Retry-total-1"><a href="#WARNING-Retrying-Retry-total-1" class="headerlink" title="WARNING: Retrying (Retry(total&#x3D;1,"></a>WARNING: Retrying (Retry(total&#x3D;1,</h3><p>connect&#x3D;None, read&#x3D;None, redirect&#x3D;None, status&#x3D;None)) after connec<br>原因:其实就是找第三方库的时候链接超时，总是获取不到。自带的pip命令去国外的服务器请求第三方包了，所以超时，因而换成国内镜像下载即可，并且要信任镜像的URL。</p>
 <pre class="line-numbers language-linux" data-language="linux"><code class="language-linux">解决：以阿里的镜像为例
 第一步：开始报错
 pip3 install xlrd
