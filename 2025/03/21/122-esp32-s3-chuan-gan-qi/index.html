@@ -11,11 +11,11 @@
   <meta charset="utf-8">
 
   
-  <title>ESP32_S3_WIFI</title>
+  <title>ESP32-S3驱动多传感器</title>
   
-  <link rel="canonical" href="http://blog.isgeek.top/2024/03/12/121-esp32-s3-wifi/">
+  <link rel="canonical" href="http://blog.isgeek.top/2025/03/21/122-esp32-s3-chuan-gan-qi/">
   
-  <meta name="description" content="📌 核心函数一览   函数 说明    WiFi.begin(ssid, password) 连接到指定 WiFi 热点   WiFi.status() 返回当前 WiFi 状态（如已连接、失败等）   WiFi.localIP() 获取当前连接 WiFi 后分配的 IP 地址   WiFi.di">
+  <meta name="description" content="TEMT6000问题1.ADC读数从0增加到3400然后又递减到0GPIO4      ADCESP32-S3 所有可用的 ADC 引脚（模拟输入引脚）： 📌 ADC1 (12-bit, 0-3.3V)    通道编号 GPIO    ADC1_CH0 GPIO1   ADC1_CH1 GPIO2">
   
   
   <meta name="author" content="南北的猫">
@@ -24,21 +24,21 @@
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="ESP32_S3_WIFI" />
+  <meta property="og:title" content="ESP32-S3驱动多传感器" />
   
-  <meta property="og:description" content="📌 核心函数一览   函数 说明    WiFi.begin(ssid, password) 连接到指定 WiFi 热点   WiFi.status() 返回当前 WiFi 状态（如已连接、失败等）   WiFi.localIP() 获取当前连接 WiFi 后分配的 IP 地址   WiFi.di">
+  <meta property="og:description" content="TEMT6000问题1.ADC读数从0增加到3400然后又递减到0GPIO4      ADCESP32-S3 所有可用的 ADC 引脚（模拟输入引脚）： 📌 ADC1 (12-bit, 0-3.3V)    通道编号 GPIO    ADC1_CH0 GPIO1   ADC1_CH1 GPIO2">
   
-  <meta property="og:url" content="http://blog.isgeek.top/2024/03/12/121-esp32-s3-wifi/" />
+  <meta property="og:url" content="http://blog.isgeek.top/2025/03/21/122-esp32-s3-chuan-gan-qi/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32_S3_WIFI">
+  <meta name="twitter:title" content="ESP32-S3驱动多传感器">
   
-  <meta name="twitter:description" content="📌 核心函数一览   函数 说明    WiFi.begin(ssid, password) 连接到指定 WiFi 热点   WiFi.status() 返回当前 WiFi 状态（如已连接、失败等）   WiFi.localIP() 获取当前连接 WiFi 后分配的 IP 地址   WiFi.di">
-  
-  
+  <meta name="twitter:description" content="TEMT6000问题1.ADC读数从0增加到3400然后又递减到0GPIO4      ADCESP32-S3 所有可用的 ADC 引脚（模拟输入引脚）： 📌 ADC1 (12-bit, 0-3.3V)    通道编号 GPIO    ADC1_CH0 GPIO1   ADC1_CH1 GPIO2">
   
   
-  <meta name="twitter:url" content="http://blog.isgeek.top/2024/03/12/121-esp32-s3-wifi/" />
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/03/21/122-esp32-s3-chuan-gan-qi/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -197,62 +197,193 @@
 </div>
 
         <div class="trans">
-            <h2>ESP32_S3_WIFI</h2>
+            <h2>ESP32-S3驱动多传感器</h2>
 
-  <h2 id="📌-核心函数一览"><a href="#📌-核心函数一览" class="headerlink" title="📌 核心函数一览"></a>📌 核心函数一览</h2><table>
+  <h3 id="TEMT6000"><a href="#TEMT6000" class="headerlink" title="TEMT6000"></a>TEMT6000</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>1.ADC读数从0增加到3400然后又递减到0<code>GPIO4</code></p>
+<blockquote>
+</blockquote>
+<ol start="2">
+<li></li>
+</ol>
+<h3 id="ADC"><a href="#ADC" class="headerlink" title="ADC"></a>ADC</h3><p>ESP32-S3 <strong>所有可用的 ADC 引脚</strong>（模拟输入引脚）：</p>
+<p><strong>📌 ADC1 (12-bit, 0-3.3V)</strong></p>
+<table>
 <thead>
 <tr>
-<th>函数</th>
-<th>说明</th>
+<th>通道编号</th>
+<th>GPIO</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>WiFi.begin(ssid, password)</code></td>
-<td>连接到指定 WiFi 热点</td>
+<td>ADC1_CH0</td>
+<td>GPIO1</td>
 </tr>
 <tr>
-<td><code>WiFi.status()</code></td>
-<td>返回当前 WiFi 状态（如已连接、失败等）</td>
+<td>ADC1_CH1</td>
+<td>GPIO2</td>
 </tr>
 <tr>
-<td><code>WiFi.localIP()</code></td>
-<td>获取当前连接 WiFi 后分配的 IP 地址</td>
+<td>ADC1_CH2</td>
+<td>GPIO3</td>
 </tr>
 <tr>
-<td><code>WiFi.disconnect()</code></td>
-<td>断开当前 WiFi</td>
+<td>ADC1_CH3</td>
+<td>GPIO4</td>
 </tr>
 <tr>
-<td><code>WiFi.SSID()</code></td>
-<td>获取当前连接的 WiFi 名称</td>
+<td>ADC1_CH4</td>
+<td>GPIO5</td>
 </tr>
 <tr>
-<td><code>WiFi.RSSI()</code></td>
-<td>获取当前 WiFi 信号强度</td>
+<td>ADC1_CH5</td>
+<td>GPIO6</td>
 </tr>
 <tr>
-<td><code>WiFi.macAddress()</code></td>
-<td>获取 MAC 地址</td>
+<td>ADC1_CH6</td>
+<td>GPIO7</td>
 </tr>
 <tr>
-<td><code>WiFi.scanNetworks()</code></td>
-<td>扫描周围 WiFi 热点</td>
+<td>ADC1_CH7</td>
+<td>GPIO8</td>
 </tr>
 <tr>
-<td><code>WiFi.mode(WIFI_STA)</code></td>
-<td>设置为“客户端模式”</td>
+<td>ADC1_CH8</td>
+<td>GPIO9</td>
 </tr>
 <tr>
-<td><code>WiFi.mode(WIFI_AP)</code></td>
-<td>设置为“热点模式”</td>
-</tr>
-<tr>
-<td><code>WiFi.mode(WIFI_AP_STA)</code></td>
-<td>同时作为热点和客户端（混合）</td>
+<td>ADC1_CH9</td>
+<td>GPIO10</td>
 </tr>
 </tbody></table>
+<hr>
+<p> <strong>📌 ADC2 (12-bit, 0-3.3V, 受 WiFi 影响)</strong></p>
+<table>
+<thead>
+<tr>
+<th>通道编号</th>
+<th>GPIO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ADC2_CH0</td>
+<td>GPIO11</td>
+</tr>
+<tr>
+<td>ADC2_CH1</td>
+<td>GPIO12</td>
+</tr>
+<tr>
+<td>ADC2_CH2</td>
+<td>GPIO13</td>
+</tr>
+<tr>
+<td>ADC2_CH3</td>
+<td>GPIO14</td>
+</tr>
+<tr>
+<td>ADC2_CH4</td>
+<td>GPIO15</td>
+</tr>
+<tr>
+<td>ADC2_CH5</td>
+<td>GPIO16</td>
+</tr>
+<tr>
+<td>ADC2_CH6</td>
+<td>GPIO17</td>
+</tr>
+<tr>
+<td>ADC2_CH7</td>
+<td>GPIO18</td>
+</tr>
+<tr>
+<td>ADC2_CH8</td>
+<td>GPIO19</td>
+</tr>
+<tr>
+<td>ADC2_CH9</td>
+<td>GPIO20</td>
+</tr>
+</tbody></table>
+<hr>
+<p> <strong>⚠️ 注意事项</strong></p>
+<ol>
+<li><strong>ADC1 可正常使用</strong>，适用于大部分情况。</li>
+<li><strong>ADC2 受 WiFi 影响</strong>，如果 WiFi 使能，ADC2 可能无法正常工作。</li>
+<li><strong>ESP32-S3 没有 DAC</strong>（无法作为模拟输出）。</li>
+<li><strong>ESP32-S3 ADC 默认 12-bit（0-4095）</strong>，但可以配置 9-bit, 10-bit, 11-bit。</li>
+<li><strong>analogReadResolution(bits)</strong> 设置分辨率，<strong>analogSetAttenuation(ADC_11db)</strong> 设置输入范围（最大 3.3V）。</li>
+</ol>
+<p>💡 <strong>推荐使用 ADC1（GPIO1-GPIO10），避免 ADC2 受 WiFi 干扰！</strong> 🚀</p>
+<h3 id="RGB灯"><a href="#RGB灯" class="headerlink" title="RGB灯"></a>RGB灯</h3><p>不知道为啥pwm驱动才有用，普通驱动没反应，要不<del>设置个pwm值吧，可能亮度太低没看到</del>，无效，只有渐变可行</p>
+<p><strong>肯定是哪里出了问题，因为arduino nano esp32出场自带的程序可以正常闪灯啊</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#define RED_PIN 45
+#define GREEN_PIN 0
+#define BLUE_PIN 46
 
-  <p> — Mar 12, 2024</p>
+&#x2F;&#x2F; 定义 LEDC PWM 频道
+#define LEDC_CHANNEL_RED   0
+#define LEDC_CHANNEL_GREEN 1
+#define LEDC_CHANNEL_BLUE  2
+
+#define PWM_FREQ 5000  &#x2F;&#x2F; PWM 频率
+#define PWM_RESOLUTION 8  &#x2F;&#x2F; 8位分辨率（0-255）
+
+void setup() &#123;
+  &#x2F;&#x2F; 配置 PWM 频道
+  ledcSetup(LEDC_CHANNEL_RED, PWM_FREQ, PWM_RESOLUTION);
+  ledcSetup(LEDC_CHANNEL_GREEN, PWM_FREQ, PWM_RESOLUTION);
+  ledcSetup(LEDC_CHANNEL_BLUE, PWM_FREQ, PWM_RESOLUTION);
+
+  &#x2F;&#x2F; 绑定通道到 GPIO 引脚
+  ledcAttachPin(RED_PIN, LEDC_CHANNEL_RED);
+  ledcAttachPin(GREEN_PIN, LEDC_CHANNEL_GREEN);
+  ledcAttachPin(BLUE_PIN, LEDC_CHANNEL_BLUE);
+&#125;
+
+void loop() &#123;
+  int val;
+
+  &#x2F;&#x2F; 颜色渐变 - 先递减
+  for (val &#x3D; 255; val &gt; 0; val--) &#123;
+    ledcWrite(LEDC_CHANNEL_RED, val);
+    ledcWrite(LEDC_CHANNEL_GREEN, 255 - val);
+    ledcWrite(LEDC_CHANNEL_BLUE, 128 - val);
+    delay(1);
+  &#125;
+
+  &#x2F;&#x2F; 颜色渐变 - 再递增
+  for (val &#x3D; 0; val &lt; 255; val++) &#123;
+    ledcWrite(LEDC_CHANNEL_RED, val);
+    ledcWrite(LEDC_CHANNEL_GREEN, 255 - val);
+    ledcWrite(LEDC_CHANNEL_BLUE, 128 - val);
+    delay(1);
+  &#125;
+
+  Serial.println(val, DEC);
+&#125;
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>烧录完后会出现usb串口失效，可能是影响到的GPIO0</p>
+<p>SCK灯也不亮不到为啥</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#define YELLOW_PIN 48
+
+void setup() &#123;
+  pinMode(YELLOW_PIN, OUTPUT);
+  digitalWrite(YELLOW_PIN, HIGH);  &#x2F;&#x2F; 初始状态：LED 熄灭
+&#125;
+
+void loop() &#123;
+  digitalWrite(YELLOW_PIN, HIGH);   &#x2F;&#x2F; 蓝色灭
+  delay(1000);
+  digitalWrite(YELLOW_PIN, LOW);  &#x2F;&#x2F; 绿色亮
+  delay(1000);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="按键"><a href="#按键" class="headerlink" title="按键"></a>按键</h3><p>不知道为啥，低电平检测不到</p>
+
+  <p> — Mar 21, 2025</p>
   
 
 

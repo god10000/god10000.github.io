@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
   
-  <title>ESP32多个传感器开发</title>
+  <title>ESP32 IIC开发</title>
   
   <link rel="canonical" href="http://blog.isgeek.top/2025/03/10/120-esp32-iic/">
   
@@ -24,14 +24,14 @@
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="ESP32多个传感器开发" />
+  <meta property="og:title" content="ESP32 IIC开发" />
   
   <meta property="og:description" content="问题1.多个iic地址，只有第一个初始化会起作用 1️⃣ I2C 地址冲突或线路不通 APDS-9930 默认 I2C 地址是 0x39。 如果多个 I2C 设备（如 TSL2591）使用不同的 I2C 引脚（你现在是分别 Wire.begin(8, 9) 和 Wire.begin(10, 11)）">
   
   <meta property="og:url" content="http://blog.isgeek.top/2025/03/10/120-esp32-iic/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32多个传感器开发">
+  <meta name="twitter:title" content="ESP32 IIC开发">
   
   <meta name="twitter:description" content="问题1.多个iic地址，只有第一个初始化会起作用 1️⃣ I2C 地址冲突或线路不通 APDS-9930 默认 I2C 地址是 0x39。 如果多个 I2C 设备（如 TSL2591）使用不同的 I2C 引脚（你现在是分别 Wire.begin(8, 9) 和 Wire.begin(10, 11)）">
   
@@ -197,7 +197,7 @@
 </div>
 
         <div class="trans">
-            <h2>ESP32多个传感器开发</h2>
+            <h2>ESP32 IIC开发</h2>
 
   <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.多个iic地址，只有第一个初始化会起作用</p>
 <h4 id="1️⃣-I2C-地址冲突或线路不通"><a href="#1️⃣-I2C-地址冲突或线路不通" class="headerlink" title="1️⃣ I2C 地址冲突或线路不通"></a>1️⃣ <strong>I2C 地址冲突或线路不通</strong></h4><ul>
