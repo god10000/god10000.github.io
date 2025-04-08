@@ -11,38 +11,34 @@
   <meta charset="utf-8">
 
   
-  <title>All Posts - 南北的猫</title>
+  <title>ESP32_MQTT_OTA</title>
   
-  <link rel="canonical" href="http://blog.isgeek.top/archives/page/12/">
+  <link rel="canonical" href="http://blog.isgeek.top/2025/04/07/125-esp32-mqtt-ota/">
   
-  <meta name="description" content="">
+  <meta name="description" content="原理OTA✅ 第二步：准备 OTA 固件（v2.0）将这个代码编译为你想升级的新版本，比如 v2.0： cpp   复制编辑 #include &amp;lt;Arduino.h&amp;gt;  void setup() &amp;#123;   Serial.begin(115200);   delay(1000); ">
   
   
   <meta name="author" content="南北的猫">
   
   
-  <meta property="og:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
-  
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - 南北的猫" />
+  <meta property="og:title" content="ESP32_MQTT_OTA" />
   
-  <meta property="og:description" content="">
+  <meta property="og:description" content="原理OTA✅ 第二步：准备 OTA 固件（v2.0）将这个代码编译为你想升级的新版本，比如 v2.0： cpp   复制编辑 #include &amp;lt;Arduino.h&amp;gt;  void setup() &amp;#123;   Serial.begin(115200);   delay(1000); ">
   
-  <meta property="og:url" content="http://blog.isgeek.top/archives/page/12/" />
+  <meta property="og:url" content="http://blog.isgeek.top/2025/04/07/125-esp32-mqtt-ota/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - 南北的猫">
+  <meta name="twitter:title" content="ESP32_MQTT_OTA">
   
-  <meta name="twitter:description" content="">
-  
-  
-  
-  <meta name="twitter:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
+  <meta name="twitter:description" content="原理OTA✅ 第二步：准备 OTA 固件（v2.0）将这个代码编译为你想升级的新版本，比如 v2.0： cpp   复制编辑 #include &amp;lt;Arduino.h&amp;gt;  void setup() &amp;#123;   Serial.begin(115200);   delay(1000); ">
   
   
-  <meta name="twitter:url" content="http://blog.isgeek.top/archives/page/12/" />
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/04/07/125-esp32-mqtt-ota/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -201,196 +197,50 @@
 </div>
 
         <div class="trans">
-          
-<h2>All Posts</h2>
+            <h2>ESP32_MQTT_OTA</h2>
+
+  <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h2 id="OTA"><a href="#OTA" class="headerlink" title="OTA"></a>OTA</h2><h3 id="✅-第二步：准备-OTA-固件（v2-0）"><a href="#✅-第二步：准备-OTA-固件（v2-0）" class="headerlink" title="✅ 第二步：准备 OTA 固件（v2.0）"></a>✅ 第二步：<strong>准备 OTA 固件（v2.0）</strong></h3><p>将这个代码编译为你想升级的新版本，比如 v2.0：</p>
+<pre class="line-numbers language-none"><code class="language-none">cpp
 
 
-    <article>
-      <div class="row">
+复制编辑
+#include &lt;Arduino.h&gt;
 
-        <div class="three columns left lit">
-          <p class="bottom">Jun 1, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/06/01/15p-pythonspider/" class="">
-            
-              学习python爬虫
-            
-          </a>
-        </div>
-      </div>
-    </article>
+void setup() &#123;
+  Serial.begin(115200);
+  delay(1000);
+  Serial.println(&quot;✅ Hello from OTA-updated firmware v2.0!&quot;);
+&#125;
 
-    <article>
-      <div class="row">
+void loop() &#123;
+  Serial.println(&quot;🔁 Running new firmware...&quot;);
+  delay(3000);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-        <div class="three columns left lit">
-          <p class="bottom">May 28, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/28/14l-nonebot2-qqbot/" class="">
-            
-              linux搭建基于nonebot2和go-cqhttp的qq机器人
-            
-          </a>
-        </div>
-      </div>
-    </article>
+<blockquote>
+<p>编译后拿到 <code>.pio/build/esp32dev/firmware.bin</code>，放在 Python HTTP 服务器目录下。</p>
+</blockquote>
+<h2 id="✅-第三步：运行-Python-OTA-服务器"><a href="#✅-第三步：运行-Python-OTA-服务器" class="headerlink" title="✅ 第三步：运行 Python OTA 服务器"></a>✅ 第三步：<strong>运行 Python OTA 服务器</strong></h2><pre class="line-numbers language-c" data-language="c"><code class="language-c">cd &lt;含 firmware.bin 的目录&gt;
+python -m http.server 8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-    <article>
-      <div class="row">
+<p>控制台会显示：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">Serving HTTP on :: port 8080 ...<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-        <div class="three columns left lit">
-          <p class="bottom">May 25, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/25/13h-ad-mesures/" class="">
-            
-              AD一些基础的使用方法
-            
-          </a>
-        </div>
-      </div>
-    </article>
 
-    <article>
-      <div class="row">
 
-        <div class="three columns left lit">
-          <p class="bottom">May 23, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/23/12h-f407-tan-suo-zhe-yu-dao-de-wen-ti/" class="">
-            
-              探索者综合测试实验报错
-            
-          </a>
-        </div>
-      </div>
-    </article>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.ESP32连接超时</p>
+<p>如果 <code>http://localhost:8080/firmware.bin</code> 可以访问，而 <code>http://192.168.71.88:8080/firmware.bin</code> 无法访问，那么说明你本地服务器只绑定了 <code>localhost</code> 地址（即只对本机可见），并没有对外网或者局域网开放。为了让 ESP32 设备通过 <code>192.168.71.88</code> 地址访问，你需要让服务器绑定到 <code>0.0.0.0</code> 或者明确绑定到局域网的 IP 地址。</p>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><hr>
+<h4 id="1-确认服务器绑定到局域网-IP（0-0-0-0）"><a href="#1-确认服务器绑定到局域网-IP（0-0-0-0）" class="headerlink" title="1. 确认服务器绑定到局域网 IP（0.0.0.0）"></a>1. <strong>确认服务器绑定到局域网 IP（0.0.0.0）</strong></h4><p>确保你启动的 Python 服务器监听所有接口（0.0.0.0），而不仅仅是本地 <code>localhost</code>。你可以通过以下命令重新启动服务器：</p>
+<pre class="line-numbers language-none"><code class="language-none">python -m http.server 8080 --bind 0.0.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-    <article>
-      <div class="row">
+<p>或者明确绑定到你的局域网 IP（在你的情况下是 <code>192.168.71.92</code>）：</p>
+<pre class="line-numbers language-none"><code class="language-none">python -m http.server 8080 --bind 192.168.71.92<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-        <div class="three columns left lit">
-          <p class="bottom">May 17, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/17/11h-f407-encoder/" class="">
-            
-              stm32f407串口打印编码器测速
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">May 12, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/12/10h-stm32f401-project/" class="">
-            
-              stm32f401搭建工程
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">May 9, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/09/9h-destroy-chips/" class="">
-            
-              开发板供电相关问题
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">May 8, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/08/8l-hexo-linux/" class="">
-            
-              hexo博客搭建linux服务器部分
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">May 8, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/08/7h-keil-error/" class="">
-            
-              keil常见报错
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">May 7, 2022</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2022/05/07/6h-f407timer/" class="">
-            
-              stm32f407定时器中断
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-
-    <a class="mr" href="/archives/page/11/">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z" />
-      </svg>
-      <span>Recent</span>
-    </a>
-
-    
-    
-
-    <a class="" href="/archives/page/13/">
-      <span>Older</span>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-      </svg>
-    </a>
-
-    
-  </ul>
-</div>
+<p>这将确保你在 <strong>任何设备</strong>（包括 ESP32）上都可以访问 <code>http://192.168.71.92:8080/firmware.bin</code>。</p>
+<h3 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h3>
+  <p> — Apr 7, 2025</p>
+  
 
 
         </div>
