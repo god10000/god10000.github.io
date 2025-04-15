@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
   
-  <title>ESP32-S3驱动多传感器</title>
+  <title>ESP32驱动多传感器</title>
   
   <link rel="canonical" href="http://blog.isgeek.top/2025/03/21/122-esp32-s3-chuan-gan-qi/">
   
@@ -24,14 +24,14 @@
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="ESP32-S3驱动多传感器" />
+  <meta property="og:title" content="ESP32驱动多传感器" />
   
   <meta property="og:description" content="TEMT6000问题1.ADC读数从0增加到3400然后又递减到0GPIO4      ADCESP32-S3 所有可用的 ADC 引脚（模拟输入引脚）： 📌 ADC1 (12-bit, 0-3.3V)    通道编号 GPIO    ADC1_CH0 GPIO1   ADC1_CH1 GPIO2">
   
   <meta property="og:url" content="http://blog.isgeek.top/2025/03/21/122-esp32-s3-chuan-gan-qi/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32-S3驱动多传感器">
+  <meta name="twitter:title" content="ESP32驱动多传感器">
   
   <meta name="twitter:description" content="TEMT6000问题1.ADC读数从0增加到3400然后又递减到0GPIO4      ADCESP32-S3 所有可用的 ADC 引脚（模拟输入引脚）： 📌 ADC1 (12-bit, 0-3.3V)    通道编号 GPIO    ADC1_CH0 GPIO1   ADC1_CH1 GPIO2">
   
@@ -197,7 +197,7 @@
 </div>
 
         <div class="trans">
-            <h2>ESP32-S3驱动多传感器</h2>
+            <h2>ESP32驱动多传感器</h2>
 
   <h3 id="TEMT6000"><a href="#TEMT6000" class="headerlink" title="TEMT6000"></a>TEMT6000</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>1.ADC读数从0增加到3400然后又递减到0<code>GPIO4</code></p>
 <blockquote>
@@ -381,6 +381,44 @@ void loop() &#123;
   delay(1000);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="红外传感器"><a href="#红外传感器" class="headerlink" title="红外传感器"></a>红外传感器</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>红外对管一个发送红外光一个接收反射的光（红外LED+光敏二极管接收器）</p>
+<p>可用于避障，循迹，颜色识别</p>
+<p><strong>光学原理</strong></p>
+<ul>
+<li><p>颜色是物体对可见光中不同波长的反射或吸收结果。</p>
+</li>
+<li><p>白光 &#x3D; 所有可见光的混合（红橙黄绿蓝靛紫）。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>物体颜色</th>
+<th>反射光波长</th>
+<th>吸收光波长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红色物体</td>
+<td>红光</td>
+<td>其他光</td>
+</tr>
+<tr>
+<td>黑色物体</td>
+<td>吸收全部</td>
+<td>无反射</td>
+</tr>
+<tr>
+<td>白色物体</td>
+<td>反射全部</td>
+<td>几乎无吸收</td>
+</tr>
+<tr>
+<td>绿色物体</td>
+<td>反射绿光</td>
+<td>吸收其他</td>
+</tr>
+</tbody></table>
 <h3 id="按键"><a href="#按键" class="headerlink" title="按键"></a>按键</h3><p>不知道为啥，低电平检测不到</p>
 
   <p> — Mar 21, 2025</p>

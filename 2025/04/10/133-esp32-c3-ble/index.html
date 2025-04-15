@@ -11,38 +11,34 @@
   <meta charset="utf-8">
 
   
-  <title>All Posts - 南北的猫</title>
+  <title>ESP32_C3_BLE</title>
   
-  <link rel="canonical" href="http://blog.isgeek.top/archives/page/5/">
+  <link rel="canonical" href="http://blog.isgeek.top/2025/04/10/133-esp32-c3-ble/">
   
-  <meta name="description" content="">
+  <meta name="description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有   content  官方例程注意 platform添加库的时候，没有特殊说明不要加上版本，容易用到旧版本，不支持新的api CBC加密广播问题点 串口乱码 你在串口中这样打印： Serial.printf(&amp;quot;📡 发送段 [%04X]:">
   
   
   <meta name="author" content="南北的猫">
   
   
-  <meta property="og:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
-  
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - 南北的猫" />
+  <meta property="og:title" content="ESP32_C3_BLE" />
   
-  <meta property="og:description" content="">
+  <meta property="og:description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有   content  官方例程注意 platform添加库的时候，没有特殊说明不要加上版本，容易用到旧版本，不支持新的api CBC加密广播问题点 串口乱码 你在串口中这样打印： Serial.printf(&amp;quot;📡 发送段 [%04X]:">
   
-  <meta property="og:url" content="http://blog.isgeek.top/archives/page/5/" />
+  <meta property="og:url" content="http://blog.isgeek.top/2025/04/10/133-esp32-c3-ble/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - 南北的猫">
+  <meta name="twitter:title" content="ESP32_C3_BLE">
   
-  <meta name="twitter:description" content="">
-  
-  
-  
-  <meta name="twitter:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
+  <meta name="twitter:description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有   content  官方例程注意 platform添加库的时候，没有特殊说明不要加上版本，容易用到旧版本，不支持新的api CBC加密广播问题点 串口乱码 你在串口中这样打印： Serial.printf(&amp;quot;📡 发送段 [%04X]:">
   
   
-  <meta name="twitter:url" content="http://blog.isgeek.top/archives/page/5/" />
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/04/10/133-esp32-c3-ble/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -201,196 +197,39 @@
 </div>
 
         <div class="trans">
-          
-<h2>All Posts</h2>
+            <h2>ESP32_C3_BLE</h2>
+
+  <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>ESP32-C3网上的蓝牙资料较少<del>可以说是没有</del></p>
+<ul>
+<li><input disabled="" type="checkbox"> content</li>
+</ul>
+<h2 id="官方例程"><a href="#官方例程" class="headerlink" title="官方例程"></a>官方例程</h2><p>注意</p>
+<p>platform添加库的时候，没有特殊说明不要加上版本，容易用到旧版本，不支持新的api</p>
+<h2 id="CBC加密广播"><a href="#CBC加密广播" class="headerlink" title="CBC加密广播"></a>CBC加密广播</h2><p>问题点</p>
+<p>串口乱码</p>
+<p>你在串口中这样打印：</p>
+<pre class="line-numbers language-none"><code class="language-none">Serial.printf(&quot;📡 发送段 [%04X]: %s\n&quot;, segmentID, mData.c_str());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>但 <code>mData</code> 是<strong>原始二进制数据（密文）</strong>，它可能包含：</p>
+<ul>
+<li>控制字符（如 <code>0x01</code>, <code>0x0A</code>, <code>0x13</code>）</li>
+<li>UTF-8 非法字节</li>
+<li>串口不能解析的转义字符</li>
+</ul>
+<p>所以 <code>%s</code> 打印出来就变成乱码或花屏。</p>
+<p>请把这一行：</p>
+<pre class="line-numbers language-none"><code class="language-none">Serial.printf(&quot;📡 发送段 [%04X]: %s\n&quot;, segmentID, mData.c_str());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>替换为：</p>
+<pre class="line-numbers language-none"><code class="language-none">Serial.printf(&quot;📡 发送段 [%04X]: &quot;, segmentID);
+for (size_t i &#x3D; 0; i &lt; mData.length(); i++) &#123;
+    Serial.printf(&quot;%02X &quot;, (uint8_t)mData[i]);
+&#125;
+Serial.println();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Mar 10, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/03/10/94-word-lun-wen-de-shi-yong-fang-fa/" class="">
-            
-              94_Word论文的食用方法
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Mar 6, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/03/06/92-ji-yu-51-dan-pian-ji-feng-ming-qi-de-yin-le-bo-fang-qi/" class="">
-            
-              92_基于51单片机蜂鸣器的音乐播放器
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Mar 4, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/03/04/92-ji-yu-51-dan-pian-ji-de-ds1302-shi-zhong/" class="">
-            
-              92_基于51单片机的DS1302时钟
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 23, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/23/91l-shou-dong-da-jian-v2ray-jie-dian/" class="">
-            
-              91L_手动搭建V2ray节点
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 19, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/19/90l-da-jian-jian-yi-api/" class="">
-            
-              90L_搭建实时汇率简易api
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 18, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/18/89l-ipv6-da-jian-v2ray-jie-dian/" class="">
-            
-              🦶🏻89L_ipv6搭建v2ray节点
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 16, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/16/88l-da-jian-v2ray-jie-dian/" class="">
-            
-              搭建v2ray节点
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 15, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/15/87l-nezha-tan-zhen/" class="">
-            
-              在VPS上部署NeZha探针
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 12, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/12/86l-warp/" class="">
-            
-              Warp
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Feb 11, 2024</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2024/02/11/85l-nginx/" class="">
-            
-              Nginx
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-
-    <a class="mr" href="/archives/page/4/">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z" />
-      </svg>
-      <span>Recent</span>
-    </a>
-
-    
-    
-
-    <a class="" href="/archives/page/6/">
-      <span>Older</span>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-      </svg>
-    </a>
-
-    
-  </ul>
-</div>
+  <p> — Apr 10, 2025</p>
+  
 
 
         </div>

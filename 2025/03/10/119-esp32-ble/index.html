@@ -373,7 +373,8 @@ Serial.println(&quot;📡 等待 BLE 连接...&quot;);<span aria-hidden="true" c
 
 <p>⚠️注意</p>
 <p>轻易不要东GPIO0，另外出现ESP32频繁自启的情况，可以使用固件烧录工具擦除后重新烧录固件</p>
-<h2 id="ESP32-BLE广播收发-advertise"><a href="#ESP32-BLE广播收发-advertise" class="headerlink" title="ESP32_BLE广播收发(advertise)"></a>ESP32_BLE广播收发(advertise)</h2><h3 id="✅-常见的-BLE-广播-Type-类型"><a href="#✅-常见的-BLE-广播-Type-类型" class="headerlink" title="✅ 常见的 BLE 广播 Type 类型"></a><strong>✅ 常见的 BLE 广播 Type 类型</strong></h3><table>
+<h2 id="ESP32-BLE广播收发-advertise"><a href="#ESP32-BLE广播收发-advertise" class="headerlink" title="ESP32_BLE广播收发(advertise)"></a>ESP32_BLE广播收发(advertise)</h2><p><strong>✅ 常见的 BLE 广播 Type 类型</strong></p>
+<table>
 <thead>
 <tr>
 <th><strong>Type (Hex)</strong></th>
@@ -437,7 +438,7 @@ Serial.println(&quot;📡 等待 BLE 连接...&quot;);<span aria-hidden="true" c
 <td>设备私有数据</td>
 </tr>
 </tbody></table>
-<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p> <strong>📌 BLEAdvertising（广播） vs. GATT（连接）</strong></p>
+<h3 id="nRF广播"><a href="#nRF广播" class="headerlink" title="nRF广播"></a>nRF广播</h3><p> <strong>📌 BLEAdvertising（广播） vs. GATT（连接）</strong></p>
 <p><strong>BLE（蓝牙低功耗）有两种主要通信方式：</strong></p>
 <ol>
 <li><strong>BLEAdvertising（广播）</strong> → <strong>ESP32 发送广播数据，无需连接</strong></li>
@@ -511,7 +512,187 @@ pService-&gt;start();<span aria-hidden="true" class="line-numbers-rows"><span></
 <td>设备控制、传感器数据、BLE 串口</td>
 </tr>
 </tbody></table>
-<h3 id="接收"><a href="#接收" class="headerlink" title="接收"></a>接收</h3><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>1.常错</p>
+<h3 id="ESP32轮流广播"><a href="#ESP32轮流广播" class="headerlink" title="ESP32轮流广播"></a>ESP32轮流广播</h3><p><strong>Demo</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;BLEDevice.h&gt;
+#include &lt;BLEUtils.h&gt;
+#include &lt;BLEAdvertising.h&gt;
+
+BLEAdvertising* pAdvertising;
+int toggle &#x3D; 0;
+
+const char* ssid &#x3D; &quot;VIBTEK-2.4G&quot;;
+const char* password &#x3D; &quot;vibrantech@1305-1&quot;;
+
+void broadcastData(uint16_t companyID, const char* payload) &#123;
+    std::string mData;
+    mData +&#x3D; (char)(companyID &amp; 0xFF);         &#x2F;&#x2F; 低位
+    mData +&#x3D; (char)((companyID &gt;&gt; 8) &amp; 0xFF);  &#x2F;&#x2F; 高位
+    mData +&#x3D; payload;
+
+    BLEAdvertisementData adData;
+    adData.setManufacturerData(mData);
+    pAdvertising-&gt;setAdvertisementData(adData);
+    pAdvertising-&gt;start();
+&#125;
+
+void setup() &#123;
+    Serial.begin(115200);
+    BLEDevice::init(&quot;ESP32_BLE_Sender&quot;);
+    pAdvertising &#x3D; BLEDevice::getAdvertising();
+&#125;
+
+void loop() &#123;
+    if (toggle &#x3D;&#x3D; 0) &#123;
+        Serial.println(&quot;📡 广播 SSID&quot;);
+        broadcastData(0x1234, ssid);
+    &#125; else &#123;
+        Serial.println(&quot;📡 广播密码&quot;);
+        broadcastData(0x2345, password);
+    &#125;
+
+    toggle &#x3D; 1 - toggle;  &#x2F;&#x2F; 切换
+    delay(2000);          &#x2F;&#x2F; 每 2 秒轮流广播一次
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="接收"><a href="#接收" class="headerlink" title="接收"></a>接收</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;BLEDevice.h&gt;
+#include &lt;BLEScan.h&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;Preferences.h&gt;
+
+#define BUTTON_PIN 6  &#x2F;&#x2F; 连接按键的 GPIO 引脚
+
+#define SCAN_TIME 5  
+#define SSID_COMPANY_ID 0x1234  
+#define PASS_COMPANY_ID 0x2345  
+
+const int ledPin &#x3D; 13;    &#x2F;&#x2F; the number of the LED pin
+
+BLEScan *pBLEScan;
+Preferences preferences;
+
+String receivedSSID &#x3D; &quot;&quot;;
+String receivedPassword &#x3D; &quot;&quot;;
+bool wifiConnected &#x3D; false; &#x2F;&#x2F; 记录 WiFi 连接状态
+
+
+&#x2F;&#x2F; 清除 WiFi 配置
+void clearWiFiConfig() &#123;
+    Serial.println(&quot;❌ 按键触发！正在删除 WiFi 配置信息...&quot;);
+    preferences.begin(&quot;wifi-config&quot;, false);
+    preferences.clear(); &#x2F;&#x2F; **删除整个 WiFi 存储**
+    preferences.putString(&quot;ssid&quot;, &quot;&quot;); &#x2F;&#x2F; 确保 WiFi 信息被覆盖
+    preferences.putString(&quot;password&quot;, &quot;&quot;);
+    preferences.end();
+
+    WiFi.disconnect(true, true); &#x2F;&#x2F; **彻底断开 WiFi 并清除缓存**
+    Serial.println(&quot;✅ WiFi 配置已删除，ESP32 将重新启动！&quot;);
+    delay(2000);
+    ESP.restart();  &#x2F;&#x2F; **重启 ESP32**
+&#125;
+
+void connectToWiFi(String ssid, String password) &#123;
+    Serial.printf(&quot;\n📡 连接 WiFi...\n🔹 SSID: %s\n🔹 密码: %s\n&quot;, ssid.c_str(), password.c_str());
+    WiFi.begin(ssid.c_str(), password.c_str());
+    int timeout &#x3D; 10;
+    while (WiFi.status() !&#x3D; WL_CONNECTED &amp;&amp; timeout-- &gt; 0) &#123;
+        delay(1000);
+        Serial.print(&quot;.&quot;);
+    &#125;
+
+    if (WiFi.status() &#x3D;&#x3D; WL_CONNECTED) &#123;
+        Serial.println(&quot;\n✅ WiFi 连接成功！&quot;);
+        Serial.print(&quot;🔹 IP 地址: &quot;);
+        Serial.println(WiFi.localIP());
+        
+        preferences.begin(&quot;wifi-config&quot;, false);
+        preferences.putString(&quot;ssid&quot;, ssid);
+        preferences.putString(&quot;password&quot;, password);
+        preferences.end();
+        Serial.println(&quot;✅ WiFi 信息已存储！&quot;);
+
+        wifiConnected &#x3D; true; &#x2F;&#x2F; 标记 WiFi 连接成功
+    &#125; else &#123;
+        Serial.println(&quot;\n❌ WiFi 连接失败！&quot;);
+    &#125;
+&#125;
+
+class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks &#123;
+    void onResult(BLEAdvertisedDevice advertisedDevice) &#123;
+        if (wifiConnected) return; &#x2F;&#x2F; WiFi 连接成功后，停止解析 BLE 数据
+
+        if (advertisedDevice.haveManufacturerData()) &#123;
+            String manufacturerData &#x3D; advertisedDevice.getManufacturerData();
+
+            if (manufacturerData.length() &lt; 2) return;
+
+            uint16_t companyID &#x3D; (manufacturerData[1] &lt;&lt; 8) | manufacturerData[0]; &#x2F;&#x2F;合成16位
+            String receivedData &#x3D; manufacturerData.substring(2);&#x2F;&#x2F;从索引2开始
+
+            if (companyID &#x3D;&#x3D; SSID_COMPANY_ID) &#123;
+                receivedSSID &#x3D; receivedData;
+                Serial.printf(&quot;\n 发现 SSID 广播: %s\n&quot;, receivedSSID.c_str());
+            &#125; 
+            else if (companyID &#x3D;&#x3D; PASS_COMPANY_ID) &#123;
+                receivedPassword &#x3D; receivedData;
+                Serial.printf(&quot;\n 发现密码广播: %s\n&quot;, receivedPassword.c_str());
+            &#125;
+
+            if (receivedSSID.length() &gt; 0 &amp;&amp; receivedPassword.length() &gt; 0) &#123;
+                connectToWiFi(receivedSSID, receivedPassword);
+                receivedSSID &#x3D; &quot;&quot;;
+                receivedPassword &#x3D; &quot;&quot;;
+            &#125;
+        &#125;
+    &#125;
+&#125;;
+
+void setup() &#123;
+    Serial.begin(115200);
+    Serial.println(&quot; 开始扫描 BLE 广播数据...&quot;);
+
+    &#x2F;&#x2F; pinMode(BUTTON_PIN, INPUT_PULLUP); &#x2F;&#x2F; 设置按键为上拉模式
+    pinMode(ledPin, OUTPUT);
+    preferences.begin(&quot;wifi-config&quot;, true);
+    String storedSSID &#x3D; preferences.getString(&quot;ssid&quot;, &quot;&quot;);
+    String storedPassword &#x3D; preferences.getString(&quot;password&quot;, &quot;&quot;);
+    preferences.end();
+
+    if (storedSSID.length() &gt; 0 &amp;&amp; storedPassword.length() &gt; 0) &#123;
+        Serial.println(&quot; 发现存储的 WiFi 配置，尝试连接...&quot;);
+        connectToWiFi(storedSSID, storedPassword);
+    &#125; else &#123;
+        Serial.println(&quot; 未找到 WiFi 配置，等待 BLE 配置...&quot;);
+    &#125;
+
+    if (!wifiConnected) &#123;
+        BLEDevice::init(&quot;ESP32_BLE_Receiver&quot;);
+        pBLEScan &#x3D; BLEDevice::getScan();
+        pBLEScan-&gt;setAdvertisedDeviceCallbacks(new MyAdvertisedDeviceCallbacks());
+        pBLEScan-&gt;setActiveScan(true);
+    &#125;
+&#125;
+
+void loop() &#123;
+    if (!wifiConnected) &#123;
+        Serial.println(&quot;\n 重新扫描 BLE 广播数据...&quot;);
+        pBLEScan-&gt;start(SCAN_TIME, false);
+        digitalWrite(ledPin, HIGH);
+        delay(2000);
+        digitalWrite(ledPin, LOW);
+        delay(1000);
+        digitalWrite(ledPin, HIGH);
+        delay(2000);
+    &#125; else &#123;
+        Serial.println(&quot;\n WiFi 已连接，停止 BLE 扫描&quot;);
+        digitalWrite(ledPin, HIGH);
+        delay(10000); &#x2F;&#x2F; 避免过快打印
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>1.常错</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">std::string manData &#x3D; advertisedDevice.getManufacturerData();
 Compilation error: conversion from &#39;String&#39; to non-scalar type &#39;std::string&#39; &#123;aka &#39;std::__cxx11::basic_string&lt;char&gt;&#39;&#125; requested<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
