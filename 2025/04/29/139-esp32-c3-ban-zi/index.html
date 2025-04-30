@@ -11,38 +11,34 @@
   <meta charset="utf-8">
 
   
-  <title>南北的猫</title>
+  <title>139_ESP32-C3板子</title>
   
-  <link rel="canonical" href="http://blog.isgeek.top/page/11/">
+  <link rel="canonical" href="http://blog.isgeek.top/2025/04/29/139-esp32-c3-ban-zi/">
   
-  <meta name="description" content="">
+  <meta name="description" content="问题电脑识别不到串口号 思路1.考虑短路或者断路-&amp;gt;万用表测试-&amp;gt;一切正常 2.首先type-c引脚连锡，怀疑模块损坏-&amp;gt;更换-&amp;gt;未解决 3.考虑其他元器件损坏-&amp;gt;又焊一版本-&amp;gt;无解 4.考虑原理图错误-&amp;gt;比对-&amp;gt;无解 5.测试电阻 6.测试电压-&amp;g">
   
   
   <meta name="author" content="南北的猫">
   
   
-  <meta property="og:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
-  
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="南北的猫" />
+  <meta property="og:title" content="139_ESP32-C3板子" />
   
-  <meta property="og:description" content="">
+  <meta property="og:description" content="问题电脑识别不到串口号 思路1.考虑短路或者断路-&amp;gt;万用表测试-&amp;gt;一切正常 2.首先type-c引脚连锡，怀疑模块损坏-&amp;gt;更换-&amp;gt;未解决 3.考虑其他元器件损坏-&amp;gt;又焊一版本-&amp;gt;无解 4.考虑原理图错误-&amp;gt;比对-&amp;gt;无解 5.测试电阻 6.测试电压-&amp;g">
   
-  <meta property="og:url" content="http://blog.isgeek.top/page/11/" />
+  <meta property="og:url" content="http://blog.isgeek.top/2025/04/29/139-esp32-c3-ban-zi/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="南北的猫">
+  <meta name="twitter:title" content="139_ESP32-C3板子">
   
-  <meta name="twitter:description" content="">
-  
-  
-  
-  <meta name="twitter:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
+  <meta name="twitter:description" content="问题电脑识别不到串口号 思路1.考虑短路或者断路-&amp;gt;万用表测试-&amp;gt;一切正常 2.首先type-c引脚连锡，怀疑模块损坏-&amp;gt;更换-&amp;gt;未解决 3.考虑其他元器件损坏-&amp;gt;又焊一版本-&amp;gt;无解 4.考虑原理图错误-&amp;gt;比对-&amp;gt;无解 5.测试电阻 6.测试电压-&amp;g">
   
   
-  <meta name="twitter:url" content="http://blog.isgeek.top/page/11/" />
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/04/29/139-esp32-c3-ban-zi/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -201,114 +197,52 @@
 </div>
 
         <div class="trans">
-          <div class="row">
-  <div class="column">
-    <!-- Main information, edit it on theme/_config.yml -->
-    <h2 class="mb-2">I am 南北的猫</h2>
-    <p>你好，我是Northcat——
-一个在加热台上烤肉的嵌入式巫师🔮，用Python🐍在长白山数据森林里下套捕虫。博客「南北的猫」的守夜人，专治芯片的玄学故障与代码的深夜emo。
+            <h2>139_ESP32-C3板子</h2>
 
-▪️ 技术武器库  
-Python胶水｜STM32通灵术｜示波器读心术  
-▪️ 日常操作  
-用烙铁给PCB文身｜赋予机械肉体灵魂｜教爬虫认东北方言  
-▪️ 终极目标  
-把每个硬件都搓出灵魂（当前进度：■□□□□ 23%）  
-“Bukan programmer, hanya tukang sulap kabel”
-</p>
-    <p>Welcome to my world! 😁</p>
-  </div>
-</div>
+  <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>电脑识别不到串口号</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>1.考虑短路或者断路-&gt;万用表测试-&gt;一切正常</p>
+<p>2.首先type-c引脚连锡，怀疑模块损坏-&gt;更换-&gt;未解决</p>
+<p>3.考虑其他元器件损坏-&gt;又焊一版本-&gt;无解</p>
+<p>4.考虑原理图错误-&gt;比对-&gt;无解</p>
+<p>5.测试电阻</p>
+<p>6.测试电压-&gt;发现GPIO9的压降不正常-&gt;GPT老师-&gt;找到问题</p>
+<blockquote>
+<p>去除复位电路导致EN引脚悬空，被自动下载电路拉低，芯片一直处于复位状态</p>
+<p>通过“自动下载电路”把 BOOT（IO0）也拉低,芯片持续复位</p>
+</blockquote>
+<img src="/2025/04/29/139-esp32-c3-ban-zi/1745914031148.png" class="" width="1745914031148">
 
-<h3>Recent Posts</h3>
+<img src="/2025/04/29/139-esp32-c3-ban-zi/1745914035144.png" class="" width="1745914035144">
 
+<img src="/2025/04/29/139-esp32-c3-ban-zi/1745914038646.png" class="" width="1745914038646">
 
-<div class="row">
+<p>7.下载模式下蜂鸣器响</p>
+<p>8.platform下载模式无法烧录</p>
+<p>9.arduino可以烧录但是</p>
+<p><code>Writing at 0x001240f7... (100 %) Wrote 1137632 bytes (692273 compressed) at 0x00010000 in 10.9 seconds (effective 838.8 kbit/s)... Hash of data verified.Leaving... Hard resetting with RTC WDT...A serial exception error occurred: Cannot configure port, something went wrong. Original message: OSError(22, &#39;ָ�������ڵ��豸��&#39;, None, 433) Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers. For troubleshooting steps visit: https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html Failed uploading: uploading error: exit status 1</code></p>
+<p><strong>从日志看，固件已经成功写入</strong>，只是最后一步“硬复位”后，串口没及时重枚举／被断开，导致 esptool 在重连时拿不到设备就报了“OSError(22, ‘找不到设备’)”的错误。这不影响实际烧录，只是自动复位和串口重打开的环节出了问题。</p>
+<h3 id="为什么会出现这个错误"><a href="#为什么会出现这个错误" class="headerlink" title="为什么会出现这个错误"></a>为什么会出现这个错误</h3><ol>
+<li><strong>硬复位太快</strong><br> esptool 在下载完毕后会自动拉低 EN（通过 DTR→C→Q1）来让芯片重启，但同时它也马上尝试重新打开同一个 COM 口。如果 ESP 重启过程中过快（或复位脉冲太长），USB-串口芯片一瞬间掉线，PC 端 port 就消失了，esptool 再访问就报“找不到设备”。</li>
+<li><strong>自动下载电路拉高&#x2F;拉低冲突</strong><br> 如果你的 EN 上拉（10 kΩ+100 nF）或 DTR 耦合电容参数不够理想，可能导致复位脉冲持续／反弹，板子不上电也不上载，引起端口反复重枚举，PC 端口同样就不稳定。</li>
+</ol>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="方案-A：手动复位并重试"><a href="#方案-A：手动复位并重试" class="headerlink" title="方案 A：手动复位并重试"></a>方案 A：手动复位并重试</h4><ol>
+<li>在 IDE “上传” 开始时，先手动按住 BOOT（IO0），</li>
+<li>松开后短按 EN（RST），</li>
+<li>等看到 “Connecting…” 后再松开 BOOT，<br> 这样可以用更可控的速度让 ESP 进入下载模式并重启，IDE 往往就能顺利完成复位后重连。</li>
+</ol>
+<h4 id="方案-B：微调自动复位脉冲"><a href="#方案-B：微调自动复位脉冲" class="headerlink" title="方案 B：微调自动复位脉冲"></a>方案 B：微调自动复位脉冲</h4><ul>
+<li><strong>缩短耦合电容</strong>：把 DTR→EN 的 0.1 µF 改成 0.047 µF 或在 EN 上拉电阻并联更小的电容（如 47 nF），让复位脉冲更窄，USB-串口的掉线时间更短。</li>
+<li><strong>加延时脚本</strong>：在 PlatformIO 或 Arduino 的烧录脚本里，在复位后等待 50–100 ms 再去打开串口。</li>
+</ul>
+<h4 id="方案-C：加缓冲电路"><a href="#方案-C：加缓冲电路" class="headerlink" title="方案 C：加缓冲电路"></a>方案 C：加缓冲电路</h4><ul>
+<li>在 EN 节点上再并联一个 <strong>1 kΩ + 100 nF</strong> 的 RC 滤波，软化复位沿，让 ESP 復位更平滑、USB-串口不至于“咔嚓”断线太久。</li>
+<li>或者在 DTR→C→Q1 前串个 <strong>22 Ω</strong> 小电阻，限制脉冲幅度，减少对 USB-串口掉线的影响。</li>
+</ul>
+<h2 id="更新版本"><a href="#更新版本" class="headerlink" title="更新版本"></a>更新版本</h2><p>在网页版打开备份就可以导入了</p>
 
-  <div class="three columns left lit">
-    <p class="bottom">Apr 29, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/29/139-esp32-c3-ban-zi/" >
-      
-        139_ESP32-C3板子
-      
-    </a>
-  </div>
-</div>
+  <p> — Apr 29, 2025</p>
+  
 
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 29, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/29/138-usb-bu-shi-bie-duan-kou-hao/" >
-      
-        USB不识别端口号
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 17, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/17/137-ce-liang-dian-yuan-wen-bo/" >
-      
-        测量电源纹波
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 16, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/16/136-chang-yong-dc-dc-xin-pian-fang-an/" >
-      
-        常用DC-DC芯片方案
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 14, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/14/135-mos-guan-yu-kai-guan-dian-lu/" >
-      
-        MOS管与开关电路
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 10, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/10/133-esp32-c3-ble/" >
-      
-        ESP32_C3_BLE
-      
-    </a>
-  </div>
-</div>
-
-
-<h4> <a href="/archives">All Posts</a></h4>
 
         </div>
         <div class="row mt-2">

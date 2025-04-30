@@ -11,38 +11,34 @@
   <meta charset="utf-8">
 
   
-  <title>南北的猫</title>
+  <title>测量电源纹波</title>
   
-  <link rel="canonical" href="http://blog.isgeek.top/page/11/">
+  <link rel="canonical" href="http://blog.isgeek.top/2025/04/17/137-ce-liang-dian-yuan-wen-bo/">
   
-  <meta name="description" content="">
+  <meta name="description" content="测量工具 示波器 万用表  示波器测量电源纹波 （按对应通道按键设置例CH1） 交流耦合 带宽显示20MHZ（过高会有高频噪声） x10 + x10的探头 一般20mv，20ms以上（这个设置低了，超过太多的看不到） 接地弹簧 auto  🔧 推荐测点： 测量点 &amp;#x3D; 电源滤波电容正端（靠">
   
   
   <meta name="author" content="南北的猫">
   
   
-  <meta property="og:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
-  
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="南北的猫" />
+  <meta property="og:title" content="测量电源纹波" />
   
-  <meta property="og:description" content="">
+  <meta property="og:description" content="测量工具 示波器 万用表  示波器测量电源纹波 （按对应通道按键设置例CH1） 交流耦合 带宽显示20MHZ（过高会有高频噪声） x10 + x10的探头 一般20mv，20ms以上（这个设置低了，超过太多的看不到） 接地弹簧 auto  🔧 推荐测点： 测量点 &amp;#x3D; 电源滤波电容正端（靠">
   
-  <meta property="og:url" content="http://blog.isgeek.top/page/11/" />
+  <meta property="og:url" content="http://blog.isgeek.top/2025/04/17/137-ce-liang-dian-yuan-wen-bo/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="南北的猫">
+  <meta name="twitter:title" content="测量电源纹波">
   
-  <meta name="twitter:description" content="">
-  
-  
-  
-  <meta name="twitter:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
+  <meta name="twitter:description" content="测量工具 示波器 万用表  示波器测量电源纹波 （按对应通道按键设置例CH1） 交流耦合 带宽显示20MHZ（过高会有高频噪声） x10 + x10的探头 一般20mv，20ms以上（这个设置低了，超过太多的看不到） 接地弹簧 auto  🔧 推荐测点： 测量点 &amp;#x3D; 电源滤波电容正端（靠">
   
   
-  <meta name="twitter:url" content="http://blog.isgeek.top/page/11/" />
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/04/17/137-ce-liang-dian-yuan-wen-bo/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -201,114 +197,123 @@
 </div>
 
         <div class="trans">
-          <div class="row">
-  <div class="column">
-    <!-- Main information, edit it on theme/_config.yml -->
-    <h2 class="mb-2">I am 南北的猫</h2>
-    <p>你好，我是Northcat——
-一个在加热台上烤肉的嵌入式巫师🔮，用Python🐍在长白山数据森林里下套捕虫。博客「南北的猫」的守夜人，专治芯片的玄学故障与代码的深夜emo。
+            <h2>测量电源纹波</h2>
 
-▪️ 技术武器库  
-Python胶水｜STM32通灵术｜示波器读心术  
-▪️ 日常操作  
-用烙铁给PCB文身｜赋予机械肉体灵魂｜教爬虫认东北方言  
-▪️ 终极目标  
-把每个硬件都搓出灵魂（当前进度：■□□□□ 23%）  
-“Bukan programmer, hanya tukang sulap kabel”
-</p>
-    <p>Welcome to my world! 😁</p>
-  </div>
-</div>
+  <h2 id="测量工具"><a href="#测量工具" class="headerlink" title="测量工具"></a>测量工具</h2><ul>
+<li>示波器</li>
+<li>万用表</li>
+</ul>
+<h2 id="示波器测量电源纹波"><a href="#示波器测量电源纹波" class="headerlink" title="示波器测量电源纹波"></a>示波器测量电源纹波</h2><ul>
+<li>（按对应通道按键设置例CH1）</li>
+<li>交流耦合</li>
+<li>带宽显示20MHZ（过高会有高频噪声）</li>
+<li><code>x10 </code>+ <code>x10</code>的探头</li>
+<li>一般20mv，20ms以上（这个设置低了，超过太多的看不到）</li>
+<li>接地弹簧</li>
+<li>auto</li>
+</ul>
+<h3 id="🔧-推荐测点："><a href="#🔧-推荐测点：" class="headerlink" title="🔧 推荐测点："></a>🔧 推荐测点：</h3><ul>
+<li>测量点 &#x3D; 电源滤波电容正端（靠近负载）</li>
+<li>接地点 &#x3D; 该电容负端（靠近GND面）</li>
+<li>探头贴近焊盘，线尽可能短</li>
+</ul>
+<h2 id="PCB问题"><a href="#PCB问题" class="headerlink" title="PCB问题"></a>PCB问题</h2><ol>
+<li><strong>PCB布局未形成有效“电流环闭合路径”</strong></li>
+</ol>
+<p>从你的第二张 PCB 图可以看出：</p>
+<ul>
+<li>电感 L2 与 C8~C11 的<strong>GND 走线偏细或绕线过长</strong></li>
+<li>电容布在一起，但并没有<strong>尽量靠近实际负载（如U12或主控）</strong></li>
+<li>电源线与地回路不够对称，<strong>GND平面割裂严重</strong></li>
+</ul>
+<ol start="2">
+<li><strong>电容ESR叠加&#x2F;电容摆放不当</strong></li>
+</ol>
+<ul>
+<li>你用了多个 MLCC（多层陶瓷电容）并联，如果它们走线不等长、没有共同的接地短路径，<strong>等效串联阻抗（ESR）会相互抵消或增强纹波</strong></li>
+<li>最好每个大电容 + 一个 100nF，且靠近负载芯片或高频源（如DC-DC）</li>
+</ul>
+<hr>
+<ol start="3">
+<li><strong>滤波电感参数不匹配实际纹波频率</strong></li>
+</ol>
+<ul>
+<li>如果你后面接的是 <strong>开关频率在 500kHz~1MHz</strong> 的 DC-DC，但你用了 4.7uH 电感 + 电容组合</li>
+<li>那么 LC 滤波器的截止频率未必刚好覆盖纹波主频</li>
+</ul>
+<p>fc&#x3D;12πLC≈33kHz（对L&#x3D;4.7uH，C&#x3D;22uF）f_c &#x3D; \frac{1}{2\pi\sqrt{LC}} ≈ 33kHz（对 L&#x3D;4.7uH，C&#x3D;22uF）fc&#x3D;2πLC1≈33kHz（对L&#x3D;4.7uH，C&#x3D;22uF）</p>
+<p>→ 对高频纹波（如 500kHz）可能衰减有限</p>
+<h2 id="纹波优化方案"><a href="#纹波优化方案" class="headerlink" title="纹波优化方案"></a>纹波优化方案</h2><ul>
+<li>电源头</li>
+</ul>
+<p><strong>方案一：改善PCB布局（首推）</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电容尽量贴近负载或电源引脚</td>
+<td>降低高频回路阻抗</td>
+</tr>
+<tr>
+<td>所有滤波电容共用一块“完整接地面”</td>
+<td>防止回路漂移、地弹效应</td>
+</tr>
+<tr>
+<td>GND 必须为大面积实心平面</td>
+<td>避免切割地平面造成电磁干扰</td>
+</tr>
+<tr>
+<td>电感前电容（C8）接地更短、更粗</td>
+<td>保证高频能量快速回路闭合</td>
+</tr>
+</tbody></table>
+<p><strong>方案二：电容组合优化</strong></p>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>为每个大电容搭配一个 0.1uF 的贴片陶瓷电容</td>
+<td>高频旁路有效，贴近芯片引脚</td>
+</tr>
+<tr>
+<td>保持单个高频电容（如 C12）靠近负载主控电源脚</td>
+<td>而非都放一排</td>
+</tr>
+<tr>
+<td>确认电容为 X5R&#x2F;X7R 型号（低ESR）</td>
+<td>陶瓷贴片电容优于钽电容</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>方案三：必要时替换电感或加 LC 级联</strong></p>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>增加二级 LC 结构（两段 L+C）</td>
+<td>提高滤波深度</td>
+</tr>
+<tr>
+<td>替换为 2.2uH 或 10uH 进行实验</td>
+<td>结合开关频率实际纹波频点调整 LC 截止频率</td>
+</tr>
+</tbody></table>
 
-<h3>Recent Posts</h3>
+  <p> — Apr 17, 2025</p>
+  
 
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 29, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/29/139-esp32-c3-ban-zi/" >
-      
-        139_ESP32-C3板子
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 29, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/29/138-usb-bu-shi-bie-duan-kou-hao/" >
-      
-        USB不识别端口号
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 17, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/17/137-ce-liang-dian-yuan-wen-bo/" >
-      
-        测量电源纹波
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 16, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/16/136-chang-yong-dc-dc-xin-pian-fang-an/" >
-      
-        常用DC-DC芯片方案
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 14, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/14/135-mos-guan-yu-kai-guan-dian-lu/" >
-      
-        MOS管与开关电路
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 10, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/10/133-esp32-c3-ble/" >
-      
-        ESP32_C3_BLE
-      
-    </a>
-  </div>
-</div>
-
-
-<h4> <a href="/archives">All Posts</a></h4>
 
         </div>
         <div class="row mt-2">

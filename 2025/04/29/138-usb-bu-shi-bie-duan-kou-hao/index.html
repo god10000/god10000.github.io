@@ -11,38 +11,34 @@
   <meta charset="utf-8">
 
   
-  <title>南北的猫</title>
+  <title>USB不识别端口号</title>
   
-  <link rel="canonical" href="http://blog.isgeek.top/page/11/">
+  <link rel="canonical" href="http://blog.isgeek.top/2025/04/29/138-usb-bu-shi-bie-duan-kou-hao/">
   
-  <meta name="description" content="">
+  <meta name="description" content="背景起因：你将电脑 USB 口与 Type-C 口连接时，Type-C接口的引脚短路了。 症状：  短路时，电脑右下角不断弹出 “电压不足”、”无法驱动”之类的警告。 修复短路后，再插入设备，这个 USB 口无法识别串口设备（即 COM 口不出现了）  可能原因分析 USB控制器过流保护触发 电脑主">
   
   
   <meta name="author" content="南北的猫">
   
   
-  <meta property="og:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
-  
   
   <meta property="og:site_name" content="南北的猫" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="南北的猫" />
+  <meta property="og:title" content="USB不识别端口号" />
   
-  <meta property="og:description" content="">
+  <meta property="og:description" content="背景起因：你将电脑 USB 口与 Type-C 口连接时，Type-C接口的引脚短路了。 症状：  短路时，电脑右下角不断弹出 “电压不足”、”无法驱动”之类的警告。 修复短路后，再插入设备，这个 USB 口无法识别串口设备（即 COM 口不出现了）  可能原因分析 USB控制器过流保护触发 电脑主">
   
-  <meta property="og:url" content="http://blog.isgeek.top/page/11/" />
+  <meta property="og:url" content="http://blog.isgeek.top/2025/04/29/138-usb-bu-shi-bie-duan-kou-hao/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="南北的猫">
+  <meta name="twitter:title" content="USB不识别端口号">
   
-  <meta name="twitter:description" content="">
-  
-  
-  
-  <meta name="twitter:image" content="http://blog.isgeek.top/images/thumbnail.jpg">
+  <meta name="twitter:description" content="背景起因：你将电脑 USB 口与 Type-C 口连接时，Type-C接口的引脚短路了。 症状：  短路时，电脑右下角不断弹出 “电压不足”、”无法驱动”之类的警告。 修复短路后，再插入设备，这个 USB 口无法识别串口设备（即 COM 口不出现了）  可能原因分析 USB控制器过流保护触发 电脑主">
   
   
-  <meta name="twitter:url" content="http://blog.isgeek.top/page/11/" />
+  
+  
+  <meta name="twitter:url" content="http://blog.isgeek.top/2025/04/29/138-usb-bu-shi-bie-duan-kou-hao/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -201,114 +197,77 @@
 </div>
 
         <div class="trans">
-          <div class="row">
-  <div class="column">
-    <!-- Main information, edit it on theme/_config.yml -->
-    <h2 class="mb-2">I am 南北的猫</h2>
-    <p>你好，我是Northcat——
-一个在加热台上烤肉的嵌入式巫师🔮，用Python🐍在长白山数据森林里下套捕虫。博客「南北的猫」的守夜人，专治芯片的玄学故障与代码的深夜emo。
+            <h2>USB不识别端口号</h2>
 
-▪️ 技术武器库  
-Python胶水｜STM32通灵术｜示波器读心术  
-▪️ 日常操作  
-用烙铁给PCB文身｜赋予机械肉体灵魂｜教爬虫认东北方言  
-▪️ 终极目标  
-把每个硬件都搓出灵魂（当前进度：■□□□□ 23%）  
-“Bukan programmer, hanya tukang sulap kabel”
-</p>
-    <p>Welcome to my world! 😁</p>
-  </div>
-</div>
+  <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><strong>起因</strong>：你将电脑 USB 口与 Type-C 口连接时，Type-C接口的<strong>引脚短路</strong>了。</p>
+<p><strong>症状</strong>：</p>
+<ul>
+<li>短路时，电脑右下角不断弹出 “电压不足”、”无法驱动”之类的警告。</li>
+<li>修复短路后，再插入设备，<strong>这个 USB 口无法识别串口设备</strong>（即 COM 口不出现了）</li>
+</ul>
+<h3 id="可能原因分析"><a href="#可能原因分析" class="headerlink" title="可能原因分析"></a>可能原因分析</h3><ol>
+<li><strong>USB控制器过流保护触发</strong><ul>
+<li>电脑主板的 USB 控制器检测到了异常（短路&#x2F;过流），<strong>关闭了该端口供电或通信</strong>。</li>
+<li>有些主板会<strong>自动恢复</strong>，有些则需要<strong>重启</strong>，甚至部分严重情况要关机断电。</li>
+</ul>
+</li>
+<li><strong>端口物理损坏</strong><ul>
+<li>如果短路电流过大，有可能烧掉了<strong>USB控制器芯片</strong>、<strong>保护电路</strong>或者<strong>端口自身</strong>。</li>
+<li>这种情况，硬件损坏，修复起来就比较复杂了。</li>
+</ul>
+</li>
+<li><strong>驱动程序异常</strong><ul>
+<li>短路可能导致 Windows&#x2F;系统<strong>错误地禁用了对应的 USB 端口</strong>。</li>
+<li>可能需要重新扫描硬件、重装驱动。</li>
+</ul>
+</li>
+<li><strong>设备本身受损</strong><ul>
+<li>如果你的 Type-C 设备也遭遇电击或者过流，有可能<strong>设备内部损坏</strong>，导致即使插在好的 USB 口上也无法识别。</li>
+</ul>
+</li>
+</ol>
+<h3 id="解决步骤（按由简到难的顺序来）"><a href="#解决步骤（按由简到难的顺序来）" class="headerlink" title="解决步骤（按由简到难的顺序来）"></a>解决步骤（按由简到难的顺序来）</h3><ol>
+<li><strong>彻底关机断电</strong><ul>
+<li><strong>正常关机</strong>（不是重启）。</li>
+<li><strong>拔掉电源</strong>（台式机要断掉电源开关，笔记本最好也断掉电池或者等几分钟放电）。</li>
+<li>等 5 分钟后重新开机。这是为了清空主板的<strong>保护状态</strong>，有些 USB 保护芯片需要断电才能复位。</li>
+</ul>
+</li>
+<li><strong>检查其他 USB 口</strong><ul>
+<li>换一个正常的 USB 口试试，如果其他口可以识别，基本可以确认是个别端口的问题。</li>
+<li>如果其他口也出问题，可能是<strong>控制器部分损坏</strong>了。</li>
+</ul>
+</li>
+<li><strong>设备管理器检查</strong><ul>
+<li>打开 Windows 设备管理器（<code>Win+X</code> → <code>设备管理器</code>）。</li>
+<li>查看“端口 (COM 和 LPT)”和“通用串行总线控制器”项。</li>
+<li>看是否有<strong>黄色感叹号</strong>或者<strong>未知设备</strong>，右键卸载掉出问题的设备，再点击菜单栏上的“扫描检测硬件改动”。</li>
+</ul>
+</li>
+<li><strong>BIOS设置检查</strong><ul>
+<li>有些主板在检测到严重 USB 错误后，<strong>BIOS会关闭部分端口</strong>。</li>
+<li>重启时进 BIOS，检查 USB 端口是否被禁用。</li>
+</ul>
+</li>
+<li><strong>硬件进一步确认</strong><ul>
+<li>如果以上操作无效，可能就是硬件损坏了。轻度损坏可能只是某个端口（可以禁用不用），严重的话则可能需要更换主板或者外接 USB Hub。</li>
+</ul>
+</li>
+<li><strong>外接 USB Hub 作为替代方案</strong><ul>
+<li>如果损坏的是电脑自带的 USB 口，而主控制器还能用，可以接一个有独立供电的 USB Hub（带电源适配器那种），用 Hub 的端口代替坏掉的端口。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="补充建议"><a href="#补充建议" class="headerlink" title="补充建议"></a>补充建议</h3><ul>
+<li>短路后尽量<strong>不要反复插拔</strong>，容易加剧损坏。</li>
+<li>检查 Type-C 线材或模块本身是否有损伤，<strong>确认短路源彻底排除</strong>。</li>
+<li>如果串口通讯对你很重要（比如开发板、调试设备），建议买一块<strong>独立的 USB 转串口模块</strong>，能更安全地调试。</li>
+</ul>
 
-<h3>Recent Posts</h3>
+  <p> — Apr 29, 2025</p>
+  
 
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 29, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/29/139-esp32-c3-ban-zi/" >
-      
-        139_ESP32-C3板子
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 29, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/29/138-usb-bu-shi-bie-duan-kou-hao/" >
-      
-        USB不识别端口号
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 17, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/17/137-ce-liang-dian-yuan-wen-bo/" >
-      
-        测量电源纹波
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 16, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/16/136-chang-yong-dc-dc-xin-pian-fang-an/" >
-      
-        常用DC-DC芯片方案
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 14, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/14/135-mos-guan-yu-kai-guan-dian-lu/" >
-      
-        MOS管与开关电路
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">Apr 10, 2025</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2025/04/10/133-esp32-c3-ble/" >
-      
-        ESP32_C3_BLE
-      
-    </a>
-  </div>
-</div>
-
-
-<h4> <a href="/archives">All Posts</a></h4>
 
         </div>
         <div class="row mt-2">

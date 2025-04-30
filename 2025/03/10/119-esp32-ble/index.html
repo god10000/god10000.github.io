@@ -691,17 +691,6 @@ void loop() &#123;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-
-<h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>1.常错</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">std::string manData &#x3D; advertisedDevice.getManufacturerData();
-Compilation error: conversion from &#39;String&#39; to non-scalar type &#39;std::string&#39; &#123;aka &#39;std::__cxx11::basic_string&lt;char&gt;&#39;&#125; requested<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p><code>advertisedDevice.getManufacturerData()</code> 返回 <strong>Arduino String 类型</strong></p>
-<p>你尝试 <strong>直接赋值给 std::string，但不兼容</strong></p>
-<p><strong>解决方法</strong>：改用 <strong>Arduino String</strong>，或者 <strong>手动转换为 std::string</strong></p>
-</blockquote>
-
   <p> — Mar 10, 2025</p>
   
 
