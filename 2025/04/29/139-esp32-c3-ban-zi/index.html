@@ -15,7 +15,7 @@
   
   <link rel="canonical" href="http://blog.isgeek.top/2025/04/29/139-esp32-c3-ban-zi/">
   
-  <meta name="description" content="问题电脑识别不到串口号 思路1.考虑短路或者断路-&amp;gt;万用表测试-&amp;gt;一切正常 2.首先type-c引脚连锡，怀疑模块损坏-&amp;gt;更换-&amp;gt;未解决 3.考虑其他元器件损坏-&amp;gt;又焊一版本-&amp;gt;无解 4.考虑原理图错误-&amp;gt;比对-&amp;gt;无解 5.测试电阻 6.测试电压-&amp;g">
+  <meta name="description" content="问题1.电脑识别不到串口号 2.无法进入下载模式（）    1.arduino ide cbc可正常烧录 ​	2.arduino ide cbc可正常烧录，但是无法打开串口监视器 ​	3.模块出现问题，上电短路导致板子硬件连接出现问题  3.一直重启，串口打印0xfffffff 4.设备管理器串口一">
   
   
   <meta name="author" content="南北的猫">
@@ -26,14 +26,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="139_ESP32-C3板子" />
   
-  <meta property="og:description" content="问题电脑识别不到串口号 思路1.考虑短路或者断路-&amp;gt;万用表测试-&amp;gt;一切正常 2.首先type-c引脚连锡，怀疑模块损坏-&amp;gt;更换-&amp;gt;未解决 3.考虑其他元器件损坏-&amp;gt;又焊一版本-&amp;gt;无解 4.考虑原理图错误-&amp;gt;比对-&amp;gt;无解 5.测试电阻 6.测试电压-&amp;g">
+  <meta property="og:description" content="问题1.电脑识别不到串口号 2.无法进入下载模式（）    1.arduino ide cbc可正常烧录 ​	2.arduino ide cbc可正常烧录，但是无法打开串口监视器 ​	3.模块出现问题，上电短路导致板子硬件连接出现问题  3.一直重启，串口打印0xfffffff 4.设备管理器串口一">
   
   <meta property="og:url" content="http://blog.isgeek.top/2025/04/29/139-esp32-c3-ban-zi/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="139_ESP32-C3板子">
   
-  <meta name="twitter:description" content="问题电脑识别不到串口号 思路1.考虑短路或者断路-&amp;gt;万用表测试-&amp;gt;一切正常 2.首先type-c引脚连锡，怀疑模块损坏-&amp;gt;更换-&amp;gt;未解决 3.考虑其他元器件损坏-&amp;gt;又焊一版本-&amp;gt;无解 4.考虑原理图错误-&amp;gt;比对-&amp;gt;无解 5.测试电阻 6.测试电压-&amp;g">
+  <meta name="twitter:description" content="问题1.电脑识别不到串口号 2.无法进入下载模式（）    1.arduino ide cbc可正常烧录 ​	2.arduino ide cbc可正常烧录，但是无法打开串口监视器 ​	3.模块出现问题，上电短路导致板子硬件连接出现问题  3.一直重启，串口打印0xfffffff 4.设备管理器串口一">
   
   
   
@@ -199,8 +199,20 @@
         <div class="trans">
             <h2>139_ESP32-C3板子</h2>
 
-  <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>电脑识别不到串口号</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>1.考虑短路或者断路-&gt;万用表测试-&gt;一切正常</p>
+  <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>1.电脑识别不到串口号</p>
+<p>2.无法进入下载模式（）</p>
+<p>   1.arduino ide cbc可正常烧录</p>
+<p>​	2.arduino ide cbc可正常烧录，但是无法打开串口监视器</p>
+<p>​	3.模块出现问题，上电短路导致板子硬件连接出现问题</p>
+<p> 3.一直重启，串口打印0xfffffff</p>
+<p>4.设备管理器串口一直刷新，boot上电后写入超时</p>
+<p>cbc烧录过程中烧录后程序正常运行，无法打开串口监视器，串口也不再刷新</p>
+<p>vs烧录成功正常模式，但是串口不打印</p>
+<p>但是arduino无法烧录了</p>
+<blockquote>
+<p>A serial exception error occurred: Cannot configure port, something went wrong. Original message: OSError(22, ‘�����߳��˳���Ӧ�ó�����������ֹ I&#x2F;O ������’, None, 995)<br>Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers.<br>For troubleshooting steps visit: <a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html">https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html</a></p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="一、电脑识别不到串口号"><a href="#一、电脑识别不到串口号" class="headerlink" title="一、电脑识别不到串口号"></a>一、电脑识别不到串口号</h3><p>1.考虑短路或者断路-&gt;万用表测试-&gt;一切正常</p>
 <p>2.首先type-c引脚连锡，怀疑模块损坏-&gt;更换-&gt;未解决</p>
 <p>3.考虑其他元器件损坏-&gt;又焊一版本-&gt;无解</p>
 <p>4.考虑原理图错误-&gt;比对-&gt;无解</p>
@@ -239,7 +251,7 @@
 <li>或者在 DTR→C→Q1 前串个 <strong>22 Ω</strong> 小电阻，限制脉冲幅度，减少对 USB-串口掉线的影响。</li>
 </ul>
 <h2 id="更新版本"><a href="#更新版本" class="headerlink" title="更新版本"></a>更新版本</h2><p>在网页版打开备份就可以导入了</p>
-
+<h3 id="二、无法进入下载模式（）"><a href="#二、无法进入下载模式（）" class="headerlink" title="二、无法进入下载模式（）"></a>二、无法进入下载模式（）</h3><h3 id="三、一直重启，串口打印0xfffffff"><a href="#三、一直重启，串口打印0xfffffff" class="headerlink" title="三、一直重启，串口打印0xfffffff"></a>三、一直重启，串口打印0xfffffff</h3>
   <p> — Apr 29, 2025</p>
   
 
