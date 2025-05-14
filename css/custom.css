@@ -319,5 +319,12 @@ body.darkmode {
   #madewith {
     text-align: left;
   }
+/* ================================= */
+/* 保留文本中的换行为真实换行（header + 正文 info） */
+.subtitle,
+.description {
+  /* 把 \n 换行符当作 <br/> 来渲染 */
+  white-space: pre-line;
+}
 
 }
