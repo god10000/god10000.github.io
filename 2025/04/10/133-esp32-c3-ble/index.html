@@ -15,7 +15,7 @@
   
   <link rel="canonical" href="http://blog.isgeek.top/2025/04/10/133-esp32-c3-ble/">
   
-  <meta name="description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有   content  ESP32-C3蓝牙广播使用NimBLE-Arduino库 我个人觉得这个库比较复杂，没有文档，只有demo，gpt的库也有错误，只能先让gpt添加注释，再继续修改 问题随着广播数据的增多，接收端越来越难一个周期内接到所有数据">
+  <meta name="description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有 ESP32-C3蓝牙广播使用NimBLE-Arduino库 没有文档，只有demo，gpt的库也有错误，先让gpt添加注释，再继续修改 问题随着广播数据的增多，接收端越来越难一个周期内接到所有数据，每个周期的iv还是不同的，所以会导致一直连接不上 ">
   
   
   <meta name="author" content="南北的猫">
@@ -26,14 +26,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="ESP32_C3_BLE" />
   
-  <meta property="og:description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有   content  ESP32-C3蓝牙广播使用NimBLE-Arduino库 我个人觉得这个库比较复杂，没有文档，只有demo，gpt的库也有错误，只能先让gpt添加注释，再继续修改 问题随着广播数据的增多，接收端越来越难一个周期内接到所有数据">
+  <meta property="og:description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有 ESP32-C3蓝牙广播使用NimBLE-Arduino库 没有文档，只有demo，gpt的库也有错误，先让gpt添加注释，再继续修改 问题随着广播数据的增多，接收端越来越难一个周期内接到所有数据，每个周期的iv还是不同的，所以会导致一直连接不上 ">
   
   <meta property="og:url" content="http://blog.isgeek.top/2025/04/10/133-esp32-c3-ble/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ESP32_C3_BLE">
   
-  <meta name="twitter:description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有   content  ESP32-C3蓝牙广播使用NimBLE-Arduino库 我个人觉得这个库比较复杂，没有文档，只有demo，gpt的库也有错误，只能先让gpt添加注释，再继续修改 问题随着广播数据的增多，接收端越来越难一个周期内接到所有数据">
+  <meta name="twitter:description" content="背景ESP32-C3网上的蓝牙资料较少可以说是没有 ESP32-C3蓝牙广播使用NimBLE-Arduino库 没有文档，只有demo，gpt的库也有错误，先让gpt添加注释，再继续修改 问题随着广播数据的增多，接收端越来越难一个周期内接到所有数据，每个周期的iv还是不同的，所以会导致一直连接不上 ">
   
   
   
@@ -200,11 +200,8 @@
             <h2>ESP32_C3_BLE</h2>
 
   <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>ESP32-C3网上的蓝牙资料较少<del>可以说是没有</del></p>
-<ul>
-<li><input disabled="" type="checkbox"> content</li>
-</ul>
 <h2 id="ESP32-C3蓝牙广播"><a href="#ESP32-C3蓝牙广播" class="headerlink" title="ESP32-C3蓝牙广播"></a>ESP32-C3蓝牙广播</h2><p>使用<code>NimBLE-Arduino</code>库</p>
-<p>我个人觉得这个库比较复杂，没有文档，只有demo，gpt的库也有错误，只能先让gpt添加注释，再继续修改</p>
+<p>没有文档，只有demo，gpt的库也有错误，先让gpt添加注释，再继续修改</p>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>随着广播数据的增多，接收端越来越难一个周期内接到所有数据，每个周期的iv还是不同的，所以会导致一直连接不上</p>
 <blockquote>
 <p>不对，随机iv再setup里面，所以是因为收发不同步的问题，导致有一部分数据永远也接收不到</p>
@@ -221,9 +218,9 @@ Compilation error: conversion from &#39;String&#39; to non-scalar type &#39;std:
 <p>你尝试 <strong>直接赋值给 std::string，但不兼容</strong></p>
 <p><strong>解决方法</strong>：改用 <strong>Arduino String</strong>，或者 <strong>手动转换为 std::string</strong></p>
 </blockquote>
-<h2 id="官方例程"><a href="#官方例程" class="headerlink" title="官方例程"></a>官方例程</h2><p>注意</p>
+<p>注意</p>
 <p>platform添加库的时候，没有特殊说明不要加上版本，容易用到旧版本，不支持新的api</p>
-<h2 id="CBC加密广播"><a href="#CBC加密广播" class="headerlink" title="CBC加密广播"></a>CBC加密广播</h2><p>问题点</p>
+<h2 id="CBC加密广播"><a href="#CBC加密广播" class="headerlink" title="CBC加密广播"></a>CBC加密广播</h2><p><strong>问题点</strong></p>
 <p>串口乱码</p>
 <p>你在串口中这样打印：</p>
 <pre class="line-numbers language-none"><code class="language-none">Serial.printf(&quot;📡 发送段 [%04X]: %s\n&quot;, segmentID, mData.c_str());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>

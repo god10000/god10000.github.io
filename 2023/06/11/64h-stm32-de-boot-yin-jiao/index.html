@@ -15,7 +15,7 @@
   
   <link rel="canonical" href="http://blog.isgeek.top/2023/06/11/64h-stm32-de-boot-yin-jiao/">
   
-  <meta name="description" content="加一些初始文章生成的表头STM32的boot引脚   最常用个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。 1、主闪存存储器是STM3">
+  <meta name="description" content="STM32的boot引脚   最常用个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。 1、主闪存存储器是STM32内置的Flash，一般">
   
   
   <meta name="author" content="南北的猫">
@@ -26,14 +26,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="STM32的BOOt引脚" />
   
-  <meta property="og:description" content="加一些初始文章生成的表头STM32的boot引脚   最常用个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。 1、主闪存存储器是STM3">
+  <meta property="og:description" content="STM32的boot引脚   最常用个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。 1、主闪存存储器是STM32内置的Flash，一般">
   
   <meta property="og:url" content="http://blog.isgeek.top/2023/06/11/64h-stm32-de-boot-yin-jiao/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="STM32的BOOt引脚">
   
-  <meta name="twitter:description" content="加一些初始文章生成的表头STM32的boot引脚   最常用个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。 1、主闪存存储器是STM3">
+  <meta name="twitter:description" content="STM32的boot引脚   最常用个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。 1、主闪存存储器是STM32内置的Flash，一般">
   
   
   
@@ -199,7 +199,7 @@
         <div class="trans">
             <h2>STM32的BOOt引脚</h2>
 
-  <h2 id="加一些初始文章生成的表头"><a href="#加一些初始文章生成的表头" class="headerlink" title="加一些初始文章生成的表头"></a>加一些初始文章生成的表头</h2><h2 id="STM32的boot引脚"><a href="#STM32的boot引脚" class="headerlink" title="STM32的boot引脚"></a>STM32的boot引脚</h2><p><img src="https://img-blog.csdnimg.cn/f59aab7a73b44b86939ca05cf7349db4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARFJfQ0FO,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+  <h2 id="STM32的boot引脚"><a href="#STM32的boot引脚" class="headerlink" title="STM32的boot引脚"></a>STM32的boot引脚</h2><p><img src="https://img-blog.csdnimg.cn/f59aab7a73b44b86939ca05cf7349db4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARFJfQ0FO,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
 <img src="/2023/06/11/64h-stm32-de-boot-yin-jiao/image-20230611220035676.png" class="" title="image-20230611220035676">
 
 <p><code>最常用</code>个人理解,BOOT0接地(通常接个10k电阻),BOOT1x就是可以不接,对比原理图给x,是STM32内置的Flash，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接<strong>从这启动程序</strong>。</p>
