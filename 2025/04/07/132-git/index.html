@@ -15,7 +15,7 @@
   
   <link rel="canonical" href="http://blog.isgeek.top/2025/04/07/132-git/">
   
-  <meta name="description" content="上传1.在文件夹下git bash here 2.git init 3.配置用户信息  git config –global user.name “wangjiaqi”git config –global user.email “wangjiaqi@vibtek.onaliyun.com“  查看 ">
+  <meta name="description" content="一、Git 指令速查   命令 功能说明    git status 查看工作区和暂存区状态   git diff 查看未暂存的改动   git diff --staged 查看已暂存但未提交的改动   git log 查看提交历史   git branch 列出本地分支   git branch ">
   
   
   <meta name="author" content="南北的猫">
@@ -26,14 +26,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Git" />
   
-  <meta property="og:description" content="上传1.在文件夹下git bash here 2.git init 3.配置用户信息  git config –global user.name “wangjiaqi”git config –global user.email “wangjiaqi@vibtek.onaliyun.com“  查看 ">
+  <meta property="og:description" content="一、Git 指令速查   命令 功能说明    git status 查看工作区和暂存区状态   git diff 查看未暂存的改动   git diff --staged 查看已暂存但未提交的改动   git log 查看提交历史   git branch 列出本地分支   git branch ">
   
   <meta property="og:url" content="http://blog.isgeek.top/2025/04/07/132-git/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Git">
   
-  <meta name="twitter:description" content="上传1.在文件夹下git bash here 2.git init 3.配置用户信息  git config –global user.name “wangjiaqi”git config –global user.email “wangjiaqi@vibtek.onaliyun.com“  查看 ">
+  <meta name="twitter:description" content="一、Git 指令速查   命令 功能说明    git status 查看工作区和暂存区状态   git diff 查看未暂存的改动   git diff --staged 查看已暂存但未提交的改动   git log 查看提交历史   git branch 列出本地分支   git branch ">
   
   
   
@@ -168,7 +168,7 @@
 
   <div class="six columns ml-1">
     <h1 class="mt-2">
-      Hi Folks.
+      Hi .
     </h1>
   </div>
 
@@ -199,47 +199,120 @@
         <div class="trans">
             <h2>Git</h2>
 
-  <h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><p>1.在文件夹下<strong>git bash here</strong></p>
-<p>2.git init</p>
-<p>3.配置用户信息</p>
-<blockquote>
-<p>git config –global user.name “wangjiaqi”<br>git config –global user.email “<a href="mailto:&#119;&#97;&#110;&#103;&#x6a;&#x69;&#97;&#x71;&#x69;&#x40;&#118;&#x69;&#98;&#x74;&#x65;&#x6b;&#x2e;&#x6f;&#x6e;&#97;&#108;&#x69;&#x79;&#x75;&#110;&#x2e;&#x63;&#111;&#x6d;">wangjiaqi@vibtek.onaliyun.com</a>“</p>
-</blockquote>
-<p>查看</p>
-<blockquote>
-<p>git config –list</p>
-</blockquote>
-<p>4.克隆</p>
-<blockquote>
-<p>git clone <a target="_blank" rel="noopener" href="https://wangjiaqi-T2NwK:7678321.Com@codeup.aliyun.com/67975038cfc95bafa621705d/drone/detector.git">https://wangjiaqi-T2NwK:7678321.Com@codeup.aliyun.com/67975038cfc95bafa621705d/drone/detector.git</a></p>
-</blockquote>
-<p>5.git add .</p>
-<p>6.git commit -m “Detector_V2” </p>
-<p>7.git push -u detector master</p>
-<p>8.<strong>拉取远程最新代码并合并</strong></p>
+  <h2 id="一、Git-指令速查"><a href="#一、Git-指令速查" class="headerlink" title="一、Git 指令速查"></a>一、Git 指令速查</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git status</code></td>
+<td>查看工作区和暂存区状态</td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>查看未暂存的改动</td>
+</tr>
+<tr>
+<td><code>git diff --staged</code></td>
+<td>查看已暂存但未提交的改动</td>
+</tr>
+<tr>
+<td><code>git log</code></td>
+<td>查看提交历史</td>
+</tr>
+<tr>
+<td><code>git branch</code></td>
+<td>列出本地分支</td>
+</tr>
+<tr>
+<td><code>git branch -r</code></td>
+<td>列出远程分支</td>
+</tr>
+<tr>
+<td><code>git checkout &lt;分支名&gt;</code></td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td><code>git checkout -b &lt;新分支&gt;</code></td>
+<td>新建并切换到分支</td>
+</tr>
+<tr>
+<td><code>git merge &lt;分支&gt;</code></td>
+<td>合并指定分支到当前分支</td>
+</tr>
+<tr>
+<td><code>git remote -v</code></td>
+<td>查看已配置的远程仓库</td>
+</tr>
+<tr>
+<td><code>git reset HEAD &lt;文件&gt;</code></td>
+<td>将文件从暂存区移除</td>
+</tr>
+<tr>
+<td><code>git revert &lt;提交ID&gt;</code></td>
+<td>针对指定提交生成“反向提交”</td>
+</tr>
+<tr>
+<td><code>git reset --hard &lt;提交ID&gt;</code></td>
+<td>回退到某次提交（谨慎使用，会丢失历史）</td>
+</tr>
+</tbody></table>
+<h2 id="二、项目初始化"><a href="#二、项目初始化" class="headerlink" title="二、项目初始化"></a>二、项目初始化</h2><ol>
+<li><p><strong>进入项目目录</strong><br> 在资源管理器中右键 → <strong>Git Bash Here</strong></p>
+</li>
+<li><p><strong>初始化本地仓库</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><strong>配置全局用户信息</strong><br> 仅需首次配置，或者当你换了机器／账户时再执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git config --global user.name  &quot;wangjiaqi&quot;
+git config --global user.email &quot;wangjiaqi@vibtek.onaliyun.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>查看当前配置</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git config --list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>1.在文件夹下<strong>git bash here</strong></p>
+<h2 id="三、Clone-远程仓库"><a href="#三、Clone-远程仓库" class="headerlink" title="三、Clone 远程仓库"></a>三、Clone 远程仓库</h2><ul>
+<li><p><strong>HTTPS 方式</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git clone https:&#x2F;&#x2F;wangjiaqi-T2NwK:7678321.Com@codeup.aliyun.com&#x2F;67975038cfc95bafa621705d&#x2F;drone&#x2F;detector.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><strong>SSH 方式</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git clone git@codeup.aliyun.com:67975038cfc95bafa621705d&#x2F;sleep_sense&#x2F;radar.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h2 id="四、添加、提交与推送"><a href="#四、添加、提交与推送" class="headerlink" title="四、添加、提交与推送"></a>四、添加、提交与推送</h2><ol>
+<li><p><strong>将修改或新文件加入暂存区</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git add .<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或针对单个文件：</p>
+<pre class="line-numbers language-none"><code class="language-none">git add path&#x2F;to&#x2F;file.ext<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><strong>提交（Commit）</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git commit -m &quot;Add core feature list to README&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><code>-m</code> 后面跟的是本次提交的<strong>简洁描述</strong>。</li>
+</ul>
+</li>
+<li><p><strong>关联远程仓库（首次推送时执行，或切换远程时）</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git remote add origin &lt;远程仓库地址&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><strong>推送到远程分支</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git push -u origin main     # 若主分支为 main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>后续只需</p>
+<pre class="line-numbers language-none"><code class="language-none">git push<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<hr>
+<h2 id="五、拉取更新与-Rebas"><a href="#五、拉取更新与-Rebas" class="headerlink" title="五、拉取更新与 Rebas"></a>五、拉取更新与 Rebas</h2><ul>
+<li><p><strong>拉取远程最新提交并在本地“衔接”</strong></p>
 <pre class="line-numbers language-none"><code class="language-none">git pull origin master --rebase<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
-<p>解释：</p>
-<ul>
-<li><code>--rebase</code> 让你的提交叠加在远程仓库的最新提交之上，避免生成多余的合并记录。</li>
-</ul>
+<p><code>--rebase</code> 会把你的本地提交“移到”刚拉下来的远程最新提交之后，避免产生多余的 merge commit。</p>
 </blockquote>
-<ol start="9">
-<li></li>
-</ol>
-<blockquote>
-<p>git init</p>
-<ul>
-<li>git add .<br> git commit -m “Initial commit”</li>
+</li>
 </ul>
-<p>​       git push -u origin master   # 如果你是 master 分支</p>
-<p>git remote add origin <a target="_blank" rel="noopener" href="https://your.repo.url.git/">https://your.repo.url.git</a></p>
-<p>git branch</p>
-<p>git push -u origin master   # 如果你是 master 分支</p>
-<p>git push -u origin main     # 如果你是 main 分支</p>
-<p>git remote -v<br>git remote show origin</p>
-</blockquote>
 
   <p> — Apr 7, 2025</p>
   
