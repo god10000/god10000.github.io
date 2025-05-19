@@ -157,7 +157,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2025-04-17 15:01:56
+          2025-05-16 14:34:27
         </span>
         
       </div>
@@ -302,6 +302,21 @@ int main()&#123;
 <blockquote>
 <p>1%4&#x3D;0……1</p>
 </blockquote>
+<h1 id="strstr"><a href="#strstr" class="headerlink" title="strstr"></a>strstr</h1><p><code>strstr</code> 是标准 C 库 <code>&lt;string.h&gt;</code>（C99 起）里提供的函数，用来在一个 <strong>以 \0 结尾</strong> 的字符串里查找另一个子串。它的原型是：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">char *strstr(const char *haystack, const char *needle);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><strong>参数</strong><ul>
+<li><code>haystack</code>：被搜索的“海”——目标字符串</li>
+<li><code>needle</code>：要找的“针”——子串</li>
+</ul>
+</li>
+<li><strong>返回值</strong><ul>
+<li>如果在 <code>haystack</code> 中找到了第一次出现的 <code>needle</code>，则返回一个指向该子串开头的指针（<code>char *</code>）。</li>
+<li>如果没找到，则返回 <code>NULL</code>。</li>
+</ul>
+</li>
+</ul>
 
       </div>
       
@@ -317,7 +332,7 @@ int main()&#123;
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2025-04-17 15:01:56
+              2025-05-16 14:34:27
             </span>
             
           </div>
@@ -340,7 +355,7 @@ int main()&#123;
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E8%8F%9C%E5%8D%95%E5%8E%9F%E7%90%86"><span class="toc-text">多级菜单原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C%E8%AF%AD%E8%A8%80"><span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-text">函数指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">函数指针的使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">指针调用函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D%E4%B8%8D%E5%B0%B1%E6%98%AF%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80%E5%90%97-%E4%B8%BA%E5%95%A5%E8%BF%98%E7%94%A8%E5%8A%A0-%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80"><span class="toc-text">函数名不就是函数地址吗,为啥还用加*获取函数地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E6%8C%87%E9%92%88"><span class="toc-text">结构体指针</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%BA%93%E5%87%BD%E6%95%B0-snprintf"><span class="toc-text">C 库函数 - snprintf()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E4%BD%99"><span class="toc-text">取余</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E8%8F%9C%E5%8D%95%E5%8E%9F%E7%90%86"><span class="toc-text">多级菜单原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C%E8%AF%AD%E8%A8%80"><span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-text">函数指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">函数指针的使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">指针调用函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D%E4%B8%8D%E5%B0%B1%E6%98%AF%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80%E5%90%97-%E4%B8%BA%E5%95%A5%E8%BF%98%E7%94%A8%E5%8A%A0-%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80"><span class="toc-text">函数名不就是函数地址吗,为啥还用加*获取函数地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E6%8C%87%E9%92%88"><span class="toc-text">结构体指针</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%BA%93%E5%87%BD%E6%95%B0-snprintf"><span class="toc-text">C 库函数 - snprintf()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E4%BD%99"><span class="toc-text">取余</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strstr"><span class="toc-text">strstr</span></a>
       
     </div>
   </div>

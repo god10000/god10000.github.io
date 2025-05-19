@@ -157,12 +157,17 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2025-05-14 15:30:30
+          2025-05-19 09:33:30
         </span>
         
       </div>
       <div class="markdown-body">
-        <h2 id="Lvgl开发"><a href="#Lvgl开发" class="headerlink" title="Lvgl开发"></a>Lvgl开发</h2><h3 id="蜂鸣器开关"><a href="#蜂鸣器开关" class="headerlink" title="蜂鸣器开关"></a>蜂鸣器开关</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;&#x2F;  创建Beep开关
+        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>微雪ESP32-S3-Touch-LCD-2.8</li>
+<li>Arduino IDE</li>
+<li>ESP32开发板包</li>
+</ul>
+<h2 id="Lvgl开发"><a href="#Lvgl开发" class="headerlink" title="Lvgl开发"></a>Lvgl开发</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;&#x2F;  创建Beep开关
 lv_obj_t  * beep_label&#x3D; lv_label_create(panel1);  &#x2F;&#x2F; 创建标签“蜂鸣音”
 lv_label_set_text(beep_label, &quot;蜂鸣音(Beep)&quot;);  &#x2F;&#x2F; 设置标签文本
 lv_obj_add_style(beep_label, &amp;style_text_muted, 0);  &#x2F;&#x2F; 为标签应用样式
@@ -211,144 +216,17 @@ lv_obj_add_event_cb(Beep, beep_switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);<s
 <td align="left">col_span（列跨越）</td>
 <td></td>
 </tr>
-<tr>
-<td align="left"></td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
-<td></td>
-</tr>
 </tbody></table>
-<h3 id="AT指令"><a href="#AT指令" class="headerlink" title="AT指令"></a>AT指令</h3><p>AT+IPR&#x3D;9600</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">static lv_coord_t grid_1_col_dsc[] &#x3D; &#123;LV_GRID_CONTENT, LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST&#125;;
-static lv_coord_t grid_1_row_dsc[] &#x3D; &#123;
-  LV_GRID_CONTENT,  &#x2F;*Title*&#x2F;
-  5,                &#x2F;*Separator*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  40,               &#x2F;*Box*&#x2F;
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  10,  
-  LV_GRID_CONTENT,  &#x2F;*Box title*&#x2F;
-  30,  
-  LV_GRID_TEMPLATE_LAST               
-&#125;;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
-<li><pre><code>Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers.
-<pre class="line-numbers language-none"><code class="language-none">
-上传速度调慢了，不知道是不是这个原因
-
-2. 注释掉背光，程序卡住，进度条为0，屏幕闪烁，串口输出如下：
-
-   &#96;&#96;&#96;c
-   ELF file SHA256: 1c7e04bf5
-   
-   Rebooting...
-   ESP-ROM:esp32s3-20210327
-   Build:Mar 27 2021
-   rst:0xc (RTC_SW_CPU_RST),boot:0x2b (SPI_FAST_FLASH_BOOT)
-   Saved PC:0x4037ed1e
-   SPIWP:0xee
-   mode:DIO, clock div:1
-   load:0x3fce2820,len:0x1188
-   load:0x403c8700,len:0x4
-   load:0x403c8704,len:0xbf0
-   load:0x403cb700,len:0x30e4
-   entry 0x403c88ac
-   TouchPad_ID:0x0f,0x00,0xca,0xca
-   
-   TouchPad_X_MAX:15    TouchPad_Y_MAX:51914 
-   
-   D1F4:0x0b,0x00,0x08,0x00
-   
-   D1F8:0xf0,0x00,0x40,0x01
-   
-   D1FC:0x0f,0x00,0xca,0xca
-   
-   D200:0xff,0xff,0xff,0xff
-   
-   D204:0x05,0x4b,0x48,0x01
-   
-   D208:0x01,0x00,0x00,0x01
-   
-   CACA Read:0xcaca
-   
-   Guru Meditation Error: Core  1 panic&#39;ed (LoadProhibited). Exception was unhandled.
-   
-   Core  1 register dump:
-   PC      : 0x42020f53  PS      : 0x00060130  A0      : 0x803754b6  A1      : 0x3fcbf760  
-   A2      : 0x00000000  A3      : 0x00000032  A4      : 0x00000001  A5      : 0x3fc9ca20  
-   A6      : 0x00060023  A7      : 0x00000001  A8      : 0x00000001  A9      : 0x3fca2fe0  
-   A10     : 0x00000001  A11     : 0x00000000  A12     : 0x00000000  A13     : 0x03c9a55c  
-   A14     : 0x01ffffff  A15     : 0x00000000  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
-   EXCVADDR: 0x00000024  LBEG    : 0x4201e975  LEND    : 0x4201e995  LCOUNT  : 0x00000001  
-   
-   
-   Backtrace: 0x42020f50:0x3fcbf760 0x403754b3:0x3fcbf780 0x4201f052:0x3fcbf7a0 0x42002823:0x3fcbf7d0 0x420021cb:0x3fcbf7f0 0x420317f8:0x3fcbf810 0x4038251e:0x3fcbf830<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</code></pre>
-</li>
-<li><p>第二列老师超出范围</p>
-<blockquote>
-<p>一行一列睡是00，二列是1不是2</p>
-</blockquote>
-</li>
-<li><p>led按钮宽度不对，原因未知</p>
-<blockquote>
-<p>没有选怎中心对齐</p>
-</blockquote>
-</li>
-<li><pre class=" language-language-c"><code class="language-language-c">Sketch uses 1228016 bytes (39%) of program storage space. Maximum is 3145728 bytes.
-Global variables use 115548 bytes (35%) of dynamic memory, leaving 212132 bytes for local variables. Maximum is 327680 bytes.
-esptool.py v4.8.1
-Serial port COM3
-Connecting....
-
-A serial exception error occurred: Write timeout
-Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers.
-For troubleshooting steps visit: https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html
-Failed uploading: uploading error: exit status 1
-<pre class="line-numbers language-none"><code class="language-none">
-6. 宏定义不能用&#96;-&#96;会被当成剑法操作符，使用下划线代替
-
-7. 出现方框多是字体不支持该符号
-
-### 中文字库
-
-[下载字体](https:&#x2F;&#x2F;lvgl.100ask.net&#x2F;8.1&#x2F;tools&#x2F;fonts-zh-source.html)
-
-记住名字，输入要转换的汉字
-
-[字体转换器 — LVGL](https:&#x2F;&#x2F;lvgl.io&#x2F;tools&#x2F;fontconverter)
-
-字体文件配置
-
-&#96;&#96;&#96;c
-#ifdef LV_LVGL_H_INCLUDE_SIMPLE
-#include "lvgl.h"
+<h3 id="中文字库"><a href="#中文字库" class="headerlink" title="中文字库"></a>中文字库</h3><p><a target="_blank" rel="noopener" href="https://lvgl.100ask.net/8.1/tools/fonts-zh-source.html">下载字体</a></p>
+<p>记住名字，输入要转换的汉字</p>
+<p><a target="_blank" rel="noopener" href="https://lvgl.io/tools/fontconverter">字体转换器 — LVGL</a></p>
+<p>字体文件配置</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#ifdef LV_LVGL_H_INCLUDE_SIMPLE
+#include &quot;lvgl.h&quot;
 #else
-#include "..&#x2F;..&#x2F;lvgl.h"
-#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</code></pre>
-</li>
-</ol>
+#include &quot;..&#x2F;..&#x2F;lvgl.h&quot;
+#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>添加到程序中，并加入</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;&#x2F;中文字体声明
 LV_FONT_DECLARE(NotoSansCJK-Medium-5);
@@ -366,10 +244,57 @@ lv_style_set_text_font();        &#x2F;&#x2F;普通（共享）样式<span aria-
 <blockquote>
 <p>设置电量蜂鸣音告警示灯语音播报屏幕亮信号强度检测无人机探器频率图传品牌型号反制建议类型图传震动 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.+-*&#x2F;</p>
 </blockquote>
-<h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>三个框不能勾选，否则会导致字符消失</p>
+<h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1><p>三个框不能勾选，否则会导致字符消失</p>
 <img src="/2025/03/01/129-lvgl-kai-fa/1745740295371.png" class="" width="1745740295371">
 
-<h2 id="提取不到数据"><a href="#提取不到数据" class="headerlink" title="提取不到数据"></a><strong>提取不到数据</strong></h2><ol>
+<p> 1.<strong>信号频率有时会显示一个方框</strong></p>
+<ul>
+<li>解析&#x2F;指针的问题</li>
+<li>还是 LVGL 字体&#x2F;渲染</li>
+</ul>
+<p>排查</p>
+<blockquote>
+<p>写死检测界面，固定数值检查是否正常-√，字体问题排除</p>
+</blockquote>
+<p>原因：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;&#x2F; 假设 data 里 “F…R” 之间是 &quot;5212&quot;，那么 end_v1 - start_v1 &#x3D;&#x3D; 4
+char v1[end_v1 - start_v1 + 1]; &#x2F;&#x2F; 这里分配了 5 字节的空间：&#39;5&#39;,&#39;2&#39;,&#39;1&#39;,&#39;2&#39;,&#39;\0&#39;
+strncpy(v1, start_v1, 4);
+v1[4] &#x3D; &#39;\0&#39;;
+
+&#x2F;&#x2F; 下面这行要把 &quot; MHz&quot;（5 个字节，含终止符 &#39;\0&#39;）全写进去
+strcat(v1, &quot; MHz&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>越界写入</strong>：<code>v1</code> 长度只有 <code>len(v1)+1</code>，但 <code>&quot; MHz&quot;</code> 还要再写 4 个字节，立刻把栈上的邻近数据打乱，导致后续你给 LVGL 的字符串有时是乱码、方框。</p>
+<p><strong>悬空指针</strong>：<code>v1</code> 是局部数组，<code>DroneDetect()</code> 返回后就被释放，<code>droneSignalFrequency</code> 再去访问，会读到随机内存，也就会出现怪字符</p>
+<p>2.<strong>无法获取按钮状态并更新</strong></p>
+<p>现象是卡死并自动重启</p>
+<blockquote>
+<p>思路是发送AT指令获取状态后更新</p>
+<p>经过注释烧录烧录注释后判定为当调用蓝牙发送at+motor这个指令时，就会自启</p>
+<p>我没想明白，GPT老师指出</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">&gt;char* start_v1 &#x3D; strchr(data, &#39;F&#39;) + 1;
+  if (start_v1 &#x3D;&#x3D; nullptr) return;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p> 这个return永远无效，因为<code>+1</code></p>
+</blockquote>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">void DroneDetect(char* data) &#123;
+   
+  &#x2F;&#x2F; char* start_v1 &#x3D; strchr(data, &#39;F&#39;) + 1;
+  &#x2F;&#x2F; if (start_v1 &#x3D;&#x3D; nullptr) return;
+  
+  char* pF &#x3D; strchr(data, &#39;F&#39;);
+  if (!pF) return;          &#x2F;&#x2F; 没找到 F，就退出
+  char* start_v1 &#x3D; pF + 1;  &#x2F;&#x2F; 跳过 &#39;F&#39; 本身，指向数字起始
+
+  char* end_v1 &#x3D; strchr(data, &#39;R&#39;);
+  if (end_v1 &#x3D;&#x3D; nullptr) return;
+  char v1[end_v1 - start_v1 + 1];
+  strncpy(v1, start_v1, end_v1 - start_v1);
+  v1[end_v1 - start_v1] &#x3D; &#39;\0&#39;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>3.<strong>提取不到数据</strong></p>
+<ol>
 <li><p><strong>使用 strncpy() 确保 pData 是一个 ‘\0’ 结尾的字符串</strong></p>
 <pre class="line-numbers language-none"><code class="language-none">strncpy(buffer, (char*)pData, length);
 buffer[length] &#x3D; &#39;\0&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -393,7 +318,29 @@ sscanf(snPtr, &quot;+SN &#x3D; %s&quot;, snValue);<span aria-hidden="true" class
 <li>这样 <code>pnValue</code> 和 <code>snValue</code> <strong>只提取实际数据</strong>，不会包含 <code>&quot;+PN =&quot;</code> <strong>这部分字符串</strong>。</li>
 </ul>
 </li>
+<li></li>
 </ol>
+<blockquote>
+<p>Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers.</p>
+</blockquote>
+<p>上传速度调慢了，不知道是不是这个原因，也可能是卡死了，需要重烧固件</p>
+<p>5.注释掉背光，程序卡住，进度条为0，屏幕闪烁</p>
+<ul>
+<li><p>第二列老师超出范围</p>
+<blockquote>
+<p>一行一列是00，二列是1不是2</p>
+</blockquote>
+</li>
+<li><p>led按钮宽度不对，原因未知</p>
+<blockquote>
+<p>没有选怎么中心对齐</p>
+</blockquote>
+</li>
+<li><p>宏定义不能用<code>-</code>会被当成剑法操作符，使用下划线代替</p>
+</li>
+<li><p>出现方框多是字体不支持该符号，或者是传入的数据越界</p>
+</li>
+</ul>
 
       </div>
       
@@ -409,7 +356,7 @@ sscanf(snPtr, &quot;+SN &#x3D; %s&quot;, snValue);<span aria-hidden="true" class
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2025-05-14 15:30:30
+              2025-05-19 09:33:30
             </span>
             
           </div>
@@ -432,7 +379,7 @@ sscanf(snPtr, &quot;+SN &#x3D; %s&quot;, snValue);<span aria-hidden="true" class
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lvgl%E5%BC%80%E5%8F%91"><span class="toc-text">Lvgl开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8%E5%BC%80%E5%85%B3"><span class="toc-text">蜂鸣器开关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grid%E5%B8%83%E5%B1%80"><span class="toc-text">Grid布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT%E6%8C%87%E4%BB%A4"><span class="toc-text">AT指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-1"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%8F%96%E4%B8%8D%E5%88%B0%E6%95%B0%E6%8D%AE"><span class="toc-text">提取不到数据</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lvgl%E5%BC%80%E5%8F%91"><span class="toc-text">Lvgl开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#switch"><span class="toc-text">switch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grid%E5%B8%83%E5%B1%80"><span class="toc-text">Grid布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%87%E5%AD%97%E5%BA%93"><span class="toc-text">中文字库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bugs"><span class="toc-text">Bugs</span></a></li></ol>
       
     </div>
   </div>
