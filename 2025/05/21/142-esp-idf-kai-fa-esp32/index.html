@@ -10,10 +10,13 @@
   <!-- 用于搜索引擎的文章摘要 -->
   
   
-    <meta name="robots" content="noindex" />
-  
   
   <title>
+    
+      ESP-IDF开发ESP32 
+      
+      
+      |
     
      南北的猫
   </title>
@@ -105,177 +108,173 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="Word论文的食用方法">
-        <div class="time-m-d">2024-03-10</div>
-        <div class="title">
-          <a href="/2024/03/10/94-word-lun-wen-de-shi-yong-fang-fa/">
-            
-              
-                <span>Word论文的食用方法</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">ESP-IDF开发ESP32</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-05-22 17:19:43
+        </span>
+        
       </div>
-    
-      <div class="post-item" title="基于51单片机蜂鸣器的音乐播放器">
-        <div class="time-m-d">2024-03-06</div>
-        <div class="title">
-          <a href="/2024/03/06/92-ji-yu-51-dan-pian-ji-feng-ming-qi-de-yin-le-bo-fang-qi/">
-            
-              
-                <span>基于51单片机蜂鸣器的音乐播放器</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>ESP32-Nano 板子之所以在刷机时 COM 号“跳变”，而你的 S3 板子没有，是因为它们 USB-UART 实现的方式不同：</p>
+<ul>
+<li><strong>ESP32-S3 开发板</strong> 通常用外置 CP210x&#x2F;FTDI 芯片，只要上电就一直挂在同一个 VID&#x2F;PID 上，重启或进下载模式也不会重新枚举，就一直是那个 COM 口。</li>
+<li><strong>ESP32-Nano 板</strong> 则用原生 TinyUSB 或集成的 USB-UART 控制器（CH9102、RISC-V CDC 等），它在正常运行时和进下载（BOOT）时会用<strong>两个不同的 USB 设备描述符</strong>，系统就给了两个不同的 COM 号（比如正常时 COM9，进下载后又变成 COM10）。</li>
+</ul>
+<hr>
+<h3 id="几种常见的应对办法"><a href="#几种常见的应对办法" class="headerlink" title="几种常见的应对办法"></a>几种常见的应对办法</h3><ol>
+<li><p><strong>固定一个你看到的 COM 口号</strong></p>
+<ul>
+<li>在 Windows 设备管理器里，对 Nano 的两个端口分别右键 → 属性 → “端口设置” → “高级” → 手动改一个固定号（如 COM3），避免系统随意分配。</li>
+<li>然后在 VS Code&#x2F;<code>idf.py</code> 里一律使用这个固定号即可。</li>
+</ul>
+</li>
+<li><p><strong>改用「自动端口识别」</strong></p>
+<ul>
+<li>VS Code ESP-IDF 扩展里有 “Monitor (Auto-detect port)” 功能，或者点击 “Flash project” 时选择 “Automatically detect port” 选项，扩展会在刷写前后自动扫描设备并切换，不必手动指定 COM 号。</li>
+<li>如果用命令行，也可以不指定 <code>-p COMx</code>，让 esptool 去找第一个 ESP 设备。</li>
+</ul>
+</li>
+<li><p><strong>分别指定下载和 Monitor 的端口</strong></p>
+<ul>
+<li><p>在启动下载时（BOOT loader 阶段）系统是给第二个 VID&#x2F;PID，你可以在脚本里区分：</p>
+<pre class="line-numbers language-none"><code class="language-none"># 先用空的 -p ，让 esptool 自动选，刷完之后…
+idf.py flash
+# 再切回第一个端口用 monitor
+idf.py -p COM9 monitor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>或者在 <code>idf.py menuconfig</code> → “Serial flasher config” 中把 “Flasher port” 设为 <code>auto</code>。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>给刷机板加一个独立的 USB-UART 适配器</strong></p>
+<ul>
+<li>如果不想折腾系统枚举，也可以把 Nano 的下载脚（IO0&#x2F;EN）留空，用板子上的 USB 供电，然后用外接 CP2102 转接器连 TX&#x2F;RX&#x2F;EN&#x2F;IO0 来刷，这样就只会出现一个由 CP2102 提供的稳定 COM 口。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>小结</strong>：ESP32-Nano 在进入下载模式时切换了 USB 描述符，所以 Windows 给它分配了新的 COM 号。推荐的快速解决：</p>
+<ol>
+<li>在设备管理器里给这个 Nano USB 设备手动固定一个 COM 号；</li>
+<li>或者打开 VS Code 的“自动端口检测”功能，让工具自己选口；<br> 这样一来，不管是刷机模式还是运行模式，都能稳定地找到同一个串口。</li>
+</ol>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><strong>要让 Sniffer 接收到你自己发的 Vendor IE</strong>，必须先把它「广播」出去。</p>
+<ul>
+<li>最简单的：切 AP 模式 + <code>esp_wifi_set_vendor_ie</code></li>
+<li>或者：手工拼 802.11 Beacon + <code>esp_wifi_80211_tx</code></li>
+</ul>
+<h1 id="烧录固件"><a href="#烧录固件" class="headerlink" title="烧录固件"></a>烧录固件</h1><p>在ESP-IDF编译后德 打印数据获取固件以及固件地址</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48057513/article/details/143827373?spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Ctr-5-143827373-blog-138012468.235%5Ev43%5Epc_blog_bottom_relevance_base6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Ctr-5-143827373-blog-138012468.235%5Ev43%5Epc_blog_bottom_relevance_base6&utm_relevant_index=5">ESP32s3烧录bin，乐鑫下载工具flash_download_tool_乐鑫烧录工具-CSDN博客</a></p>
+
       </div>
-    
-      <div class="post-item" title="基于51单片机的DS1302时钟">
-        <div class="time-m-d">2024-03-04</div>
-        <div class="title">
-          <a href="/2024/03/04/92-ji-yu-51-dan-pian-ji-de-ds1302-shi-zhong/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>基于51单片机的DS1302时钟</span>
-              
+              <a href="/2025/05/12/141-wu-xian-dian-hua-hua/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-05-22 17:19:43
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/05/22/143-rmoteid-jie-shou-duan-kai-fa/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="手动搭建V2ray节点">
-        <div class="time-m-d">2024-02-23</div>
-        <div class="title">
-          <a href="/2024/02/23/91l-shou-dong-da-jian-v2ray-jie-dian/">
-            
-              
-                <span>手动搭建V2ray节点</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BA%94%E5%AF%B9%E5%8A%9E%E6%B3%95"><span class="toc-text">几种常见的应对办法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E5%9B%BA%E4%BB%B6"><span class="toc-text">烧录固件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="搭建实时汇率简易api">
-        <div class="time-m-d">2024-02-19</div>
-        <div class="title">
-          <a href="/2024/02/19/90l-da-jian-jian-yi-api/">
-            
-              
-                <span>搭建实时汇率简易api</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="🏻ipv6搭建v2ray节点">
-        <div class="time-m-d">2024-02-18</div>
-        <div class="title">
-          <a href="/2024/02/18/89l-ipv6-da-jian-v2ray-jie-dian/">
-            
-              
-                <span>🏻ipv6搭建v2ray节点</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="搭建v2ray节点">
-        <div class="time-m-d">2024-02-16</div>
-        <div class="title">
-          <a href="/2024/02/16/88l-da-jian-v2ray-jie-dian/">
-            
-              
-                <span>搭建v2ray节点</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="在VPS上部署NeZha探针">
-        <div class="time-m-d">2024-02-15</div>
-        <div class="title">
-          <a href="/2024/02/15/87l-nezha-tan-zhen/">
-            
-              
-                <span>在VPS上部署NeZha探针</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Warp">
-        <div class="time-m-d">2024-02-12</div>
-        <div class="title">
-          <a href="/2024/02/12/86l-warp/">
-            
-              
-                <span>Warp</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Nginx">
-        <div class="time-m-d">2024-02-11</div>
-        <div class="title">
-          <a href="/2024/02/11/85l-nginx/">
-            
-              
-                <span>Nginx</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="🔥Nginx反向代理">
-        <div class="time-m-d">2024-02-05</div>
-        <div class="title">
-          <a href="/2024/02/05/84l-nginx-fan-xiang-dai-li/">
-            
-              
-                <span>🔥Nginx反向代理</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="💻F1200S_linux小电脑">
-        <div class="time-m-d">2023-10-06</div>
-        <div class="title">
-          <a href="/2023/10/06/83l-linux-xiao-dian-nao/">
-            
-              
-                <span>💻F1200S_linux小电脑</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-      <a href="/page/4/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">5 / 12</span>
-    
-      <a href="/page/6/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -532,6 +531,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ESP-IDF%E5%BC%80%E5%8F%91ESP32 + '&url=' + http%3A%2F%2Fblog.isgeek.top%2F2025%2F05%2F21%2F142-esp-idf-kai-fa-esp32%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://blog.isgeek.top/2025/05/21/142-esp-idf-kai-fa-esp32/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

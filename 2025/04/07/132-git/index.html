@@ -157,7 +157,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2025-05-19 13:41:06
+          2025-05-22 17:34:01
         </span>
         
       </div>
@@ -260,7 +260,36 @@ git config --global user.email &quot;email&quot;<span aria-hidden="true" class="
 </blockquote>
 </li>
 </ul>
-<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2>
+<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><blockquote>
+<p>VIBTEK@DESKTOP-TG673JB MINGW64 ~&#x2F;Desktop&#x2F;Detector (master)<br>$ git push -u origin main<br>error: src refspec main does not match any<br>error: failed to push some refs to ‘codeup.aliyun.com:67975038cfc95bafa621705d&#x2F;d<br>rone&#x2F;detector.git’<br>VIBTEK@DESKTOP-TG673JB MINGW64 ~&#x2F;Desktop&#x2F;Detector (master)<br>$ git push -u origin master<br>To codeup.aliyun.com:67975038cfc95bafa621705d&#x2F;drone&#x2F;detector.git<br>! [rejected]        master -&gt; master (fetch first)<br>error: failed to push some refs to ‘codeup.aliyun.com:67975038cfc95bafa621705d&#x2F;d<br>rone&#x2F;detector.git’<br>hint: Updates were rejected because the remote contains work that you do not<br>hint: have locally. This is usually caused by another repository pushing to<br>hint: the same ref. If you want to integrate the remote changes, use<br>hint: ‘git pull’ before pushing again.<br>hint: See the ‘Note about fast-forwards’ in ‘git push –help’ for details.</p>
+</blockquote>
+<p>这个错误说明你的远程 <code>master</code> 分支上已经有提交，而你本地的 <code>master</code> 没有包含这些提交，所以 Git 为了防止你不小心覆盖别人工作，拒绝了直接推送。</p>
+<p><code>git fetch origin</code></p>
+<p><code>git merge origin/master</code></p>
+<blockquote>
+<p>VIBTEK@DESKTOP-TG673JB MINGW64 ~&#x2F;Desktop&#x2F;Detector (master)<br>$ git merge origin&#x2F;master<br>fatal: refusing to merge unrelated histories</p>
+</blockquote>
+<p>当你在本地和远程各自独立 <code>git init</code> 过一次，两个仓库就没有共同的祖先提交，Git 默认会拒绝合并“无关联历史”。</p>
+<h2 id="方案-A：合并两端历史（保留远程已有提交）"><a href="#方案-A：合并两端历史（保留远程已有提交）" class="headerlink" title="方案 A：合并两端历史（保留远程已有提交）"></a>方案 A：合并两端历史（保留远程已有提交）</h2><ol>
+<li><p><strong>拉取远程并允许合并无关联历史</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git pull origin master --allow-unrelated-histories<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或者先 <code>fetch</code> 再 <code>merge</code>：</p>
+<pre class="line-numbers language-none"><code class="language-none">git fetch origin
+git merge origin&#x2F;master --allow-unrelated-histories<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>处理可能出现的冲突</strong></p>
+<ul>
+<li>编辑冲突文件，删除冲突标记（<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>、<code>=======</code>、<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>），</li>
+<li><code>git add &lt;已解决文件&gt;</code>，</li>
+<li>最后 <code>git commit</code> 完成这次合并。</li>
+</ul>
+</li>
+<li><p><strong>推送到远程</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>这样，远程原有的内容和你本地的内容都会被保留并合并到一起。</p>
+
       </div>
       
         <div class="prev-or-next">
@@ -275,7 +304,7 @@ git config --global user.email &quot;email&quot;<span aria-hidden="true" class="
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2025-05-19 13:41:06
+              2025-05-22 17:34:01
             </span>
             
           </div>
@@ -298,7 +327,7 @@ git config --global user.email &quot;email&quot;<span aria-hidden="true" class="
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Git-%E6%8C%87%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="toc-text">一、Git 指令速查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">二、项目初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Clone-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">三、Clone 远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B7%BB%E5%8A%A0%E3%80%81%E6%8F%90%E4%BA%A4%E4%B8%8E%E6%8E%A8%E9%80%81"><span class="toc-text">四、添加、提交与推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8B%89%E5%8F%96%E6%9B%B4%E6%96%B0%E4%B8%8E-Rebas"><span class="toc-text">五、拉取更新与 Rebas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#commit"><span class="toc-text">commit</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Git-%E6%8C%87%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="toc-text">一、Git 指令速查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">二、项目初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Clone-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">三、Clone 远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B7%BB%E5%8A%A0%E3%80%81%E6%8F%90%E4%BA%A4%E4%B8%8E%E6%8E%A8%E9%80%81"><span class="toc-text">四、添加、提交与推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8B%89%E5%8F%96%E6%9B%B4%E6%96%B0%E4%B8%8E-Rebas"><span class="toc-text">五、拉取更新与 Rebas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#commit"><span class="toc-text">commit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88-A%EF%BC%9A%E5%90%88%E5%B9%B6%E4%B8%A4%E7%AB%AF%E5%8E%86%E5%8F%B2%EF%BC%88%E4%BF%9D%E7%95%99%E8%BF%9C%E7%A8%8B%E5%B7%B2%E6%9C%89%E6%8F%90%E4%BA%A4%EF%BC%89"><span class="toc-text">方案 A：合并两端历史（保留远程已有提交）</span></a></li></ol>
       
     </div>
   </div>
