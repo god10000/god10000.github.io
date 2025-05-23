@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>Rmoteid接收端开发</title>
-      <link href="/2025/05/22/143-rmoteid-jie-shou-duan-kai-fa/"/>
-      <url>/2025/05/22/143-rmoteid-jie-shou-duan-kai-fa/</url>
-      
-        <content type="html"><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul><li>GB42590标准</li><li>F3411.40165-UAS-Remote-ID国际标准</li><li>ESP32系列开发板</li><li>ESP-IDF</li><li><a href="https://www.faa.gov/uas/getting_started/remote_id">无人机的远程识别 |美国联邦航空管理局</a></li><li><a href="https://thedroneprofessor.com/wp-content/uploads/2022/11/F3411.40165-UAS-Remote-ID.pdf?utm_source=chatgpt.com">F3411.40165-UAS-Remote-ID.pdf</a></li></ul><h1 id="WIFI-Beacon"><a href="#WIFI-Beacon" class="headerlink" title="WIFI Beacon"></a>WIFI Beacon</h1><p>现在无人机都需要 采用WI-FI Beacon广播协议发送报文，ESP32没有官方例程，所以去<a href="https://docs.espressif.com/projects/esp-idf/zh_CN/v5.4.1/esp32s3/api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib">官方文档</a>找相关方法</p><p>根据GB42590文件了解到wifi信标帧格式，于是用两个ESP32开发板，分别为接收端与发射端开发</p><img src="/2025/05/22/143-rmoteid-jie-shou-duan-kai-fa/1747904815392.png" class="" width="1747904815392"><h1 id="发送端"><a href="#发送端" class="headerlink" title="发送端"></a>发送端</h1><h1 id="接收端"><a href="#接收端" class="headerlink" title="接收端"></a>接收端</h1><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>1.<strong>可以接收到发送端的数据，但是接收不到无人机的数据</strong></p><blockquote><p>无人机需要起飞才可以</p></blockquote><ol start="13"><li>无人机开始广播远程识别信号的条件是什么？</li></ol><p>The drone will start broadcasting the FAA Remote ID signal when all of the following conditions are met.<br>当满足以下所有条件时，无人机将开始广播 FAA Remote ID 信号。</p><p>• The drone has built-in Remote ID functionality.<br>• 无人机具有内置的 Remote ID 功能。</p><p>• The drone is within airspace of the United States.<br>• 飞行器在美国领空内。</p><p>• The drone is in flight (i.e. the propellers are turning).<br>• 飞行器正在飞行（即螺旋桨在转动）。</p><p><a href="https://support.dji.com/help/content?customId=en-us03400007747&documentType=artical&lang=en&paperDocType=paper&re=HK&spaceId=34">大疆国外RID文件</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>ESP-IDF开发ESP32</title>
       <link href="/2025/05/21/142-esp-idf-kai-fa-esp32/"/>
       <url>/2025/05/21/142-esp-idf-kai-fa-esp32/</url>
